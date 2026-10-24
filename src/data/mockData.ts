@@ -302,7 +302,7 @@ export const FOOD_CARDS: FoodCardItem[] = [
   },
   {
     id: 'food-veg',
-    name: 'Fibrous Vegetables & Seasonal Fruits',
+    name: 'Fibrous Vegetables and Seasonal Fruits',
     type: 'vegetarian',
     primaryNutrient: 'Antioxidants, Electrolytes & Hydration',
     proteinApprox: '~2-4g (focus on micronutrient density)',
