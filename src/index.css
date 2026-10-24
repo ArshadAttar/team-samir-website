@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --color-brand-black: #111318;
+  --color-brand-surface: #1C2028;
+  --color-brand-blue: #1769FF;
+  --color-brand-deep-blue: #0B3D91;
+  --color-brand-light-blue: #EEF5FF;
+  --color-brand-text: #171A21;
+  --color-brand-muted: #646B78;
+  --color-brand-border: #E1E6EF;
+  --color-brand-success: #16834A;
+  --color-brand-error: #C62828;
+}
+
+/* Fluid responsive root font scaling for optimal mobile balance */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14.5px;
+  }
+}
+
+@media (max-width: 380px) {
+  html {
+    font-size: 13.5px;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #171A21;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+/* Custom horizontal scrollbar hiding for clean mobile quick nav */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Wireframe / Blueprint Mode Enhancements */
+.wireframe-mode {
+  --wireframe-border: #94a3b8;
+}
+
+.wireframe-mode section,
+.wireframe-mode header,
+.wireframe-mode footer {
+  position: relative;
+}
+
+.wireframe-mode .wireframe-box {
+  outline: 1.5px dashed #3b82f6 !important;
+  outline-offset: -1px;
+}
+
+.wireframe-mode img {
+  filter: grayscale(85%) contrast(90%);
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Samir Fitness & Personal Training - Pune",
+  "description": "Official website prototype for Samir Fitness & Personal Training in Kothrud, Pune. Premium 1-on-1 personal training, fitness coaching, and nutrition guidance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
