@@ -303,41 +303,48 @@ export const ContactPage: React.FC<ContactPageProps> = ({
 
               </div>
 
-              {/* Verified Location Map & Directions Placeholder */}
-              <div className="rounded-2xl border border-[#E1E6EF] overflow-hidden bg-slate-50 p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-bold text-[#171A21]">Kothrud Pune Location Map</h3>
-                    <p className="text-xs text-[#646B78]">DP Road, Kothrud, Pune, Maharashtra</p>
-                  </div>
-                  <Navigation className="w-5 h-5 text-[#1769FF]" />
-                </div>
 
-                {/* Map Graphic Simulation (DP Road, Kothrud, Pune) */}
-                <div className="relative aspect-16/9 rounded-xl bg-slate-200 border border-slate-300 overflow-hidden flex flex-col items-center justify-center text-center p-4">
-                  {/* Subtle map grid styling */}
-                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#1769FF_1px,transparent_1px)] [background-size:16px_16px]" />
-                  <MapPin className="w-8 h-8 text-[#1769FF] animate-bounce relative z-10" />
-                  <div className="relative z-10 bg-white/90 backdrop-blur-xs px-3 py-1 rounded-md text-xs font-semibold text-slate-900 shadow-sm mt-1">
-                    DP Road, Kothrud, Pune
-                  </div>
-                  <span className="text-[11px] text-slate-500 mt-1 relative z-10">
-                    Exact coordinates pending venue confirmation
-                  </span>
-                </div>
+{/* Live Google Maps Location */}
+<div className="rounded-2xl border border-[#E1E6EF] overflow-hidden bg-white p-6 space-y-4">
+  <div className="flex items-center justify-between gap-3">
+    <div>
+      <h3 className="text-sm font-bold text-[#171A21]">
+       Near Ashish Garden Banquet Hall
+      </h3>
+      <p className="text-xs text-[#646B78] mt-1">
+        Kothrud, Pune, Maharashtra
+      </p>
+    </div>
 
-                <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                    BUSINESS_INFO.location.directionsQuery
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white border border-[#E1E6EF] hover:border-[#1769FF] text-[#171A21] text-xs font-semibold transition-colors shadow-xs"
-                >
-                  <Navigation className="w-4 h-4 text-[#1769FF]" />
-                  <span>Get Directions on Google Maps</span>
-                </a>
-              </div>
+    <Navigation className="w-5 h-5 text-[#1769FF] shrink-0" />
+  </div>
+
+  {/* Actual Google Map */}
+  <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200">
+    <iframe
+      title="Ashish Garden Banquet Hall Location"
+      src="https://maps.google.com/maps?q=18.5026368,73.8025847&z=17&output=embed"
+      width="100%"
+      height="100%"
+      style={{ border: 0, position: "absolute", inset: 0 }}
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    />
+  </div>
+
+  {/* Open exact venue in Google Maps */}
+  <a
+    href="https://www.google.com/maps/place/Ashish+Garden+Banquet+Hall/@18.5026368,73.8025847,17z"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1769FF] hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
+  >
+    <Navigation className="w-4 h-4" />
+    <span>Get Directions on Google Maps</span>
+  </a>
+</div>
+
 
             </div>
 
