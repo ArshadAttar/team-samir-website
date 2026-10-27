@@ -21,10 +21,10 @@ export const BUSINESS_INFO = {
   },
   // Realistic dummy contact details for immediate mobile click-to-call & WhatsApp
   contact: {
-    phone: '+91 98230 45678',
-    phoneRaw: '+919823045678',
-    whatsapp: '+91 98230 45678',
-    whatsappNumber: '919823045678',
+    phone: '+91 8421287284',
+    phoneRaw: '+918421287284',
+    whatsapp: '+91 8421287284',
+    whatsappNumber: '918421287284',
     email: 'samir@teamsamirfitness.com',
     workingHours: 'Mon – Sat: 6:00 AM – 9:00 PM (Sunday By Appointment)',
   },
