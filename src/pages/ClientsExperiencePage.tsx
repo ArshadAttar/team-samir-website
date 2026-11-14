@@ -248,10 +248,10 @@ const PhotoFrame: React.FC<{
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 text-center bg-[radial-gradient(circle_at_50%_35%,rgba(23,105,255,0.18),transparent_65%)]">
           <div className="absolute inset-3 rounded-xl border border-dashed border-white/15" />
           <ImagePlus className={`w-7 h-7 ${isAfter ? 'text-[#00A3FF]' : 'text-slate-400'}`} strokeWidth={1.5} />
-          <span className="text-[11px] sm:text-xs font-semibold text-slate-300">
+          <span className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-slate-300">
             {isAfter ? 'After photo' : 'Before photo'}
           </span>
-          <span className="text-[10px] text-slate-500">Coming soon</span>
+          <span className="text-[length:max(10px,calc(10rem/16))] text-slate-500">Coming soon</span>
         </div>
       )}
 
@@ -259,7 +259,7 @@ const PhotoFrame: React.FC<{
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 to-transparent pointer-events-none" />
 
       <span
-        className={`absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] backdrop-blur-md border ${
+        className={`absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10 px-2.5 py-1 rounded-full text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] font-bold uppercase tracking-[0.14em] backdrop-blur-md border ${
           isAfter
             ? 'bg-[#1769FF]/85 border-[#5C9BFF]/50 text-white shadow-[0_4px_14px_-4px_rgba(23,105,255,0.8)]'
             : 'bg-black/55 border-white/20 text-white/90'
@@ -289,7 +289,7 @@ const TransformationCard: React.FC<{
       whileInView={{ opacity: 1, x: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.08 }}
       transition={{ duration: 0.8, delay: Math.min(index, 3) * 0.09, ease: EASE }}
-      className="w-[80vw] max-w-[560px] sm:w-[520px] lg:w-[580px]"
+      className="w-[80vw] max-w-[35rem] sm:w-[32.5rem] lg:w-[36.25rem]"
     >
       <button
         type="button"
@@ -310,9 +310,9 @@ const TransformationCard: React.FC<{
         <div className="flex items-center justify-between gap-3 px-2 pt-3.5 pb-1.5 sm:px-3">
           <div className="min-w-0">
             <h3 className="font-display font-bold text-base sm:text-lg text-white truncate">{title}</h3>
-            <p className="text-xs sm:text-[13px] text-slate-400 truncate">{transformationMeta(item)}</p>
+            <p className="text-xs sm:text-[length:max(13px,calc(13rem/16))] text-slate-400 truncate">{transformationMeta(item)}</p>
           </div>
-          <span className="shrink-0 text-[11px] sm:text-xs font-semibold text-[#00A3FF] opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5">
+          <span className="shrink-0 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-[#00A3FF] opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5">
             View
           </span>
         </div>
@@ -380,7 +380,7 @@ const TransformationLightbox: React.FC<{
           >
             <div className="flex items-start justify-between gap-4 px-1 pb-3 sm:pb-4">
               <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#00A3FF]">
+                <p className="text-[length:max(11px,calc(11rem/16))] font-semibold uppercase tracking-[0.18em] text-[#00A3FF]">
                   {String(index + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
                 </p>
                 <h3 className="font-display font-bold text-lg sm:text-2xl text-white truncate">
@@ -493,7 +493,7 @@ const VideoCard: React.FC<{ video: ClientVideo; index: number; onOpen: () => voi
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.08 }}
       transition={{ duration: 0.8, delay: Math.min(index, 3) * 0.1, ease: EASE }}
-      className="w-[62vw] max-w-[300px] sm:w-[280px] lg:w-[300px]"
+      className="w-[62vw] max-w-[18.75rem] sm:w-[17.5rem] lg:w-[18.75rem]"
       style={{ perspective: 1000 }}
     >
       <motion.button
@@ -542,7 +542,7 @@ const VideoCard: React.FC<{ video: ClientVideo; index: number; onOpen: () => voi
 
           <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5" style={{ transform: 'translateZ(24px)' }}>
             <h3 className="font-display font-bold text-base sm:text-lg text-white leading-snug">{video.title}</h3>
-            <p className="mt-1 text-xs sm:text-[13px] text-slate-300/90 leading-relaxed">{video.description}</p>
+            <p className="mt-1 text-xs sm:text-[length:max(13px,calc(13rem/16))] text-slate-300/90 leading-relaxed">{video.description}</p>
           </div>
         </div>
       </motion.button>
@@ -593,8 +593,8 @@ const VideoPlayerModal: React.FC<{ video: ClientVideo | null; onClose: () => voi
                 playsInline
                 className={`block object-contain rounded-[22px] bg-black ${
                   video.portrait
-                    ? 'h-[min(76vh,720px)] w-auto max-w-[calc(100vw-2.5rem)] aspect-[9/16]'
-                    : 'w-[min(calc(100vw-2.5rem),960px)] h-auto max-h-[72vh] aspect-video'
+                    ? 'h-[min(76vh,45rem)] w-auto max-w-[calc(100vw-2.5rem)] aspect-[9/16]'
+                    : 'w-[min(calc(100vw-2.5rem),60rem)] h-auto max-h-[72vh] aspect-video'
                 }`}
               />
             </div>
@@ -643,7 +643,7 @@ export const ClientsExperiencePage: React.FC<ClientsExperiencePageProps> = () =>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-2.5 sm:space-y-4">
             <motion.div
-              className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider"
+              className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2 gap-y-0.5 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider [&>span]:whitespace-nowrap"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: EASE }}
@@ -678,8 +678,8 @@ export const ClientsExperiencePage: React.FC<ClientsExperiencePageProps> = () =>
         aria-labelledby="real-transformations"
         className="relative overflow-hidden bg-[#111318] py-16 sm:py-24"
       >
-        <Glow className="w-[520px] h-[520px] -top-40 -left-32 bg-[#1769FF]/25" />
-        <Glow className="w-[420px] h-[420px] bottom-0 right-[-120px] bg-[#00A3FF]/15" />
+        <Glow className="w-[32.5rem] h-[32.5rem] -top-40 -left-32 bg-[#1769FF]/25" />
+        <Glow className="w-[26.25rem] h-[26.25rem] bottom-0 right-[-7.5rem] bg-[#00A3FF]/15" />
 
         <div className="relative space-y-8 sm:space-y-12">
           <div id="real-transformations">
@@ -701,7 +701,7 @@ export const ClientsExperiencePage: React.FC<ClientsExperiencePageProps> = () =>
             <TrackProgress trackRef={photoTrack} />
             {/* Fine print while stock photos are in use. Remove once every pair is a real client. */}
             {CLIENT_TRANSFORMATIONS.some((t) => t.sample) && (
-              <p className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-[11px] text-slate-500">
+              <p className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-[length:max(11px,calc(11rem/16))] text-slate-500">
                 Images shown are illustrative.
               </p>
             )}
@@ -714,8 +714,8 @@ export const ClientsExperiencePage: React.FC<ClientsExperiencePageProps> = () =>
         aria-labelledby="training-in-motion"
         className="relative overflow-hidden bg-[#0D0F14] py-16 sm:py-24 border-t border-white/5"
       >
-        <Glow className="w-[480px] h-[480px] top-10 right-[-80px] bg-[#1769FF]/20" />
-        <Glow className="w-[380px] h-[380px] -bottom-24 left-[10%] bg-[#0B3D91]/40" />
+        <Glow className="w-[30rem] h-[30rem] top-10 right-[-5rem] bg-[#1769FF]/20" />
+        <Glow className="w-[23.75rem] h-[23.75rem] -bottom-24 left-[10%] bg-[#0B3D91]/40" />
 
         <div className="relative space-y-8 sm:space-y-12">
           <div id="training-in-motion">

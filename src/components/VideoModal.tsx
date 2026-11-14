@@ -85,7 +85,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose, onBookDem
           </button>
 
           {/* On-screen Watermark */}
-          <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-xs px-3 py-1 rounded-md text-[11px] font-semibold text-[#00A3FF] border border-slate-700">
+          <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-xs px-3 py-1 rounded-md text-[length:max(11px,calc(11rem/16))] font-semibold text-[#00A3FF] border border-slate-700">
             TS Fitness Studio · Pune
           </div>
 
@@ -113,7 +113,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose, onBookDem
               </div>
               <div className="flex items-center gap-2">
                 <Volume2 className="w-4 h-4 text-slate-400" />
-                <span className="text-[11px] text-slate-400">1080p HD Studio</span>
+                <span className="text-[length:max(11px,calc(11rem/16))] text-slate-400">1080p HD Studio</span>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose, onBookDem
 
         {/* Video Clips Switcher (Reels Selector) */}
         <div className="p-4 bg-[#1C2028] border-b border-slate-800 space-y-2">
-          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          <div className="text-[length:max(11px,calc(11rem/16))] font-bold text-slate-400 uppercase tracking-wider">
             Available HD Coaching Videos:
           </div>
           <div className="grid grid-cols-3 gap-2">
@@ -140,7 +140,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose, onBookDem
                 }`}
               >
                 <div className="text-xs font-bold line-clamp-1">{clip.title}</div>
-                <div className="text-[10px] text-slate-400 line-clamp-1">{clip.duration}</div>
+                <div className="text-[length:max(10px,calc(10rem/16))] text-slate-400 line-clamp-1">{clip.duration}</div>
               </button>
             ))}
           </div>

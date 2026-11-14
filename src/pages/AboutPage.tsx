@@ -33,7 +33,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
       <section className="bg-[#111318] text-white py-8 sm:py-14 lg:py-20 border-b border-[#1C2028]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-2.5 sm:space-y-4">
-            <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider">
+            <div className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2 gap-y-0.5 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider [&>span]:whitespace-nowrap">
               <span>Personal Brand & Background</span>
               <span className="text-slate-500">·</span>
               <span>Kothrud, Pune</span>
@@ -63,9 +63,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 sm:p-4 rounded-xl bg-black/85 backdrop-blur-md text-white border border-slate-700">
-                  <div className="text-[11px] sm:text-xs text-[#00A3FF] font-semibold uppercase">TS Fitness Founder & Head Coach</div>
+                  <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-[#00A3FF] font-semibold uppercase">TS Fitness Founder & Head Coach</div>
                   <div className="text-lg sm:text-xl font-display font-bold">Coach Samir</div>
-                  <div className="text-[11px] sm:text-xs text-slate-300">5 Years Professional Experience · DP Road, Kothrud, Pune</div>
+                  <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-300">5 Years Professional Experience · DP Road, Kothrud, Pune</div>
                 </div>
               </div>
 
@@ -133,15 +133,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-xs">
                   <div className="p-3 rounded-lg bg-[#EEF5FF] border border-[#E1E6EF]">
                     <span className="font-bold text-[#1769FF] block mb-1">1. Mechanics First</span>
-                    <span className="text-[#646B78] text-[11px] sm:text-xs">Strict posture and joint alignment before increasing load weights.</span>
+                    <span className="text-[#646B78] text-[length:max(11px,calc(11rem/16))] sm:text-xs">Strict posture and joint alignment before increasing load weights.</span>
                   </div>
                   <div className="p-3 rounded-lg bg-[#EEF5FF] border border-[#E1E6EF]">
                     <span className="font-bold text-[#1769FF] block mb-1">2. Consistency First</span>
-                    <span className="text-[#646B78] text-[11px] sm:text-xs">Sustainable 4-day workouts consistently beat sporadic burnout sessions.</span>
+                    <span className="text-[#646B78] text-[length:max(11px,calc(11rem/16))] sm:text-xs">Sustainable 4-day workouts consistently beat sporadic burnout sessions.</span>
                   </div>
                   <div className="p-3 rounded-lg bg-[#EEF5FF] border border-[#E1E6EF]">
                     <span className="font-bold text-[#1769FF] block mb-1">3. Realistic Diet</span>
-                    <span className="text-[#646B78] text-[11px] sm:text-xs">Practical Indian meal balance with adequate protein, hydration, and sleep.</span>
+                    <span className="text-[#646B78] text-[length:max(11px,calc(11rem/16))] sm:text-xs">Practical Indian meal balance with adequate protein, hydration, and sleep.</span>
                   </div>
                 </div>
               </div>
@@ -206,11 +206,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 { title: 'Supportive Experience', desc: 'Provide an encouraging, judgement-free 1-on-1 coaching environment.' },
               ].map((g, idx) => (
                 <div key={idx} className="p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
-                  <div className="w-6 h-6 rounded-md bg-[#1769FF] text-white text-[11px] font-bold flex items-center justify-center font-mono">
+                  <div className="w-6 h-6 rounded-md bg-[#1769FF] text-white text-[length:max(11px,calc(11rem/16))] font-bold flex items-center justify-center font-mono">
                     0{idx + 1}
                   </div>
                   <h4 className="text-xs sm:text-sm font-bold text-[#171A21]">{g.title}</h4>
-                  <p className="text-[11px] sm:text-xs text-[#646B78] leading-relaxed">{g.desc}</p>
+                  <p className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-[#646B78] leading-relaxed">{g.desc}</p>
                 </div>
               ))}
             </div>

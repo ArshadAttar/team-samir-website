@@ -198,7 +198,7 @@ export const ProcessesDraw: React.FC<ProcessesDrawProps> = ({ className = '', on
                       {step.icon}
                     </div>
                     <div>
-                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#00A3FF]">
+                      <span className="text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] font-bold uppercase tracking-wider text-[#00A3FF]">
                         Phase {step.phase} · {step.duration}
                       </span>
                       <h3 className="text-sm sm:text-base lg:text-lg font-display font-bold text-white leading-tight">
@@ -207,7 +207,7 @@ export const ProcessesDraw: React.FC<ProcessesDrawProps> = ({ className = '', on
                     </div>
                   </div>
 
-                  <div className="mt-3 space-y-1.5 text-xs sm:text-[13px] leading-relaxed">
+                  <div className="mt-3 space-y-1.5 text-xs sm:text-[length:max(13px,calc(13rem/16))] leading-relaxed">
                     <p className="text-slate-300">
                       <span className="font-semibold text-slate-100">🏋️ In the gym: </span>
                       {step.gymPoint}
@@ -218,7 +218,7 @@ export const ProcessesDraw: React.FC<ProcessesDrawProps> = ({ className = '', on
                     </p>
                   </div>
 
-                  <div className="mt-2.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-950/50 border border-emerald-800/40 text-[11px] font-semibold text-emerald-400">
+                  <div className="mt-2.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-950/50 border border-emerald-800/40 text-[length:max(11px,calc(11rem/16))] font-semibold text-emerald-400">
                     <CheckCircle2 className="w-3 h-3" />
                     {step.outcome}
                   </div>

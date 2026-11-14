@@ -88,7 +88,7 @@ export const CountUpStat: React.FC<CountUpStatProps> = ({
   return (
     <div ref={elementRef} className={`relative p-3.5 sm:p-5 rounded-xl transition-all ${className}`}>
       {badge && (
-        <span className="absolute top-2 right-2 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        <span className="absolute top-2 right-2 text-[length:max(10px,calc(10rem/16))] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
           {badge}
         </span>
       )}
@@ -98,7 +98,7 @@ export const CountUpStat: React.FC<CountUpStatProps> = ({
           {prefix}{count}{suffix}
         </span>
         {isPinging && (
-          <span className="inline-block text-[11px] font-bold text-emerald-400 animate-pulse">
+          <span className="inline-block text-[length:max(11px,calc(11rem/16))] font-bold text-emerald-400 animate-pulse">
             +1
           </span>
         )}
@@ -109,7 +109,7 @@ export const CountUpStat: React.FC<CountUpStatProps> = ({
       </div>
 
       {sublabel && (
-        <div className="text-[10px] sm:text-xs text-slate-500 mt-0.5">
+        <div className="text-[length:max(10px,calc(10rem/16))] sm:text-xs text-slate-500 mt-0.5">
           {sublabel}
         </div>
       )}

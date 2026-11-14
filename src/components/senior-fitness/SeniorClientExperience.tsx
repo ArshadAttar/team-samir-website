@@ -56,7 +56,7 @@ const HIGHLIGHTS = [
 
 const SampleChip: React.FC<{ label?: string; className?: string }> = ({ label = 'Sample', className = '' }) => (
   <span
-    className={`inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-[#FFB020] text-[#1A1300] rounded-full px-2.5 py-1 ${className}`}
+    className={`inline-block text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] font-bold uppercase tracking-wider bg-[#FFB020] text-[#1A1300] rounded-full px-2.5 py-1 ${className}`}
   >
     {label}
   </span>
@@ -301,7 +301,7 @@ export const SeniorClientExperience: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1. Description */}
         <FadeUp>
-          <div className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] text-[#6EA2FF]">Client Experience</div>
+          <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold uppercase tracking-[0.14em] text-[#6EA2FF]">Client Experience</div>
           <h2 className="mt-3 mb-4 text-3xl sm:text-5xl lg:text-[3.6rem] font-display font-bold leading-[1.04] tracking-tight max-w-[16ch] text-balance">
             What training feels like, <span className="text-[#6EA2FF]">session by session</span>
           </h2>
@@ -375,13 +375,13 @@ export const SeniorClientExperience: React.FC = () => {
                   style={{ objectPosition: p.position }}
                   className="w-full h-full object-cover saturate-[.9] transition duration-700 ease-out group-hover:scale-[1.06] group-hover:saturate-100 pointer-events-none"
                 />
-                <span className="absolute left-3 top-3 text-[11px] font-semibold uppercase tracking-wider bg-[#0A1020]/70 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">
+                <span className="absolute left-3 top-3 text-[length:max(11px,calc(11rem/16))] font-semibold uppercase tracking-wider bg-[#0A1020]/70 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">
                   {p.tag}
                 </span>
                 <SampleChip className="absolute right-3 top-3" />
               </span>
-              <span className="block font-display font-semibold text-base sm:text-[17px] mt-3.5">{p.title}</span>
-              <span className="block text-xs sm:text-[13.5px] text-[#9AA6BD] leading-relaxed mt-0.5">{p.caption}</span>
+              <span className="block font-display font-semibold text-base sm:text-[length:max(17px,calc(17rem/16))] mt-3.5">{p.title}</span>
+              <span className="block text-xs sm:text-[length:max(13.5px,calc(13.5rem/16))] text-[#9AA6BD] leading-relaxed mt-0.5">{p.caption}</span>
             </motion.button>
           ))}
         </div>
@@ -432,7 +432,7 @@ export const SeniorClientExperience: React.FC = () => {
             </span>
             <span className="absolute inset-x-0 bottom-0 p-4 sm:p-6">
               <span className="block font-display font-semibold text-lg sm:text-2xl">{featured.title}</span>
-              <span className="hidden sm:block text-sm sm:text-[15px] text-[#C9D2E3] max-w-xl mt-1">{featured.desc}</span>
+              <span className="hidden sm:block text-sm sm:text-[length:max(15px,calc(15rem/16))] text-[#C9D2E3] max-w-xl mt-1">{featured.desc}</span>
             </span>
           </button>
 
@@ -448,18 +448,18 @@ export const SeniorClientExperience: React.FC = () => {
               >
                 <span className="relative block aspect-[16/10] rounded-[10px] overflow-hidden">
                   <img src={v.src} alt="" loading="lazy" style={{ objectPosition: v.position }} className="w-full h-full object-cover" />
-                  <span className="absolute right-1.5 bottom-1.5 bg-black/70 rounded-md px-1.5 text-[11px] tabular-nums">{v.duration}</span>
+                  <span className="absolute right-1.5 bottom-1.5 bg-black/70 rounded-md px-1.5 text-[length:max(11px,calc(11rem/16))] tabular-nums">{v.duration}</span>
                 </span>
                 <span className="min-w-0">
-                  <span className="block font-display font-semibold text-sm sm:text-[15.5px] leading-snug">{v.title}</span>
-                  <span className="block text-xs sm:text-[13px] text-[#9AA6BD] leading-snug mt-0.5 line-clamp-2">{v.desc}</span>
+                  <span className="block font-display font-semibold text-sm sm:text-[length:max(15.5px,calc(15.5rem/16))] leading-snug">{v.title}</span>
+                  <span className="block text-xs sm:text-[length:max(13px,calc(13rem/16))] text-[#9AA6BD] leading-snug mt-0.5 line-clamp-2">{v.desc}</span>
                 </span>
               </button>
             ))}
           </div>
         </FadeUp>
 
-        <p className="mt-8 sm:mt-9 text-xs sm:text-[13px] text-[#9AA6BD]">
+        <p className="mt-8 sm:mt-9 text-xs sm:text-[length:max(13px,calc(13rem/16))] text-[#9AA6BD]">
           These are placeholders. Real client photos and videos will be added with their consent.
         </p>
       </div>

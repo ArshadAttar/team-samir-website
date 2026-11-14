@@ -82,7 +82,7 @@ const SeniorImage: React.FC<{
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#1C2028] via-[#111318] to-[#0B3D91] text-center px-6">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:2.5rem_2.5rem]" />
           <Users className="relative w-8 h-8 text-[#00A3FF]/70" />
-          <span className="relative text-[11px] sm:text-xs text-slate-400 max-w-[16rem] leading-snug">{alt}</span>
+          <span className="relative text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400 max-w-[16rem] leading-snug">{alt}</span>
         </div>
       ) : (
         <div className={`w-full h-full ${imgClassName}`}>
@@ -112,7 +112,7 @@ const SectionHeading: React.FC<{ kicker: string; title: string; desc?: string; d
   center = true,
 }) => (
   <Reveal className={`max-w-2xl space-y-2 sm:space-y-3 ${center ? 'mx-auto text-center' : ''}`}>
-    <div className={`text-[11px] sm:text-xs font-bold uppercase tracking-wider ${dark ? 'text-[#00A3FF]' : 'text-[#1769FF]'}`}>
+    <div className={`text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold uppercase tracking-wider ${dark ? 'text-[#00A3FF]' : 'text-[#1769FF]'}`}>
       {kicker}
     </div>
     <h2
@@ -198,7 +198,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             <div className="lg:col-span-7 space-y-5 sm:space-y-6">
               <Reveal>
-                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider">
                   <span>Senior Fitness</span>
                   <span className="text-slate-500">·</span>
                   <span>Ages 55+</span>
@@ -267,7 +267,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
                 </div>
                 <div>
                   <div className="text-sm font-bold">Safety First</div>
-                  <div className="text-[11px] text-[#646B78]">Every move supervised by Samir</div>
+                  <div className="text-[length:max(11px,calc(11rem/16))] text-[#646B78]">Every move supervised by Samir</div>
                 </div>
               </motion.div>
             </div>
@@ -343,7 +343,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
                 className="absolute -top-4 -right-2 sm:-right-5 bg-[#111318] text-white rounded-2xl shadow-xl px-4 py-3"
               >
                 <div className="text-2xl font-display font-extrabold text-[#00A3FF]">{BUSINESS_INFO.experienceYears}+ yrs</div>
-                <div className="text-[11px] text-slate-300">Coaching experience</div>
+                <div className="text-[length:max(11px,calc(11rem/16))] text-slate-300">Coaching experience</div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -406,7 +406,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
               </a>
             </Reveal>
             <Reveal delay={0.3}>
-              <p className="text-[11px] sm:text-xs text-slate-400 max-w-xl mx-auto">
+              <p className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400 max-w-xl mx-auto">
                 Please consult your doctor before starting a new exercise programme. Training supports, but does not replace, medical care.
               </p>
             </Reveal>

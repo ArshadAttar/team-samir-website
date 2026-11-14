@@ -163,7 +163,7 @@ export const PriceRoll: React.FC<PriceRollProps> = ({ onBookDemo, className = ''
               }`}
             >
               <span className="truncate">{dur.label}</span>
-              <span className={`text-[10px] font-normal truncate ${selectedDuration === dur.id ? 'text-blue-200' : 'text-slate-500'}`}>
+              <span className={`text-[length:max(10px,calc(10rem/16))] font-normal truncate ${selectedDuration === dur.id ? 'text-blue-200' : 'text-slate-500'}`}>
                 {dur.sublabel}
               </span>
             </button>
@@ -173,7 +173,7 @@ export const PriceRoll: React.FC<PriceRollProps> = ({ onBookDemo, className = ''
         {/* RIGHT SIDE: GREEN DISCOUNT ODOMETER CALLOUT */}
         <div className="flex items-center justify-between sm:justify-end gap-3 px-3 py-2 rounded-xl bg-emerald-950/70 border border-emerald-600/40 text-emerald-300">
           <div className="text-left">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+            <div className="text-[length:max(10px,calc(10rem/16))] font-bold uppercase tracking-wider text-emerald-400">
               ⚡ Incentive Odometer Roll
             </div>
             <div className="text-xs text-emerald-200">
@@ -230,9 +230,9 @@ export const PriceRoll: React.FC<PriceRollProps> = ({ onBookDemo, className = ''
 
                 {/* THE DISCOUNT ROLL DISPLAY (Prominent Green Banner with Odometer) */}
                 <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-500/15 via-emerald-500/10 to-teal-500/15 border border-emerald-500/30 text-emerald-900">
-                  <div className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider flex items-center justify-between">
+                  <div className="text-[length:max(11px,calc(11rem/16))] font-bold text-emerald-800 uppercase tracking-wider flex items-center justify-between">
                     <span>Applied Commitment Discount</span>
-                    <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold">
+                    <span className="text-[length:max(10px,calc(10rem/16))] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold">
                       {activeDurationObj.label}
                     </span>
                   </div>
@@ -245,7 +245,7 @@ export const PriceRoll: React.FC<PriceRollProps> = ({ onBookDemo, className = ''
                       <span className="text-sm font-bold text-emerald-800">
                         OFF Standard Fee
                       </span>
-                      <div className="text-[10px] text-emerald-700">
+                      <div className="text-[length:max(10px,calc(10rem/16))] text-emerald-700">
                         Odometer verified savings
                       </div>
                     </div>
@@ -253,14 +253,14 @@ export const PriceRoll: React.FC<PriceRollProps> = ({ onBookDemo, className = ''
                 </div>
 
                 {/* Bonus Gift Box */}
-                <div className="p-2.5 rounded-lg bg-blue-50/70 border border-blue-200/80 text-[11px] text-blue-900 flex items-center gap-2">
+                <div className="p-2.5 rounded-lg bg-blue-50/70 border border-blue-200/80 text-[length:max(11px,calc(11rem/16))] text-blue-900 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#1769FF] shrink-0" />
                   <span><strong>Bonus:</strong> {plan.commitmentGift}</span>
                 </div>
 
                 {/* Feature Checklist */}
                 <div className="space-y-2 pt-2 border-t border-slate-100">
-                  <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                  <div className="text-[length:max(11px,calc(11rem/16))] font-bold text-slate-500 uppercase tracking-wider">
                     What's Included:
                   </div>
                   {plan.features.map((feature, fIdx) => (
@@ -288,7 +288,7 @@ export const PriceRoll: React.FC<PriceRollProps> = ({ onBookDemo, className = ''
                   <span>Claim {currentDiscount}% Discount & Book Demo</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
-                <p className="text-[10px] text-slate-400 text-center mt-2">
+                <p className="text-[length:max(10px,calc(10rem/16))] text-slate-400 text-center mt-2">
                   Assessment at TS Fitness Studio, DP Road, Kothrud
                 </p>
               </div>

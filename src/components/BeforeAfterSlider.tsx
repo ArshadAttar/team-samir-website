@@ -144,7 +144,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
 
         <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md text-white text-xs p-3 rounded-xl max-w-xs text-right z-10 pointer-events-none hidden sm:block">
           <div className="font-bold text-emerald-400">{activeCase.achievement}</div>
-          <div className="text-[11px] text-slate-300">{activeCase.afterStats}</div>
+          <div className="text-[length:max(11px,calc(11rem/16))] text-slate-300">{activeCase.afterStats}</div>
         </div>
 
         {/* Layer 2: Foreground - "BEFORE" Image (Clipped by slider position) */}
@@ -173,7 +173,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
 
           <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md text-white text-xs p-3 rounded-xl max-w-xs z-10 hidden sm:block">
             <div className="font-bold text-slate-200">{activeCase.name}</div>
-            <div className="text-[11px] text-slate-400">{activeCase.beforeStats}</div>
+            <div className="text-[length:max(11px,calc(11rem/16))] text-slate-400">{activeCase.beforeStats}</div>
           </div>
         </div>
 
@@ -193,7 +193,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
 
         {/* Mobile Swipe Guidance Banner */}
         <div className="absolute bottom-2 inset-x-0 flex justify-center pointer-events-none sm:hidden z-10">
-          <span className="bg-black/75 backdrop-blur-xs text-[10px] text-white px-3 py-1 rounded-full font-medium">
+          <span className="bg-black/75 backdrop-blur-xs text-[length:max(10px,calc(10rem/16))] text-white px-3 py-1 rounded-full font-medium">
             Slide finger left / right to compare
           </span>
         </div>

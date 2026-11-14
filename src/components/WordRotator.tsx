@@ -115,7 +115,7 @@ export const WordRotator: React.FC<WordRotatorProps> = ({
           <Sparkles className="w-3.5 h-3.5" />
           <span>Dynamic Promise Rotator · Tailored by Personality</span>
         </div>
-        <div className="text-[11px] text-slate-400 flex items-center gap-1.5">
+        <div className="text-[length:max(11px,calc(11rem/16))] text-slate-400 flex items-center gap-1.5">
           <span className={`w-2 h-2 rounded-full ${isPaused ? 'bg-amber-400' : 'bg-emerald-400 animate-ping'}`} />
           <span>{isPaused ? 'Paused (hovered)' : 'Auto-cycling every 3.8s'}</span>
         </div>
@@ -151,7 +151,7 @@ export const WordRotator: React.FC<WordRotatorProps> = ({
               {current.personality}
             </span>
           </div>
-          <span className="text-[11px] font-semibold text-emerald-400 flex items-center gap-1">
+          <span className="text-[length:max(11px,calc(11rem/16))] font-semibold text-emerald-400 flex items-center gap-1">
             <Flame className="w-3.5 h-3.5" />
             <span>Dedicated Guarantee</span>
           </span>
@@ -166,7 +166,7 @@ export const WordRotator: React.FC<WordRotatorProps> = ({
           {current.focus.map((item, fIdx) => (
             <span
               key={fIdx}
-              className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium px-2.5 py-1 rounded-md bg-black/40 text-slate-300 border border-slate-700"
+              className="inline-flex items-center gap-1.5 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-medium px-2.5 py-1 rounded-md bg-black/40 text-slate-300 border border-slate-700"
             >
               <CheckCircle2 className="w-3 h-3 text-[#00A3FF]" />
               <span>{item}</span>

@@ -130,7 +130,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
       <section className="bg-[#111318] text-white py-8 sm:py-14 lg:py-20 border-b border-[#1C2028]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-2.5 sm:space-y-4">
-            <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider">
+            <div className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2 gap-y-0.5 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider [&>span]:whitespace-nowrap">
               <span>Pune Direct Consultation</span>
               <span className="text-slate-500">·</span>
               <span>Complimentary 1-on-1 Demo</span>
@@ -222,7 +222,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                     <div className="text-sm font-semibold text-[#171A21]">
                       {BUSINESS_INFO.location.fullAddress}
                     </div>
-                    <p className="text-[11px] text-slate-500 mt-1">
+                    <p className="text-[length:max(11px,calc(11rem/16))] text-slate-500 mt-1">
                       DP Road, Kothrud, Pune, Maharashtra 411038
                     </p>
                   </div>
@@ -238,7 +238,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                       Phone Number
                     </span>
                     <div className="text-sm font-medium text-slate-900 mt-0.5">
-                      <a href={`tel:${BUSINESS_INFO.contact.phoneRaw}`} className="hover:text-[#1769FF] transition-colors">
+                      <a href={`tel:${BUSINESS_INFO.contact.phoneRaw}`} className="inline-block py-1.5 lg:py-0 hover:text-[#1769FF] transition-colors">
                         {BUSINESS_INFO.contact.phone}
                       </a>
                     </div>
@@ -261,7 +261,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline"
+                        className="inline-block py-1.5 lg:py-0 hover:underline"
                       >
                         {BUSINESS_INFO.contact.whatsapp} (Direct Chat)
                       </a>
@@ -279,7 +279,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                       Email Address
                     </span>
                     <div className="text-sm font-medium text-slate-900 mt-0.5">
-                      <a href={`mailto:${BUSINESS_INFO.contact.email}`} className="hover:text-[#1769FF] transition-colors">
+                      <a href={`mailto:${BUSINESS_INFO.contact.email}`} className="inline-block py-1.5 lg:py-0 break-all hover:text-[#1769FF] transition-colors">
                         {BUSINESS_INFO.contact.email}
                       </a>
                     </div>
@@ -682,7 +682,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                                 key={method}
                                 type="button"
                                 onClick={() => setFormData({ ...formData, contactMethod: method })}
-                                className={`py-2 px-3 text-xs font-semibold rounded-xl border transition-all cursor-pointer ${
+                                className={`min-h-11 py-2 px-2 sm:px-3 text-xs font-semibold rounded-xl border transition-all cursor-pointer ${
                                   formData.contactMethod === method
                                     ? 'bg-[#EEF5FF] text-[#1769FF] border-[#1769FF]'
                                     : 'bg-white text-slate-700 border-[#E1E6EF] hover:bg-slate-50'
@@ -718,7 +718,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                           type="checkbox"
                           checked={formData.consentAgreed}
                           onChange={(e) => setFormData({ ...formData, consentAgreed: e.target.checked })}
-                          className="mt-1 w-4 h-4 rounded text-[#1769FF] border-slate-300 focus:ring-[#1769FF] cursor-pointer"
+                          className="mt-0.5 sm:mt-1 w-5 h-5 sm:w-4 sm:h-4 shrink-0 rounded text-[#1769FF] border-slate-300 focus:ring-[#1769FF] cursor-pointer"
                         />
                         <span className="text-xs text-[#646B78] leading-relaxed">
                           I consent to being contacted by Samir and the fitness team via {formData.contactMethod} regarding my demo session enquiry. No automated spam or third-party marketing.
@@ -748,7 +748,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                           </>
                         )}
                       </button>
-                      <p className="text-[10px] sm:text-[11px] text-center text-slate-400 mt-2">
+                      <p className="text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] text-center text-slate-400 mt-2">
                         *Prototype simulation: tests form UX & validations before production launch.
                       </p>
                     </div>

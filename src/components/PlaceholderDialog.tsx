@@ -49,7 +49,7 @@ export const PlaceholderDialog: React.FC<PlaceholderDialogProps> = ({
           {type === 'call' && (
             <div className="space-y-3">
               <div className="p-3.5 rounded-xl bg-[#EEF5FF] border border-[#E1E6EF] text-xs space-y-1">
-                <span className="text-[#646B78] uppercase font-bold text-[10px] tracking-wider">
+                <span className="text-[#646B78] uppercase font-bold text-[length:max(10px,calc(10rem/16))] tracking-wider">
                   Configured Business Line
                 </span>
                 <div className="font-mono text-sm font-bold text-[#1769FF]">
@@ -65,7 +65,7 @@ export const PlaceholderDialog: React.FC<PlaceholderDialogProps> = ({
           {type === 'whatsapp' && (
             <div className="space-y-3">
               <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs space-y-1">
-                <span className="text-emerald-800 uppercase font-bold text-[10px] tracking-wider">
+                <span className="text-emerald-800 uppercase font-bold text-[length:max(10px,calc(10rem/16))] tracking-wider">
                   WhatsApp Direct Business Line
                 </span>
                 <div className="font-mono text-sm font-bold text-[#16834A]">

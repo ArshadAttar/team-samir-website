@@ -104,7 +104,7 @@ export const SalePings: React.FC<SalePingsProps> = ({ className = '', onBookDemo
 
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">
+              <span className="text-[length:max(11px,calc(11rem/16))] font-bold uppercase tracking-wider text-emerald-400">
                 Live Sale Ping
               </span>
               <span className="text-slate-500 text-xs">·</span>
@@ -137,10 +137,10 @@ export const SalePings: React.FC<SalePingsProps> = ({ className = '', onBookDemo
           
           <div className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 col-span-1 ${isPinging ? 'bg-emerald-50 border-emerald-400 ring-2 ring-emerald-300' : 'bg-slate-50 border-[#E1E6EF]'}`}>
             <div className="flex flex-wrap items-center justify-between gap-1">
-              <span className="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <span className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">
                 Total Clients
               </span>
-              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-emerald-600 bg-emerald-100 px-1.5 sm:px-2 py-0.5 rounded-full">
+              <span className="inline-flex items-center gap-1 text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] font-semibold text-emerald-600 bg-emerald-100 px-1.5 sm:px-2 py-0.5 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Live
               </span>
@@ -150,22 +150,22 @@ export const SalePings: React.FC<SalePingsProps> = ({ className = '', onBookDemo
                 {clientCount}+
               </span>
               {isPinging && (
-                <span className="text-[10px] sm:text-xs font-bold text-emerald-600 animate-bounce">
+                <span className="text-[length:max(10px,calc(10rem/16))] sm:text-xs font-bold text-emerald-600 animate-bounce">
                   +1
                 </span>
               )}
             </div>
-            <p className="text-[10px] sm:text-[11px] text-slate-500 mt-1 line-clamp-1 sm:line-clamp-none">
+            <p className="text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] text-slate-500 mt-1 line-clamp-1 sm:line-clamp-none">
               Verified Pune bookings.
             </p>
           </div>
 
           <div className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 col-span-1 ${isPinging ? 'bg-blue-50 border-blue-400 ring-2 ring-blue-300' : 'bg-slate-50 border-[#E1E6EF]'}`}>
             <div className="flex flex-wrap items-center justify-between gap-1">
-              <span className="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <span className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">
                 Celebrity VIP
               </span>
-              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-[#1769FF] bg-blue-100 px-1.5 sm:px-2 py-0.5 rounded-full">
+              <span className="inline-flex items-center gap-1 text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] font-semibold text-[#1769FF] bg-blue-100 px-1.5 sm:px-2 py-0.5 rounded-full">
                 <Award className="w-3 h-3" />
                 Elite
               </span>
@@ -175,7 +175,7 @@ export const SalePings: React.FC<SalePingsProps> = ({ className = '', onBookDemo
                 {celebrityCount}+
               </span>
             </div>
-            <p className="text-[10px] sm:text-[11px] text-slate-500 mt-1 line-clamp-1 sm:line-clamp-none">
+            <p className="text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] text-slate-500 mt-1 line-clamp-1 sm:line-clamp-none">
               Confidential protocols.
             </p>
           </div>
@@ -193,7 +193,7 @@ export const SalePings: React.FC<SalePingsProps> = ({ className = '', onBookDemo
             <div className="mt-1 sm:mt-2 text-base sm:text-2xl font-display font-bold text-slate-800">
               2022 → 2026 Expansion
             </div>
-            <p className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5 sm:mt-1">
+            <p className="text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] text-slate-500 mt-0.5 sm:mt-1">
               From 38 foundational trainees to Pune's premier personal coaching hub.
             </p>
           </div>
@@ -204,7 +204,7 @@ export const SalePings: React.FC<SalePingsProps> = ({ className = '', onBookDemo
         <div className="p-4 sm:p-6 rounded-2xl bg-[#111318] text-white border border-slate-800 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <div className="text-[11px] font-bold uppercase tracking-wider text-[#00A3FF] flex items-center gap-1.5">
+              <div className="text-[length:max(11px,calc(11rem/16))] font-bold uppercase tracking-wider text-[#00A3FF] flex items-center gap-1.5">
                 <TrendingUp className="w-3.5 h-3.5" />
                 <span>Verified Historical Trainee Growth (2022 - 2026)</span>
               </div>

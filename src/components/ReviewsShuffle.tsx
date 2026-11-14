@@ -179,7 +179,7 @@ export const ReviewsShuffle: React.FC<ReviewsShuffleProps> = ({ className = '' }
           <p className="text-xs text-slate-400 line-clamp-2">
             "{nextCard.comment}"
           </p>
-          <div className="text-[11px] text-slate-400 font-medium">
+          <div className="text-[length:max(11px,calc(11rem/16))] text-slate-400 font-medium">
             {nextCard.name}
           </div>
         </div>
@@ -213,7 +213,7 @@ export const ReviewsShuffle: React.FC<ReviewsShuffleProps> = ({ className = '' }
               <span className="ml-1.5 sm:ml-2 text-xs font-bold text-slate-800">5.0 / 5.0</span>
             </div>
             
-            <div className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            <div className="inline-flex items-center gap-1 text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
               <CheckCircle2 className="w-3 h-3" />
               <span>Verified Trainee</span>
             </div>
@@ -245,7 +245,7 @@ export const ReviewsShuffle: React.FC<ReviewsShuffleProps> = ({ className = '' }
                   <span>{activeCard.name}</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 </div>
-                <div className="text-[11px] sm:text-xs text-slate-500">
+                <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-500">
                   {activeCard.location} · {activeCard.program}
                 </div>
               </div>
@@ -253,14 +253,14 @@ export const ReviewsShuffle: React.FC<ReviewsShuffleProps> = ({ className = '' }
 
             {/* Result Badge */}
             <div className="text-right shrink-0">
-              <span className="text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg bg-[#EEF5FF] text-[#1769FF] border border-[#1769FF]/20">
+              <span className="text-[length:max(10px,calc(10rem/16))] sm:text-xs font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg bg-[#EEF5FF] text-[#1769FF] border border-[#1769FF]/20">
                 {activeCard.resultBadge}
               </span>
             </div>
           </div>
 
           {/* Swipe / Click Hint for user */}
-          <div className="mt-2.5 pt-2 text-[10px] text-slate-400 flex flex-wrap items-center justify-between gap-1">
+          <div className="mt-2.5 pt-2 text-[length:max(10px,calc(10rem/16))] text-slate-400 flex flex-wrap items-center justify-between gap-1">
             <span>👆 Click card to pause/resume</span>
             <span>👈 Swipe left/right/up/down for next 👉</span>
           </div>

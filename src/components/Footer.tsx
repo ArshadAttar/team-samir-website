@@ -16,7 +16,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 border-b border-[#1C2028]">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-6">
           <div>
-            <div className="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-[#00A3FF] mb-0.5 sm:mb-1">
+            <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs uppercase tracking-wider font-semibold text-[#00A3FF] mb-0.5 sm:mb-1">
               TS Fitness · Kothrud, Pune
             </div>
             <h3 className="text-base sm:text-2xl lg:text-3xl font-display font-bold text-white tracking-tight">
@@ -49,14 +49,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
               href={`https://wa.me/${BUSINESS_INFO.contact.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-[#1C2028] hover:bg-emerald-950/60 border border-emerald-800 text-[11px] sm:text-xs text-emerald-400 transition-colors"
+              className="inline-flex items-center gap-1.5 min-h-9 lg:min-h-0 px-3 py-1.5 rounded-lg bg-[#1C2028] hover:bg-emerald-950/60 border border-emerald-800 text-[length:max(11px,calc(11rem/16))] sm:text-xs text-emerald-400 transition-colors"
             >
               <MessageSquare className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span>WhatsApp Chat</span>
             </a>
             <a
               href={`tel:${BUSINESS_INFO.contact.phoneRaw}`}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-[#1C2028] hover:bg-blue-950/60 border border-blue-800 text-[11px] sm:text-xs text-blue-400 transition-colors"
+              className="inline-flex items-center gap-1.5 min-h-9 lg:min-h-0 px-3 py-1.5 rounded-lg bg-[#1C2028] hover:bg-blue-950/60 border border-blue-800 text-[length:max(11px,calc(11rem/16))] sm:text-xs text-blue-400 transition-colors"
             >
               <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span>Call Us</span>
@@ -68,30 +68,30 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
         <div className="grid grid-cols-2 gap-4 col-span-1 md:contents lg:contents">
           {/* Quick Links */}
           <div className="lg:col-span-2 space-y-2 sm:space-y-3">
-            <h4 className="text-[11px] sm:text-xs font-semibold text-slate-300 uppercase tracking-wider">Pages</h4>
-            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-slate-400">
+            <h4 className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-slate-300 uppercase tracking-wider">Pages</h4>
+            <ul className="space-y-0.5 lg:space-y-2 text-xs sm:text-sm text-slate-400">
               <li>
-                <button onClick={() => onNavigate('home')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('home')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Home
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Services
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('senior-fitness')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('senior-fitness')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Senior Fitness
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('clients')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('clients')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Clients Experience
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('about')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('about')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   About Samir
                 </button>
               </li>
@@ -100,25 +100,25 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
 
           {/* Training Formats */}
           <div className="lg:col-span-2 space-y-2 sm:space-y-3">
-            <h4 className="text-[11px] sm:text-xs font-semibold text-slate-300 uppercase tracking-wider">Services</h4>
-            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-slate-400">
+            <h4 className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-slate-300 uppercase tracking-wider">Services</h4>
+            <ul className="space-y-0.5 lg:space-y-2 text-xs sm:text-sm text-slate-400">
               <li>
-                <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   1-on-1 Personal Training
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Health Management
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Nutrition Guidance
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Offline Training (Kothrud)
                 </button>
               </li>
@@ -128,13 +128,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
 
         {/* Direct Contact Information (4 cols) */}
         <div className="lg:col-span-4 space-y-2.5 sm:space-y-3">
-          <h4 className="text-[11px] sm:text-xs font-semibold text-slate-300 uppercase tracking-wider">Location & Contact</h4>
+          <h4 className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-slate-300 uppercase tracking-wider">Location & Contact</h4>
           <div className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm text-slate-400">
             <div className="flex items-start gap-2 sm:gap-2.5">
               <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00A3FF] shrink-0 mt-0.5" />
               <div>
                 <p className="text-white font-medium text-xs sm:text-sm">{BUSINESS_INFO.location.fullAddress}</p>
-                <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">DP Road, Kothrud, Pune, Maharashtra 411038</p>
+                <p className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400 mt-0.5">DP Road, Kothrud, Pune, Maharashtra 411038</p>
               </div>
             </div>
             
@@ -143,7 +143,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
               <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00A3FF] shrink-0" />
               <a
                 href={`tel:${BUSINESS_INFO.contact.phoneRaw}`}
-                className="text-white hover:text-[#00A3FF] font-medium transition-colors"
+                className="py-1 lg:py-0 text-white hover:text-[#00A3FF] font-medium transition-colors"
               >
                 {BUSINESS_INFO.contact.phone}
               </a>
@@ -158,7 +158,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-[#16834A] font-medium transition-colors"
+                className="py-1 lg:py-0 text-white hover:text-[#16834A] font-medium transition-colors"
               >
                 {BUSINESS_INFO.contact.whatsapp} (WhatsApp Direct)
               </a>
@@ -169,7 +169,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
               <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00A3FF] shrink-0" />
               <a
                 href={`mailto:${BUSINESS_INFO.contact.email}`}
-                className="text-slate-300 hover:text-white transition-colors"
+                className="py-1 lg:py-0 break-all text-slate-300 hover:text-white transition-colors"
               >
                 {BUSINESS_INFO.contact.email}
               </a>
@@ -178,14 +178,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
             {/* Working Hours */}
             <div className="flex items-center gap-2 sm:gap-2.5">
               <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00A3FF] shrink-0" />
-              <span className="text-[11px] sm:text-xs text-slate-300">{BUSINESS_INFO.contact.workingHours}</span>
+              <span className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-300">{BUSINESS_INFO.contact.workingHours}</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar: Copyright */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-6 border-t border-[#1C2028] flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 text-[11px] sm:text-xs text-slate-400">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-6 border-t border-[#1C2028] flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400">
         <div className="flex items-center gap-1.5 sm:gap-2 text-center sm:text-left">
           <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#16834A] shrink-0" />
           <span>© {new Date().getFullYear()} TeamSamir & TS Fitness Pune. All rights reserved.</span>

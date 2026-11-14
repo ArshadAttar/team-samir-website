@@ -84,7 +84,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onOpenMobileMenu}
-            className="lg:hidden flex items-center justify-center gap-1.5 h-8.5 px-2.5 rounded-lg bg-[#1769FF] text-white hover:bg-[#0B3D91] active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1769FF] shrink-0 shadow-sm cursor-pointer border border-blue-400"
+            className="lg:hidden flex items-center justify-center gap-1.5 h-9 px-3 rounded-lg bg-[#1769FF] text-white hover:bg-[#0B3D91] active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1769FF] shrink-0 shadow-sm cursor-pointer border border-blue-400"
             aria-label="Open mobile navigation menu (three bars for home, about, services, contact)"
             aria-expanded="false"
             title="Three bars menu: Home, About, Services, Contact"
@@ -95,21 +95,21 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="w-full h-0.5 bg-white rounded-full"></span>
               <span className="w-full h-0.5 bg-white rounded-full"></span>
             </div>
-            <span className="text-[11px] font-bold tracking-wider uppercase">Menu</span>
+            <span className="text-[length:max(11px,calc(11rem/16))] font-bold tracking-wider uppercase">Menu</span>
           </button>
         </div>
 
       </div>
 
       {/* Mobile Sticky Quick Navigation Bar (Compact, proportional tabs) */}
-      <div className="lg:hidden bg-slate-50/95 border-t border-[#E1E6EF] px-2 py-1 overflow-x-auto no-scrollbar flex items-center gap-1 scroll-smooth">
+      <div className="lg:hidden bg-slate-50/95 border-t border-[#E1E6EF] px-2 sm:px-4 py-1 overflow-x-auto no-scrollbar flex items-center gap-1 sm:gap-1.5 scroll-smooth">
         {navItems.map((item) => {
           const isActive = currentPage === item.id;
           return (
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              className={`cursor-pointer whitespace-nowrap text-[11px] font-medium py-1 px-2.5 rounded-md transition-all shrink-0 ${
+              className={`cursor-pointer whitespace-nowrap text-[length:max(11px,calc(11rem/16))] sm:text-xs font-medium min-h-[34px] py-1.5 px-3 rounded-md transition-all shrink-0 ${
                 isActive
                   ? 'bg-[#1769FF] text-white font-semibold shadow-xs'
                   : 'text-[#646B78] hover:text-[#171A21] hover:bg-slate-200/50'

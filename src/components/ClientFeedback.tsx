@@ -21,7 +21,7 @@ const ReviewCard: React.FC<{ review: ReviewItem }> = ({ review }) => (
 
     <p className="text-sm text-slate-100 leading-relaxed flex-1">“{review.comment}”</p>
 
-    <span className="self-start inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-400/15 text-emerald-300 border border-emerald-400/30">
+    <span className="self-start inline-flex items-center gap-1.5 text-[length:max(11px,calc(11rem/16))] font-semibold px-2.5 py-1 rounded-full bg-emerald-400/15 text-emerald-300 border border-emerald-400/30">
       <CheckCircle2 className="w-3.5 h-3.5" />
       {review.resultBadge}
     </span>
@@ -36,7 +36,7 @@ const ReviewCard: React.FC<{ review: ReviewItem }> = ({ review }) => (
       />
       <div className="min-w-0">
         <div className="text-sm font-bold text-white truncate">{review.name}</div>
-        <div className="text-[11px] text-slate-400 truncate">
+        <div className="text-[length:max(11px,calc(11rem/16))] text-slate-400 truncate">
           {review.location} · {review.program}
         </div>
       </div>
@@ -129,7 +129,7 @@ const VideoCard: React.FC<{ video: VideoFeedbackItem; isCopy: boolean }> = ({ vi
           onPause={() => setIsPlaying(false)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-        <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-black/40 backdrop-blur-md text-white border border-white/20">
+        <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 text-[length:max(10px,calc(10rem/16))] font-semibold px-2 py-0.5 rounded-full bg-black/40 backdrop-blur-md text-white border border-white/20">
           <Play className="w-3 h-3 fill-current" />
           {video.tag}
         </span>
@@ -160,7 +160,7 @@ const VideoCard: React.FC<{ video: VideoFeedbackItem; isCopy: boolean }> = ({ vi
 
         <div className="absolute bottom-2.5 left-3 right-3">
           <div className="text-sm sm:text-base font-display font-bold text-white">{video.title}</div>
-          <div className="text-[10px] text-slate-300">{video.subtitle}</div>
+          <div className="text-[length:max(10px,calc(10rem/16))] text-slate-300">{video.subtitle}</div>
         </div>
       </div>
       <p className="p-3 text-xs text-slate-200 leading-relaxed">{video.description}</p>
@@ -184,7 +184,7 @@ const SectionHeader: React.FC<{ kicker: string; title: string; desc: string; ico
   icon,
 }) => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8 sm:mb-10 space-y-2">
-    <div className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-[#00A3FF] uppercase tracking-wider">
+    <div className="inline-flex items-center gap-1.5 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold text-[#00A3FF] uppercase tracking-wider">
       {icon}
       {kicker}
     </div>

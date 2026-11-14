@@ -65,11 +65,11 @@ export const BentoBuild: React.FC<BentoBuildProps> = ({ onBookDemo, className = 
 
           <div>
             <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-800">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#00A3FF] flex items-center gap-1.5">
+              <span className="text-[length:max(11px,calc(11rem/16))] font-bold uppercase tracking-wider text-[#00A3FF] flex items-center gap-1.5">
                 <Dumbbell className="w-4 h-4" />
                 <span>Pillar 01 · Biomechanics Lab</span>
               </span>
-              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              <span className="text-[length:max(10px,calc(10rem/16))] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                 100% Form Safety
               </span>
             </div>
@@ -85,11 +85,11 @@ export const BentoBuild: React.FC<BentoBuildProps> = ({ onBookDemo, className = 
             {/* Interactive snap tags */}
             <div className="grid grid-cols-2 gap-2 mt-5">
               <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-700/60">
-                <div className="text-[10px] text-slate-400">Kinematic Tracking</div>
+                <div className="text-[length:max(10px,calc(10rem/16))] text-slate-400">Kinematic Tracking</div>
                 <div className="text-sm font-bold text-white mt-0.5">Barbell Path Alignment</div>
               </div>
               <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-700/60">
-                <div className="text-[10px] text-slate-400">Injury Prevention</div>
+                <div className="text-[length:max(10px,calc(10rem/16))] text-slate-400">Injury Prevention</div>
                 <div className="text-sm font-bold text-emerald-400 mt-0.5">Zero Chronic Strain</div>
               </div>
             </div>
@@ -114,11 +114,11 @@ export const BentoBuild: React.FC<BentoBuildProps> = ({ onBookDemo, className = 
         >
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#16834A] flex items-center gap-1.5">
+              <span className="text-[length:max(11px,calc(11rem/16))] font-bold uppercase tracking-wider text-[#16834A] flex items-center gap-1.5">
                 <Apple className="w-4 h-4" />
                 <span>Pillar 02 · Nutrition Architecture</span>
               </span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700">
+              <span className="text-[length:max(10px,calc(10rem/16))] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700">
                 Indian Meal Friendly
               </span>
             </div>
@@ -132,9 +132,9 @@ export const BentoBuild: React.FC<BentoBuildProps> = ({ onBookDemo, className = 
             </p>
 
             <div className="flex flex-wrap gap-1.5 mt-3">
-              <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700">WhatsApp Daily Food Audit</span>
-              <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700">Flexible Social Eating</span>
-              <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700">Realistic Caloric Deficit</span>
+              <span className="text-[length:max(11px,calc(11rem/16))] font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700">WhatsApp Daily Food Audit</span>
+              <span className="text-[length:max(11px,calc(11rem/16))] font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700">Flexible Social Eating</span>
+              <span className="text-[length:max(11px,calc(11rem/16))] font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700">Realistic Caloric Deficit</span>
             </div>
           </div>
 
@@ -163,7 +163,7 @@ export const BentoBuild: React.FC<BentoBuildProps> = ({ onBookDemo, className = 
               Tracking skeletal muscle mass, visceral fat, and hydration weekly to ensure pure fat loss rather than water or muscle waste.
             </p>
           </div>
-          <div className="mt-3 text-[11px] font-semibold text-[#1769FF]">
+          <div className="mt-3 text-[length:max(11px,calc(11rem/16))] font-semibold text-[#1769FF]">
             Data-driven biofeedback
           </div>
         </div>
@@ -187,7 +187,7 @@ export const BentoBuild: React.FC<BentoBuildProps> = ({ onBookDemo, className = 
               Targeted thoracic extension and glute reactivation drills that eliminate neck stiffness and lower back pain from sitting.
             </p>
           </div>
-          <div className="mt-3 text-[11px] font-semibold text-purple-600">
+          <div className="mt-3 text-[length:max(11px,calc(11rem/16))] font-semibold text-purple-600">
             For Pune IT professionals
           </div>
         </div>

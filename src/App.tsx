@@ -161,18 +161,20 @@ export default function App() {
       />
 
       {/* 10. Discreet Floating Blueprint / Wireframe Mode Toggle */}
-      <div className="fixed bottom-20 lg:bottom-6 right-4 z-40">
+      {/* Icon-only dot below md so it doesn't cover page text on phones; full label from md up */}
+      <div className="fixed bottom-20 lg:bottom-6 right-3 md:right-4 z-40">
         <button
           onClick={() => setIsWireframeMode(!isWireframeMode)}
-          className={`px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg transition-all flex items-center gap-1.5 cursor-pointer border ${
+          className={`w-9 h-9 md:w-auto md:h-auto justify-center md:px-3 md:py-1.5 rounded-full text-xs font-semibold shadow-lg transition-all flex items-center gap-1.5 cursor-pointer border ${
             isWireframeMode
               ? 'bg-[#1769FF] text-white border-blue-400 ring-2 ring-blue-300'
               : 'bg-[#111318]/90 text-white border-slate-700 hover:bg-black'
           }`}
           title="Toggle Wireframe Blueprint vs High-Fidelity Design"
+          aria-label={isWireframeMode ? 'Visual Design Active' : 'Wireframe Blueprint'}
         >
-          <span className="w-2 h-2 rounded-full bg-[#00A3FF]" />
-          <span>{isWireframeMode ? 'Visual Design Active' : 'Wireframe Blueprint'}</span>
+          <span className="w-2 h-2 rounded-full bg-[#00A3FF] shrink-0" />
+          <span className="hidden md:inline">{isWireframeMode ? 'Visual Design Active' : 'Wireframe Blueprint'}</span>
         </button>
       </div>
     </div>

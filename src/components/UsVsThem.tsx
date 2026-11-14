@@ -106,7 +106,7 @@ export const UsVsThem: React.FC<UsVsThemProps> = ({ onBookDemo, className = '' }
                 <div className="text-xs sm:text-sm font-display font-bold text-[#171A21]">
                   {row.feature}
                 </div>
-                <div className="text-[11px] text-slate-500">
+                <div className="text-[length:max(11px,calc(11rem/16))] text-slate-500">
                   {row.featureSub}
                 </div>
               </div>
@@ -119,7 +119,7 @@ export const UsVsThem: React.FC<UsVsThemProps> = ({ onBookDemo, className = '' }
                     <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 stroke-[3]" />
                   </div>
                   <div className="text-xs text-rose-950 font-medium leading-relaxed">
-                    <span className="sm:hidden font-bold text-rose-800 block text-[10px] uppercase">
+                    <span className="sm:hidden font-bold text-rose-800 block text-[length:max(10px,calc(10rem/16))] uppercase">
                       Commercial Gyms:
                     </span>
                     {row.othersText}
@@ -132,7 +132,7 @@ export const UsVsThem: React.FC<UsVsThemProps> = ({ onBookDemo, className = '' }
                     <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 stroke-[3]" />
                   </div>
                   <div className="text-xs text-emerald-950 font-semibold leading-relaxed">
-                    <span className="sm:hidden font-bold text-emerald-800 block text-[10px] uppercase">
+                    <span className="sm:hidden font-bold text-emerald-800 block text-[length:max(10px,calc(10rem/16))] uppercase">
                       TS Fitness:
                     </span>
                     {row.usText}

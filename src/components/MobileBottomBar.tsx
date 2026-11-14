@@ -30,7 +30,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
           }`}
         >
           <Home className="w-4 h-4" />
-          <span className="text-[10px] mt-0.5">Home</span>
+          <span className="text-[length:max(10px,calc(10rem/16))] mt-0.5">Home</span>
         </button>
 
         {/* Services Tab */}
@@ -41,7 +41,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
           }`}
         >
           <Dumbbell className="w-4 h-4" />
-          <span className="text-[10px] mt-0.5">Services</span>
+          <span className="text-[length:max(10px,calc(10rem/16))] mt-0.5">Services</span>
         </button>
 
         {/* The 3-Bars Menu Button in Bottom Bar */}
@@ -56,7 +56,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
             <span className="w-full h-0.5 bg-[#1769FF] rounded-full"></span>
             <span className="w-full h-0.5 bg-[#1769FF] rounded-full"></span>
           </div>
-          <span className="text-[10px] font-bold text-[#1769FF] mt-0.5">Menu</span>
+          <span className="text-[length:max(10px,calc(10rem/16))] font-bold text-[#1769FF] mt-0.5">Menu</span>
         </button>
 
         {/* WhatsApp Direct Action */}
@@ -70,7 +70,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
           title="Chat on WhatsApp"
         >
           <MessageSquare className="w-4 h-4 text-[#16834A]" />
-          <span className="text-[10px] mt-0.5">WhatsApp</span>
+          <span className="text-[length:max(10px,calc(10rem/16))] mt-0.5">WhatsApp</span>
         </a>
 
         {/* Free Demo Action Tab (Balanced with other tabs) */}
@@ -81,7 +81,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
           <div className="w-7 h-5 rounded-md bg-[#1769FF] text-white flex items-center justify-center shadow-2xs">
             <Calendar className="w-3.5 h-3.5" />
           </div>
-          <span className="text-[10px] font-bold text-[#1769FF] mt-0.5">Demo</span>
+          <span className="text-[length:max(10px,calc(10rem/16))] font-bold text-[#1769FF] mt-0.5">Demo</span>
         </button>
       </div>
     </aside>

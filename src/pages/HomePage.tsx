@@ -104,13 +104,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </div>
                   <Award className="w-4 h-4 text-[#00A3FF] shrink-0 mt-0.5 sm:mt-0" />
                 </div>
-                <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1">
+                <p className="text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] text-slate-400 mt-1">
                   *Figures supplied by client; presented as editable claims pending formal verification before public launch.
                 </p>
               </div>
 
               {/* 2 Primary CTAs + Mobile WhatsApp Direct Action (2-column side-by-side on mobile) */}
-              <div className="pt-1 grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+              <div className="pt-1 grid grid-cols-2 sm:flex sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2 sm:gap-3">
                 <button
                   onClick={() => onBookDemo()}
                   className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-6 sm:py-3.5 min-h-[40px] sm:min-h-[46px] text-xs sm:text-sm font-semibold text-white bg-[#1769FF] hover:bg-[#00A3FF] active:scale-[0.98] rounded-lg sm:rounded-xl shadow-md transition-all cursor-pointer"
@@ -133,7 +133,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 <button
                   onClick={() => onNavigate('services')}
-                  className="hidden md:inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[46px] text-xs sm:text-sm font-semibold text-white bg-[#1C2028] hover:bg-slate-800 border border-slate-700 rounded-xl transition-all cursor-pointer"
+                  className="hidden md:inline-flex items-center justify-center gap-2 whitespace-nowrap px-5 py-3 min-h-[46px] text-xs sm:text-sm font-semibold text-white bg-[#1C2028] hover:bg-slate-800 border border-slate-700 rounded-xl transition-all cursor-pointer"
                 >
                   <span>Explore Training</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#00A3FF]" />
@@ -141,7 +141,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
 
               {/* Local Venue Marker */}
-              <div className="text-[11px] sm:text-xs text-slate-400 flex items-center gap-2 pt-1">
+              <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400 flex items-center gap-2 pt-1">
                 <span className="w-2 h-2 rounded-full bg-[#16834A]" />
                 <span>TS Fitness Studio · Flat No. 3, DP Road, Kothrud, Pune</span>
               </div>
@@ -179,7 +179,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                           <span>Lead Coach Samir</span>
                           <span className="w-1.5 h-1.5 rounded-full bg-[#16834A]" />
                         </div>
-                        <div className="text-[11px] text-[#00A3FF] font-semibold">
+                        <div className="text-[length:max(11px,calc(11rem/16))] text-[#00A3FF] font-semibold">
                           Personalised Coaching
                         </div>
                       </div>
@@ -282,7 +282,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12">
             <div>
-              <div className="text-[11px] sm:text-xs font-bold text-[#1769FF] uppercase tracking-wider mb-1 sm:mb-2">
+              <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold text-[#1769FF] uppercase tracking-wider mb-1 sm:mb-2">
                 Comprehensive Coaching Portfolio
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-[#171A21] tracking-tight">
@@ -327,7 +327,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-xs text-white text-[11px] px-2.5 py-1 rounded-md font-medium">
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-xs text-white text-[length:max(11px,calc(11rem/16))] px-2.5 py-1 rounded-md font-medium">
                       {service.format}
                     </div>
                   </div>
@@ -340,7 +340,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <p className="text-xs sm:text-sm text-[#646B78] leading-relaxed">
                       {service.shortDesc}
                     </p>
-                    <div className="text-[11px] sm:text-xs text-slate-500 pt-2 border-t border-slate-100">
+                    <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-500 pt-2 border-t border-slate-100">
                       <span className="font-medium text-[#171A21]">Best for:</span> {service.suitableFor}
                     </div>
                   </div>
@@ -391,7 +391,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           ============================================================ */}
       <section className="py-10 sm:py-16 lg:py-20 bg-[#1769FF] text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-[11px] sm:text-xs font-semibold">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold">
             <Calendar className="w-3.5 h-3.5" />
             <span>Kothrud, Pune · Complimentary 1-on-1 Consultation</span>
           </div>
@@ -420,7 +420,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </button>
           </div>
 
-          <p className="text-[10px] sm:text-xs text-blue-200 pt-1 sm:pt-2">
+          <p className="text-[length:max(10px,calc(10rem/16))] sm:text-xs text-blue-200 pt-1 sm:pt-2">
             *No automated charges or commitments. Flat No. 3, XYZ Apartment, DP Road, Kothrud, Pune.
           </p>
         </div>

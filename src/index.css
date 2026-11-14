@@ -34,11 +34,28 @@ html {
   }
 }
 
+/* Large laptops, desktops, 2K/4K monitors, TVs and projectors.
+   Every size in the site is rem-based (type, spacing, icons and the max-w-7xl content column),
+   so growing the root size scales the whole layout with the screen instead of leaving a
+   narrow 1280px strip in the middle. 16px at 1600px → ~17.6px at 1920 → ~20.8px at 2560
+   → ~27px at 3840, capped at 30px for very large displays. */
+@media (min-width: 1600px) {
+  html {
+    font-size: min(calc(16px + (100vw - 1600px) * 0.005), 30px);
+  }
+}
+
 body {
   font-family: var(--font-sans);
   color: #171A21;
   background-color: #ffffff;
   overflow-x: hidden;
+  overflow-wrap: break-word;
+}
+
+img,
+video {
+  max-width: 100%;
 }
 
 h1, h2, h3, .font-display {

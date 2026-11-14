@@ -75,7 +75,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           <div className="p-2.5 sm:p-3.5 border-b border-[#E1E6EF] flex items-center justify-between">
             <div className="flex items-center gap-1.5 min-w-0">
               <TeamSamirLogo variant="light" size="sm" />
-              <span className="text-[9px] font-bold text-[#1769FF] bg-[#EEF5FF] px-1.5 py-0.5 rounded-full uppercase tracking-wider shrink-0">Menu</span>
+              <span className="text-[length:max(9px,calc(9rem/16))] font-bold text-[#1769FF] bg-[#EEF5FF] px-1.5 py-0.5 rounded-full uppercase tracking-wider shrink-0">Menu</span>
             </div>
             <button
               onClick={onClose}
@@ -90,7 +90,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           <div className="p-2 sm:p-3 bg-slate-50 border-b border-[#E1E6EF] grid grid-cols-2 gap-1.5">
             <a
               href={`tel:${BUSINESS_INFO.contact.phoneRaw}`}
-              className="py-1.5 px-2 rounded-lg bg-white border border-[#E1E6EF] text-[#171A21] text-[11px] font-semibold shadow-2xs hover:border-[#1769FF] flex items-center justify-center gap-1 active:scale-[0.98]"
+              className="py-1.5 px-2 rounded-lg bg-white border border-[#E1E6EF] text-[#171A21] text-[length:max(11px,calc(11rem/16))] font-semibold shadow-2xs hover:border-[#1769FF] flex items-center justify-center gap-1 active:scale-[0.98]"
             >
               <Phone className="w-3 h-3 text-[#1769FF] shrink-0" />
               <span className="truncate">Call</span>
@@ -102,7 +102,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="py-1.5 px-2 rounded-lg bg-emerald-600 text-white text-[11px] font-semibold shadow-2xs hover:bg-emerald-700 flex items-center justify-center gap-1 active:scale-[0.98]"
+              className="py-1.5 px-2 rounded-lg bg-emerald-600 text-white text-[length:max(11px,calc(11rem/16))] font-semibold shadow-2xs hover:bg-emerald-700 flex items-center justify-center gap-1 active:scale-[0.98]"
             >
               <MessageSquare className="w-3 h-3 shrink-0" />
               <span className="truncate">WhatsApp</span>
@@ -111,7 +111,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
 
           {/* Navigation Links (Compact, fitted to 55-60% width) */}
           <div className="p-2 sm:p-3.5 space-y-0.5 flex-1 overflow-y-auto">
-            <p id="mobile-nav-title" className="text-[10px] font-semibold text-[#646B78] tracking-wider uppercase px-1 mb-1">
+            <p id="mobile-nav-title" className="text-[length:max(10px,calc(10rem/16))] font-semibold text-[#646B78] tracking-wider uppercase px-1 mb-1">
               Navigate
             </p>
 
@@ -133,7 +133,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
                   >
                     <div className="min-w-0 pr-1">
                       <div className="text-xs sm:text-sm font-semibold truncate">{item.label}</div>
-                      <div className="text-[10px] text-[#646B78] truncate">{item.desc}</div>
+                      <div className="text-[length:max(10px,calc(10rem/16))] text-[#646B78] truncate">{item.desc}</div>
                     </div>
                     <ArrowRight className={`w-3.5 h-3.5 shrink-0 transition-transform ${isActive ? 'text-[#1769FF] translate-x-0.5' : 'text-[#646B78]'}`} />
                   </button>
@@ -142,7 +142,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             </nav>
 
             {/* Direct Venue & Contact Details in Drawer */}
-            <div className="mt-2 pt-2 border-t border-[#E1E6EF] text-[10px] text-[#646B78] space-y-1 px-1">
+            <div className="mt-2 pt-2 border-t border-[#E1E6EF] text-[length:max(10px,calc(10rem/16))] text-[#646B78] space-y-1 px-1">
               <div className="flex items-start gap-1.5">
                 <MapPin className="w-3 h-3 text-[#1769FF] shrink-0 mt-0.5" />
                 <span className="line-clamp-2 leading-tight">{BUSINESS_INFO.location.fullAddress}</span>
@@ -166,7 +166,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
               <Calendar className="w-3.5 h-3.5 shrink-0" />
               <span className="truncate">Book Free Demo</span>
             </button>
-            <p className="text-[9px] text-center text-[#646B78] mt-1 truncate">
+            <p className="text-[length:max(9px,calc(9rem/16))] text-center text-[#646B78] mt-1 truncate">
               DP Road, Kothrud · Coach Samir
             </p>
           </div>
