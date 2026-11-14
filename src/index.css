@@ -73,3 +73,80 @@ h1, h2, h3, .font-display {
 .wireframe-mode img {
   filter: grayscale(85%) contrast(90%);
 }
+
+/* Right-to-left auto-scrolling marquee (used by components/Marquee.tsx).
+   The track holds the item list twice and slides by -50%, so the loop is seamless. */
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-rtl var(--marquee-duration, 40s) linear infinite;
+}
+
+/* Pause while the pointer is over the strip or something inside it has keyboard focus.
+   :focus-visible (not :focus-within) so a mouse-clicked button doesn't keep it paused. */
+.marquee-viewport:hover .marquee-track,
+.marquee-viewport:has(:focus-visible) .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Reduced motion: no auto-scroll; let people swipe/scroll instead */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .marquee-viewport {
+    overflow-x: auto;
+  }
+}
+
+/* Client Experiences page: horizontal gallery tracks.
+   Only the track scrolls sideways; the page itself never does.
+   Side padding lines the first card up with the max-w-7xl content column. */
+.ce-track {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+  --ce-gutter: max(1rem, calc((100% - 80rem) / 2 + 1rem));
+  padding-inline: var(--ce-gutter);
+  scroll-padding-inline: var(--ce-gutter);
+}
+.ce-track::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 640px) {
+  .ce-track { --ce-gutter: max(1.5rem, calc((100% - 80rem) / 2 + 1.5rem)); }
+}
+@media (min-width: 1024px) {
+  .ce-track { --ce-gutter: max(2rem, calc((100% - 80rem) / 2 + 2rem)); }
+}
+.ce-track > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+.ce-track.is-dragging {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  cursor: grabbing;
+  user-select: none;
+}
+.ce-track img,
+.ce-track video {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ce-track { scroll-behavior: auto; }
+}

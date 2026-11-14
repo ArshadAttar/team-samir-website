@@ -88,7 +88,7 @@ export const PlaceholderDialog: React.FC<PlaceholderDialogProps> = ({
                 <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#16834A] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900">5 Years Experience & Fitness Talk:</strong> Confirmed background narrative.
+                    <strong className="text-slate-900">5 Years Experience:</strong> Confirmed background narrative (former coach at Fitness Talk).
                   </div>
                 </div>
 

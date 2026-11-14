@@ -45,11 +45,10 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   // Clean unnumbered items
   const navItems: { id: PageId; label: string; desc: string }[] = [
     { id: 'home', label: 'Home', desc: 'TS Fitness studio overview & coach bio' },
+    { id: 'services', label: 'Services', desc: '1-on-1 personal training & nutrition' },
+    { id: 'senior-fitness', label: 'Senior Fitness', desc: 'Safe, personal training for ages 55+' },
+    { id: 'clients', label: 'Clients Experience', desc: 'Real client results, reviews & video reels' },
     { id: 'about', label: 'About Samir', desc: '5-year track record & coaching vision' },
-    { id: 'services', label: 'Training Services', desc: '1-on-1 personal training & nutrition' },
-    { id: 'transformations', label: 'Transformations', desc: 'Male & female progress and video reels' },
-    { id: 'nutrition', label: 'Nutrition & Wellness', desc: 'High-protein diet & sustainable habits' },
-    { id: 'contact', label: 'Contact & Free Demo', desc: 'Book your demo in Kothrud, Pune' },
   ];
 
   if (!isOpen) return null;

@@ -1,8 +1,7 @@
 import React from 'react';
 import { PageId } from '../types';
-import { BUSINESS_INFO, TEAM_MEMBERS, CERTIFICATIONS } from '../data/mockData';
+import { BUSINESS_INFO, CERTIFICATIONS } from '../data/mockData';
 import { CountUpStat } from '../components/CountUpStat';
-import { WordRotator } from '../components/WordRotator';
 import { ProcessesDraw } from '../components/ProcessesDraw';
 import {
   Target,
@@ -71,12 +70,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               </div>
 
               {/* Verified Employment Strip */}
-              <div className="p-3 sm:p-4 rounded-xl bg-[#EEF5FF] border border-[#E1E6EF] flex items-center justify-between text-xs text-[#171A21]">
+              <div className="p-3 sm:p-4 rounded-xl bg-[#EEF5FF] border border-[#E1E6EF] text-xs text-[#171A21]">
                 <div>
-                  <span className="font-bold text-[#1769FF]">Previous Employment:</span>
-                  <div className="font-semibold text-xs sm:text-sm">Fitness Talk</div>
-                </div>
-                <div className="text-right">
                   <span className="text-[#646B78]">Coaching Timeline:</span>
                   <div className="font-semibold text-xs sm:text-sm">5 Years In Industry</div>
                 </div>
@@ -96,7 +91,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
               <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm lg:text-base text-[#646B78] leading-relaxed">
                 <p>
-                  Samir began his coaching career driven by a desire to bring structured, evidence-guided fitness training to Pune. Over five years in the fitness industry, including hands-on tenure at <strong className="text-[#171A21]">Fitness Talk</strong>, he has coached individuals across diverse backgrounds, from desk workers managing spinal fatigue to competitive performers.
+                  Samir began his coaching career driven by a desire to bring structured, evidence-guided fitness training to Pune. Over five years in the fitness industry, including hands-on tenure at Fitness Talk, he has coached individuals across diverse backgrounds, from desk workers managing spinal fatigue to competitive performers.
                 </p>
                 <p>
                   Rather than prescribing extreme routines or crash cleanses, Samir emphasizes foundational lifting mechanics, progressive overload, and realistic Indian nutrition. Every training split is customized according to the client's current baseline, anatomical levers, and daily commitments.
@@ -154,13 +149,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             </div>
 
           </div>
-        </div>
-      </section>
-
-      {/* Word Rotator: Personalized coaching promises across personalities */}
-      <section className="py-8 sm:py-12 bg-slate-900 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <WordRotator />
         </div>
       </section>
 
@@ -231,112 +219,35 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         </div>
       </section>
 
-      {/* 10. Team Introduction */}
-      <section className="py-8 sm:py-14 lg:py-16 border-b border-[#E1E6EF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
-          <div>
-            <div className="text-xs font-bold text-[#1769FF] uppercase tracking-wider mb-1">
-              Coaching Collective
-            </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-[#171A21] tracking-tight">
-              Meet the Fitness & Nutrition Team
-            </h2>
-            <p className="text-[#646B78] text-xs sm:text-sm mt-1 max-w-2xl">
-              Professional team structure representing personal trainers, functional coaches, and nutritional advisors.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            {TEAM_MEMBERS.map((member) => (
-              <div
-                key={member.id}
-                className="p-4 sm:p-6 rounded-2xl bg-white border border-[#E1E6EF] space-y-3 sm:space-y-4 hover:border-[#1769FF] transition-all"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#EEF5FF] text-[#1769FF] flex items-center justify-center font-bold">
-                    {member.role === 'Nutritionist' ? <Apple className="w-4 h-4 sm:w-5 sm:h-5" /> : <Dumbbell className="w-4 h-4 sm:w-5 sm:h-5" />}
-                  </div>
-                  <span className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
-                    {member.role}
-                  </span>
-                </div>
-
-                <div>
-                  <h3 className="text-base sm:text-lg font-display font-bold text-[#171A21]">
-                    {member.namePlaceholder}
-                  </h3>
-                  <div className="text-xs text-[#1769FF] font-medium">{member.experience}</div>
-                </div>
-
-                <p className="text-xs text-[#646B78] leading-relaxed">
-                  {member.bioPlaceholder}
-                </p>
-
-                <div className="pt-2 border-t border-slate-100 text-xs">
-                  <span className="font-semibold text-slate-700">Specialties:</span>
-                  <div className="text-[#646B78] mt-0.5 text-[11px] sm:text-xs">{member.specialties.join(' · ')}</div>
-                </div>
-
-                <div className={`p-2.5 rounded text-[11px] ${highlightPlaceholders ? 'bg-amber-50 border border-amber-300 text-amber-900' : 'bg-slate-50 text-slate-500'}`}>
-                  <strong>Credentials:</strong> {member.qualificationPlaceholder}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 11. Certification & Qualification Gallery */}
+      {/* 11. Qualifications */}
       <section className="py-8 sm:py-14 lg:py-16 bg-slate-50 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4">
-            <div>
-              <div className="text-xs font-bold text-[#1769FF] uppercase tracking-wider mb-1">
-                Formal Accreditations
-              </div>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-[#171A21] tracking-tight">
-                Certifications & Qualifications Gallery
-              </h2>
-              <p className="text-[#646B78] text-xs sm:text-sm mt-1 max-w-xl">
-                Document placeholders for official certifications, sports science credentials, and nutrition certificates.
-              </p>
+
+          <div>
+            <div className="text-xs font-bold text-[#1769FF] uppercase tracking-wider mb-1">
+              Qualifications
             </div>
-            <div className="inline-flex items-center gap-1.5 text-xs text-amber-800 bg-amber-100/80 px-2.5 py-1.5 rounded-lg shrink-0">
-              <Info className="w-4 h-4 text-amber-700 shrink-0" />
-              <span>Pending official certificate scan upload</span>
-            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-[#171A21] tracking-tight">
+              Certifications & Qualifications
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {CERTIFICATIONS.map((cert) => (
               <div
                 key={cert.id}
-                className="bg-white p-4 sm:p-6 rounded-2xl border border-[#E1E6EF] space-y-3 sm:space-y-4 shadow-xs"
+                className="bg-white p-4 sm:p-6 rounded-2xl border border-[#E1E6EF] flex items-start gap-3 sm:gap-4 shadow-xs"
               >
-                <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600">
-                  <FileCheck2 className="w-5 h-5 text-[#1769FF]" />
+                <div className="w-10 h-10 rounded-xl bg-[#EEF5FF] flex items-center justify-center shrink-0">
+                  <Award className="w-5 h-5 text-[#1769FF]" />
                 </div>
-                
                 <div>
                   <h3 className="text-sm sm:text-base font-display font-bold text-[#171A21]">
                     {cert.title}
                   </h3>
-                  <div className="text-xs text-[#646B78] mt-1">
-                    <strong>Issuing Body:</strong> {cert.issuer}
-                  </div>
-                  <div className="text-xs text-[#646B78]">
-                    <strong>Year:</strong> {cert.year}
-                  </div>
-                </div>
-
-                <div className="p-3 sm:p-4 rounded-xl bg-slate-50 border border-dashed border-slate-300 text-center text-[11px] sm:text-xs text-slate-500">
-                  <span>[Upload PDF / Verified Credential Document]</span>
-                </div>
-
-                <div className="text-[11px] font-semibold text-amber-700 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-amber-500" />
-                  <span>{cert.status}</span>
+                  <p className="text-xs sm:text-sm text-[#646B78] mt-1 leading-relaxed">
+                    {cert.description}
+                  </p>
                 </div>
               </div>
             ))}

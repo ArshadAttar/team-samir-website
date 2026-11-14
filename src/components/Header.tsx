@@ -20,11 +20,10 @@ export const Header: React.FC<HeaderProps> = ({
   // Clean navigation items without any numbering
   const navItems: { id: PageId; label: string }[] = [
     { id: 'home', label: 'Home' },
+    { id: 'services', label: 'Services' },
+    { id: 'senior-fitness', label: 'Senior Fitness' },
+    { id: 'clients', label: 'Clients Experience' },
     { id: 'about', label: 'About Samir' },
-    { id: 'services', label: 'Training Services' },
-    { id: 'transformations', label: 'Transformations' },
-    { id: 'nutrition', label: 'Nutrition & Wellness' },
-    { id: 'contact', label: 'Contact & Free Demo' },
   ];
 
   return (
@@ -72,28 +71,13 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Zone 3: Direct Actions & Compact Mobile 3-Bars Menu */}
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          
-          {/* Quick WhatsApp Action (Compact on mobile, full on desktop) */}
-          <a
-            href={`https://wa.me/${BUSINESS_INFO.contact.whatsappNumber}?text=${encodeURIComponent(
-              'Hi Samir, I want to book a free demo fitness training session at TS Fitness in Pune.'
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 h-8.5 sm:h-auto px-2 sm:px-3 py-1 sm:py-2 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-colors shrink-0"
-            title="Chat directly with Coach Samir on WhatsApp"
-            aria-label="WhatsApp Coach Samir"
-          >
-            <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#16834A] shrink-0" />
-            <span className="hidden sm:inline">WhatsApp</span>
-          </a>
-
+        
           {/* Primary CTA (Desktop and Tablet only) */}
           <button
             onClick={onBookDemo}
             className="hidden sm:inline-flex items-center justify-center min-h-[44px] px-4 lg:px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#1769FF] hover:bg-[#0B3D91] active:scale-[0.98] rounded-xl shadow-sm transition-all cursor-pointer whitespace-nowrap shrink-0"
           >
-            Book Free Demo
+            Book Free Call
           </button>
 
           {/* Compact, Sleek Mobile Three Bars Menu Button */}

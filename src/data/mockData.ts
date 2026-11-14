@@ -1,4 +1,11 @@
-import { ServiceItem, TeamMember, TransformationItem, FoodCardItem } from '../types';
+import { ServiceItem, ServicePlan, TeamMember, TransformationItem, ReviewItem, VideoFeedbackItem, ClientTransformation, ClientVideo } from '../types';
+import videoOne from '../assets/videos/v1.mp4';
+import videoTwo from '../assets/videos/v2.mp4';
+import videoThree from '../assets/videos/v3.mp4';
+import stockDeadlift from '../assets/videos/stock/strength-deadlift.mp4';
+import stockBattleRopes from '../assets/videos/stock/battle-ropes.mp4';
+import stockSquats from '../assets/videos/stock/squat-training.mp4';
+import stockLunges from '../assets/videos/stock/lunge-workout.mp4';
 
 export const BUSINESS_INFO = {
   brandName: 'TeamSamir',
@@ -31,66 +38,205 @@ export const BUSINESS_INFO = {
   disclaimerClaims: 'Client and celebrity training statistics are supplied by the client and are presented as editable figures pending formal verification before public launch.',
 };
 
+// ------------------------------------------------------------------
+// Service plans. Discounts are placeholders; confirm with Samir before launch.
+// ------------------------------------------------------------------
+const PERSONAL_TRAINING_PLANS: ServicePlan[] = [
+  {
+    name: '1 Month',
+    duration: '20 sessions · 4 weeks',
+    discount: 0,
+    points: [
+      '5 one-on-one sessions every week',
+      'Workout plan made only for you',
+      'Simple Indian diet plan with your home food',
+      'Weekly weight and progress check',
+    ],
+  },
+  {
+    name: '3 Months',
+    duration: '60 sessions · 12 weeks',
+    discount: 15,
+    popular: true,
+    points: [
+      'Everything in the 1 Month plan',
+      'Workout and diet updated every month',
+      'Body measurements and photos every month',
+      'Daily support from Samir on WhatsApp',
+    ],
+  },
+  {
+    name: 'Only PT',
+    duration: 'Training only · monthly',
+    discount: 10,
+    points: [
+      'One-on-one training sessions only',
+      'No diet plan included',
+      'Good if you already follow a diet',
+      'Pay month by month, stop anytime',
+    ],
+  },
+];
+
+const HEALTH_MANAGEMENT_PLANS: ServicePlan[] = [
+  {
+    name: '1 Month',
+    duration: '20 guided sessions · 4 weeks',
+    discount: 0,
+    points: [
+      'Your health reports and medicines reviewed first',
+      'Safe, low-impact exercise 5 days a week',
+      'Diet plan for BP, sugar or thyroid using Indian food',
+      'Weekly check of weight, energy and sugar/BP readings',
+    ],
+  },
+  {
+    name: '3 Months',
+    duration: '60 guided sessions · 12 weeks',
+    discount: 15,
+    popular: true,
+    points: [
+      'Everything in the 1 Month plan',
+      'Progress compared with your blood reports',
+      'Diet and exercise adjusted every month',
+      'Daily support on WhatsApp',
+    ],
+  },
+  {
+    name: 'Only PT',
+    duration: 'Exercise only · monthly',
+    discount: 10,
+    points: [
+      'Supervised safe exercise sessions only',
+      'You follow your doctor or dietitian\'s diet',
+      'Exercises adjusted for joint pain or low stamina',
+      'Pay month by month',
+    ],
+  },
+];
+
+const NUTRITION_PLANS: ServicePlan[] = [
+  {
+    name: '1 Month',
+    duration: '4 weeks',
+    discount: 0,
+    points: [
+      'Diet plan built from food you already eat',
+      'No boring salads and no calorie counting',
+      'Weekly plan update based on your progress',
+      'Send meal photos on WhatsApp for feedback',
+    ],
+  },
+  {
+    name: '3 Months',
+    duration: '12 weeks',
+    discount: 15,
+    popular: true,
+    points: [
+      'Everything in the 1 Month plan',
+      'Monthly body measurements and review',
+      'Healthy swaps for your favourite masala dishes',
+      'Habit coaching so results last after the plan ends',
+    ],
+  },
+];
+
 export const SERVICES: ServiceItem[] = [
   {
     id: 'personal-training',
     title: 'Personal Training',
-    shortDesc: 'One-on-one tailored strength and conditioning with close biomechanics guidance.',
-    fullDesc: 'Individualised coaching designed around your current movement capacity, schedule, and personal goals. Sessions focus on correct lifting technique, posture alignment, progressive overload, and active progress monitoring.',
-    suitableFor: 'Men & women seeking direct 1-on-1 guidance, posture correction, and injury-free progress.',
-    format: '1-on-1 In-Person / TS Fitness Studio',
+    shortDesc: 'One-on-one training where Samir guides every exercise, corrects your form, and keeps you on track.',
+    fullDesc: 'You train one-on-one with Samir. He builds a workout plan for your body and goal, shows you the right way to do every exercise, and checks your progress every week. You don\'t need any gym experience. We start at your level and slowly make it harder as you get stronger.',
+    suitableFor: 'Anyone who wants personal attention: beginners, people with back or knee issues, or anyone who wants faster results.',
+    format: '1-on-1 · TS Fitness Studio',
     features: [
-      'Tailored strength & hypertrophy protocols',
-      'Hands-on posture & movement correction',
-      'Consistent milestone tracking & accountability',
-      'Flexible scheduling within Kothrud, Pune',
+      'Workout plan made only for you',
+      'Samir corrects your form on every rep',
+      'Weekly progress check',
+      'Timings that suit your work schedule',
     ],
     image: '/images/hd_male_client_strength_1792417382210.jpg',
+    planInfo: [
+      { label: 'Session length', value: '60 minutes' },
+      { label: 'Where', value: 'TS Fitness Studio, DP Road, Kothrud' },
+      { label: 'Trainer', value: 'Coach Samir, one-on-one' },
+      { label: 'Timings', value: 'Morning or evening slot of your choice' },
+    ],
+    activeDays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+    activeDaysLabel: '5 training days, weekends for rest',
+    plans: PERSONAL_TRAINING_PLANS,
   },
   {
-    id: 'fitness-coaching',
-    title: 'Fitness Coaching',
-    shortDesc: 'Systematic routine design, habit formation, and continuous progress management.',
-    fullDesc: 'Holistic lifestyle and athletic progression coaching that integrates functional training splits, daily movement targets, and cardiovascular conditioning for sustainable long-term fitness.',
-    suitableFor: 'Working professionals, beginners, and fitness enthusiasts wanting consistent routine design.',
-    format: 'Structured Coaching Program',
+    id: 'health-management',
+    title: 'Health Management',
+    shortDesc: 'Exercise and food plans that help you manage diabetes, BP, thyroid, PCOS and cholesterol.',
+    fullDesc: 'If you live with diabetes, high BP, thyroid, PCOS or high cholesterol, this plan helps you manage it better through safe exercise and simple food changes. We first look at your health reports and your doctor\'s advice. Then we plan gentle exercise and an Indian diet that fits your condition. This plan supports your medical treatment and does not replace it.',
+    suitableFor: 'Adults managing diabetes, high BP, thyroid, PCOS/PCOD, high cholesterol or weight-related joint pain.',
+    format: 'Lifestyle & Health Programme',
     features: [
-      'Customized workout split planning',
-      'Technique reviews and mobility drills',
-      'Progressive difficulty scaling',
-      'Weekly habit and performance check-ins',
+      'Plan based on your health reports',
+      'Safe, gentle exercises',
+      'Indian diet suited to your condition',
+      'Regular check of weight, sugar and BP',
     ],
-    image: '/images/hd_female_client_coaching_1792417382622.jpg',
+    image: '/images/fitness_coaching_tech_1792415136876.jpg',
+    planInfo: [
+      { label: 'Session length', value: '45–60 minutes' },
+      { label: 'First step', value: 'Review of your reports, medicines and doctor\'s advice' },
+      { label: 'Exercise type', value: 'Low-impact strength, walking and mobility' },
+      { label: 'Tracking', value: 'Weight, inches, energy and sugar/BP readings' },
+    ],
+    activeDays: ['Mon', 'Tue', 'Thu', 'Fri', 'Sat'],
+    activeDaysLabel: '5 days, with a rest day in mid-week',
+    plans: HEALTH_MANAGEMENT_PLANS,
   },
   {
     id: 'nutrition-guidance',
     title: 'Nutrition Guidance',
-    shortDesc: 'Practical, sustainable dietary education tailored to Indian food preferences.',
-    fullDesc: 'Education on caloric awareness, macronutrient balance, and protein intake provided by appropriately qualified team members. Designed to complement physical training without drastic elimination diets.',
-    suitableFor: 'Clients aiming for body recomposition, better energy levels, or balanced eating habits.',
-    format: 'Dietary Consultation & Meal Planning Guidelines',
+    shortDesc: 'Lose weight or build muscle while still eating your favourite Indian home food.',
+    fullDesc: 'You don\'t need to eat boring salads or count every calorie. We make a diet plan from the food you already eat at home, like dal, roti, rice, sabzi, paneer, eggs or chicken, and just change the portions and timing. You send your meal photos on WhatsApp and we guide you every week.',
+    suitableFor: 'Anyone who wants to lose fat, gain muscle or feel more energetic without giving up home food.',
+    format: 'Diet Plan & Weekly Guidance',
     features: [
-      'Indian vegetarian and non-vegetarian options',
-      'Protein optimization and hydration guidelines',
-      'Sustainable meal timing without crash dieting',
-      'Non-medical lifestyle wellness advice',
+      'Veg and non-veg options',
+      'Built around your home food',
+      'No crash diets or starving',
+      'Weekly updates on WhatsApp',
     ],
     image: '/images/nutrition_wellness_bowl_1792415114008.jpg',
+    planInfo: [
+      { label: 'How it works', value: 'Online, on WhatsApp and calls' },
+      { label: 'First step', value: 'A 30-minute call about your food habits and goal' },
+      { label: 'Food style', value: 'Vegetarian, eggetarian or non-vegetarian' },
+      { label: 'Updates', value: 'Plan reviewed every week' },
+    ],
+    activeDays: ['Mon', 'Wed', 'Thu', 'Fri', 'Sat'],
+    activeDaysLabel: '5 check-in days for meal photos and feedback',
+    plans: NUTRITION_PLANS,
   },
   {
     id: 'offline-training',
     title: 'Offline Training',
-    shortDesc: 'Dedicated in-person physical training sessions in Kothrud and surrounding Pune areas.',
-    fullDesc: 'Hands-on training delivered directly in person. Enjoy real-time feedback, motivation, and equipment mastery in a professional training environment.',
-    suitableFor: 'Residents of Kothrud and western Pune who prefer direct face-to-face coaching.',
-    format: 'In-Person Coaching (DP Road, Kothrud)',
+    shortDesc: 'Train in person at the TS Fitness studio in Kothrud with a coach guiding you face to face.',
+    fullDesc: 'Come to the TS Fitness studio on DP Road, Kothrud, and train in person with full equipment. The coach is with you during your workout to show you each exercise, fix your posture and keep you motivated. It\'s ideal if you live or work near Kothrud and prefer training face to face instead of online.',
+    suitableFor: 'People in and around Kothrud, Pune who like to train in a real gym with a coach beside them.',
+    format: 'In-Person · DP Road, Kothrud',
     features: [
-      'Real-time hands-on form cues',
-      'Immediate adjustments during sets',
-      'Dynamic warm-up and cool-down routines',
-      'Local Pune accessibility (DP Road, Kothrud)',
+      'Train with full gym equipment',
+      'Coach corrects you on the spot',
+      'Warm-up and stretching in every session',
+      'Easy to reach in Kothrud, Pune',
     ],
-    image: '/images/hd_female_functional_training_1792417382944.jpg',
+    image: '/images/offline_functional_training_1792415113638.jpg',
+    planInfo: [
+      { label: 'Session length', value: '60 minutes' },
+      { label: 'Where', value: 'TS Fitness Studio, DP Road, Kothrud' },
+      { label: 'Equipment', value: 'Free weights, machines and functional training area' },
+      { label: 'Timings', value: 'Mon – Sat, 6:00 AM – 9:00 PM' },
+    ],
+    activeDays: ['Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    activeDaysLabel: '5 studio days, Sunday and Monday off',
+    plans: PERSONAL_TRAINING_PLANS,
   },
 ];
 
@@ -127,24 +273,15 @@ export const TEAM_MEMBERS: TeamMember[] = [
 export const CERTIFICATIONS = [
   {
     id: 'cert-1',
-    title: 'Personal Training Master Certification',
-    issuer: 'Recognized Indian Fitness Academy',
-    year: '2019',
-    status: 'Verified Credential',
+    title: 'Diploma in Personal Training',
+    description:
+      'Formal training in exercise science, programme design, lifting technique and safe, progressive coaching for all fitness levels.',
   },
   {
     id: 'cert-2',
-    title: 'Functional Movement & Strength Training',
-    issuer: 'Sports Biomechanics Institute',
-    year: '2021',
-    status: 'Verified Credential',
-  },
-  {
-    id: 'cert-3',
-    title: 'Sports Nutrition & Macronutrient Planning',
-    issuer: 'Accredited Nutrition Authority',
-    year: '2022',
-    status: 'Verified Credential',
+    title: 'Human Performance Nutrition',
+    description:
+      'Qualification in performance-focused nutrition, covering macronutrients, protein intake, hydration and practical meal planning.',
   },
 ];
 
@@ -239,85 +376,212 @@ export const TRANSFORMATIONS: TransformationItem[] = [
   },
 ];
 
-export const FOOD_CARDS: FoodCardItem[] = [
+// Client reviews (shown on Home and Clients Experience)
+export const REVIEWS: ReviewItem[] = [
   {
-    id: 'food-eggs',
-    name: 'Eggs (Whole & Whites)',
-    type: 'non-vegetarian',
-    primaryNutrient: 'Complete Bioavailable Protein + Choline & Micronutrients',
-    proteinApprox: '~6g per whole large egg',
-    description: 'One of the highest-rated biological value proteins, containing all nine essential amino acids needed for muscle tissue repair.',
-    prepTip: 'Hard-boiled for convenience, or scrambled with minimal oil and fresh vegetables.',
-    image: '/images/nutrition_wellness_bowl_1792415114008.jpg',
+    id: 'rev-1',
+    name: 'Rohan Mehta',
+    location: 'Kothrud, Pune',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+    stars: 5,
+    comment:
+      'Samir completely fixed my anterior pelvic tilt while helping me drop 14kg in 5 months. His posture and biomechanics coaching is lightyears ahead of normal commercial trainers in Pune.',
+    resultBadge: 'Lost 14 kg & Fixed Back Pain',
+    program: '1-on-1 Personal Training',
   },
   {
-    id: 'food-chicken',
-    name: 'Chicken Breast',
-    type: 'non-vegetarian',
-    primaryNutrient: 'Lean Protein & B-Vitamins (Niacin, B6)',
-    proteinApprox: '~30g per 100g cooked',
-    description: 'A classic lean protein staple that supports muscular recovery while keeping overall dietary saturated fats controlled.',
-    prepTip: 'Marinated in Indian spices (turmeric, jeera, hung curd) and pan-grilled or roasted.',
-    image: '/images/nutrition_wellness_bowl_1792415114008.jpg',
+    id: 'rev-2',
+    name: 'Priya Kulkarni',
+    location: 'Bavdhan, Pune',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+    stars: 5,
+    comment:
+      'Unlike other commercial gyms where trainers ignore you after day two, Samir reviews every single WhatsApp food log and corrects every inch of your barbell squat. Truly personalised!',
+    resultBadge: 'Toned Core · 22% Body Fat',
+    program: 'Lifestyle Recomposition',
   },
   {
-    id: 'food-fish',
-    name: 'Fish (Rohu, Surmai, Salmon)',
-    type: 'non-vegetarian',
-    primaryNutrient: 'Protein + Anti-inflammatory Omega-3 Fatty Acids',
-    proteinApprox: '~20-25g per 100g',
-    description: 'Promotes muscle protein synthesis while natural Omega-3s aid in joint health and training-induced recovery.',
-    prepTip: 'Tawa-grilled with mild masala; avoid heavy deep frying to maintain nutritional benefits.',
-    image: '/images/nutrition_wellness_bowl_1792415114008.jpg',
+    id: 'rev-3',
+    name: 'Vikramaditya Deshmukh',
+    location: 'Deccan, Pune',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
+    stars: 5,
+    comment:
+      'Coaching with Coach Samir took my clean barbell squat from 100kg to 160kg without knee strain. His understanding of joint load and progressive overload is unmatched.',
+    resultBadge: '+60kg Squat PR · Zero Knee Pain',
+    program: 'Athletic Strength & Power',
   },
   {
-    id: 'food-curd',
-    name: 'Curd & Greek Yoghurt / Milk',
-    type: 'vegetarian',
-    primaryNutrient: 'Slow-Digesting Casein Protein + Calcium & Probiotics',
-    proteinApprox: '~8-10g per cup (Greek curd: ~15g)',
-    description: 'Supports gut microbiome health, digestive regularity, and provides sustained amino acid release during sleep.',
-    prepTip: 'Fresh homemade curd (dahi) with lunch or strained Greek curd with berries and seeds.',
-    image: '/images/nutrition_wellness_bowl_1792415114008.jpg',
+    id: 'rev-4',
+    name: 'Dr. Neha Joshi',
+    location: 'Karve Road, Pune',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80',
+    stars: 5,
+    comment:
+      'As a doctor with grueling 14-hour hospital shifts, Samir structured a 35-minute split that gave me sustained energy without adrenal fatigue. My chronic neck spasms disappeared.',
+    resultBadge: 'Neck Spasms Resolved · High Stamina',
+    program: 'Executive Fitness Protocol',
   },
   {
-    id: 'food-paneer',
-    name: 'Paneer & Soya / Tofu',
-    type: 'vegetarian',
-    primaryNutrient: 'Vegetarian Protein + Calcium & Essential Healthy Fats',
-    proteinApprox: '~18g per 100g paneer / tofu',
-    description: 'Essential vegetarian staples providing substantial density of protein and bone-supporting calcium for strength training.',
-    prepTip: 'Lightly sautéed with bell peppers and onions, or tossed fresh into salads.',
-    image: '/images/nutrition_wellness_bowl_1792415114008.jpg',
+    id: 'rev-5',
+    name: 'Sameer Joshi',
+    location: 'Aundh, Pune',
+    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80',
+    stars: 5,
+    comment:
+      'Dropped 18kg before my brother’s wedding in 4 months. Samir never forced impossible crash diets; he tailored the macros around my mother’s home-cooked Maharashtrian meals.',
+    resultBadge: 'Lost 18 kg in 16 Weeks',
+    program: 'Custom Nutrition & Training',
   },
   {
-    id: 'food-lentils',
-    name: 'Beans, Lentils & Moong Sprouts',
-    type: 'vegetarian',
-    primaryNutrient: 'Plant Protein, Soluble Dietary Fibre & Complex Carbs',
-    proteinApprox: '~12-16g per cooked bowl',
-    description: 'Provides long-lasting glycogen replenishment for intense training sessions alongside valuable dietary fiber.',
-    prepTip: 'Sprouted moong chaat with lemon juice, or traditional tadka dal with mixed grains.',
-    image: '/images/nutrition_wellness_bowl_1792415114008.jpg',
+    id: 'rev-6',
+    name: 'Tanvi Sharma',
+    location: 'Model Colony, Pune',
+    avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&q=80',
+    stars: 5,
+    comment:
+      'Trained for commercial shoots and runway. Samir’s celebrity conditioning protocols sculpt razor-sharp muscle definition while keeping your limbs sleek and feminine. Highly recommended!',
+    resultBadge: 'Runway & Camera Conditioning',
+    program: 'Celebrity Coaching Protocol',
   },
   {
-    id: 'food-veg',
-    name: 'Fibrous Vegetables and Seasonal Fruits',
-    type: 'vegetarian',
-    primaryNutrient: 'Antioxidants, Electrolytes & Hydration',
-    proteinApprox: '~2-4g (focus on micronutrient density)',
-    description: 'Crucial for cellular hydration, reducing oxidative stress from training, and supporting satiety.',
-    prepTip: 'Incorporate at least two colors of vegetables into lunch and dinner daily.',
-    image: '/images/nutrition_wellness_bowl_1792415114008.jpg',
+    id: 'rev-7',
+    name: 'Aditya Rao',
+    location: 'Kothrud, Pune',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80',
+    stars: 5,
+    comment:
+      'His glute activation and posterior chain routines completely eliminated my runner’s IT band syndrome. Clocked my half-marathon personal best at 1 hr 41 mins thanks to TS Fitness!',
+    resultBadge: 'Half-Marathon PB (1h 41m)',
+    program: 'Runner Injury Prevention',
   },
   {
-    id: 'food-grains',
-    name: 'Whole Grains, Nuts & Seeds',
-    type: 'vegetarian',
-    primaryNutrient: 'Complex Carbohydrates, Zinc, Magnesium & Healthy Fats',
-    proteinApprox: '~5-8g per serving',
-    description: 'Whole oats, brown rice, millets (jowar/bajra), and raw almonds/walnuts provide sustained energy and hormonal support.',
-    prepTip: 'A handful of soaked almonds and walnuts as a pre-workout snack, with millet rotis at meals.',
-    image: '/images/nutrition_wellness_bowl_1792415114008.jpg',
+    id: 'rev-8',
+    name: 'Shweta Patil',
+    location: 'Erandwane, Pune',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80',
+    stars: 5,
+    comment:
+      'Gained strength I never thought possible in my 40s. Samir is respectful, ultra-knowledgeable, and keeps you relentlessly accountable without shouting. The best coach in Pune.',
+    resultBadge: 'Deadlift 85kg at Age 42',
+    program: 'Women’s Strength & Mobility',
+  },
+];
+
+// Video feedback cards on the Home page. The current clips show Coach Samir at the studio;
+// replace `src` (files in src/assets/videos/) and the text with real client feedback videos.
+export const VIDEO_FEEDBACK: VideoFeedbackItem[] = [
+  {
+    id: 'video-1',
+    src: videoOne,
+    title: 'Meet Coach Samir',
+    subtitle: 'TeamSamir · TS Fitness',
+    description: 'A quick hello from Coach Samir on the training floor, where every client session is personally guided.',
+    tag: 'Coach Intro',
+  },
+  {
+    id: 'video-2',
+    src: videoTwo,
+    title: 'Inside TS Fitness',
+    subtitle: 'DP Road, Kothrud',
+    description: 'Take a look around the studio: free weights, machines and open floor space for safe, supervised training.',
+    tag: 'Studio Tour',
+  },
+  {
+    id: 'video-3',
+    src: videoThree,
+    title: 'Your Coach, Every Session',
+    subtitle: 'Personal Training',
+    description: 'Samir works with you one-on-one, correcting form and keeping you motivated from warm-up to cool-down.',
+    tag: 'Personal Coaching',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Client Experiences page
+// ---------------------------------------------------------------------------
+
+// Before & after photo pairs.
+//
+// The five entries below are SAMPLE stock photos (Unsplash License, free for commercial use)
+// so the gallery looks complete. They are NOT client results (a small "illustrative" note shows under the gallery while any `sample: true` entry remains).
+// To show a real client: put consented photos in public/images/transformations/
+// (e.g. client-01-before.jpg / client-01-after.jpg, portrait 4:5 such as 1080 x 1350,
+// same pose and framing), point beforeSrc / afterSrc at them, fill in clientName,
+// focus and duration, and remove `sample: true`.
+// A missing file shows a styled "photo coming soon" placeholder instead of breaking.
+const samplePair = (n: number) => {
+  const id = String(n).padStart(2, '0');
+  return {
+    id: `sample-${id}`,
+    beforeSrc: `/images/transformations/samples/sample-${id}-before.jpg`,
+    afterSrc: `/images/transformations/samples/sample-${id}-after.jpg`,
+    sample: true,
+  };
+};
+
+export const CLIENT_TRANSFORMATIONS: ClientTransformation[] = [
+  { ...samplePair(1), clientName: '', focus: 'Strength & muscle gain', duration: '' },
+  { ...samplePair(2), clientName: '', focus: 'Fat loss & toning', duration: '' },
+  { ...samplePair(3), clientName: '', focus: 'Strength foundations', duration: '' },
+  { ...samplePair(4), clientName: '', focus: 'Body recomposition', duration: '' },
+  { ...samplePair(5), clientName: '', focus: 'Fitness & conditioning', duration: '' },
+];
+
+// Training videos.
+// `stock: true` clips are free stock footage from Mixkit (Mixkit License, free for commercial
+// use, no attribution needed). The others are real
+// TS Fitness clips. Replace stock clips with your own footage when you have it.
+export const CLIENT_VIDEOS: ClientVideo[] = [
+  {
+    id: 'cv-1',
+    src: stockDeadlift,
+    title: 'Strength Training Session',
+    description: 'A look into focused strength and conditioning workouts.',
+    portrait: true,
+    stock: true,
+  },
+  {
+    id: 'cv-2',
+    src: videoThree,
+    title: 'Personal Training Moments',
+    description: 'Personal guidance, proper techniques and consistent efforts.',
+    portrait: true,
+  },
+  {
+    id: 'cv-3',
+    src: stockBattleRopes,
+    title: 'Workout Highlights',
+    description: 'Small steps, daily efforts and memorable fitness moments.',
+    portrait: true,
+    stock: true,
+  },
+  {
+    id: 'cv-4',
+    src: stockSquats,
+    title: 'Fitness Journey',
+    description: 'A glimpse of the dedication behind every transformation.',
+    stock: true,
+  },
+  {
+    id: 'cv-5',
+    src: videoOne,
+    title: 'Coach on the Floor',
+    description: 'Coach Samir at TS Fitness, guiding every session in person.',
+    portrait: true,
+  },
+  {
+    id: 'cv-6',
+    src: stockLunges,
+    title: 'Lower Body Strength',
+    description: 'Controlled lunges and leg work for strength and balance.',
+    stock: true,
+  },
+  {
+    id: 'cv-7',
+    src: videoTwo,
+    title: 'Inside TS Fitness',
+    description: 'A look around the studio where the training happens.',
+    portrait: true,
   },
 ];

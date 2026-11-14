@@ -12,8 +12,8 @@ import { PlaceholderDialog } from './components/PlaceholderDialog';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
-import { TransformationsPage } from './pages/TransformationsPage';
-import { NutritionPage } from './pages/NutritionPage';
+import { SeniorFitnessPage } from './pages/SeniorFitnessPage';
+import { ClientsExperiencePage } from './pages/ClientsExperiencePage';
 import { ContactPage } from './pages/ContactPage';
 
 export default function App() {
@@ -28,10 +28,20 @@ export default function App() {
   const [selectedVideoItem, setSelectedVideoItem] = useState<TransformationItem | null>(null);
   const [dialogType, setDialogType] = useState<'call' | 'whatsapp' | 'verification' | null>(null);
 
+  // Service whose Plan Details should open when the Services page loads (set from Home cards)
+  const [focusedServiceId, setFocusedServiceId] = useState<string | undefined>(undefined);
+
   // Navigation handler with smooth scroll to top
   const handleNavigate = (page: PageId) => {
+    setFocusedServiceId(undefined);
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Open the Services page scrolled to one service with its Plan Details expanded
+  const handleOpenService = (serviceId: string) => {
+    setFocusedServiceId(serviceId);
+    setCurrentPage('services');
   };
 
   // Trigger booking from any page / service
@@ -59,8 +69,7 @@ export default function App() {
           <HomePage
             onNavigate={handleNavigate}
             onBookDemo={handleBookDemo}
-            onOpenLightbox={(item) => setSelectedLightboxItem(item)}
-            onOpenVideo={(item) => setSelectedVideoItem(item)}
+            onOpenService={handleOpenService}
             highlightPlaceholders={highlightPlaceholders}
           />
         )}
@@ -77,22 +86,23 @@ export default function App() {
           <ServicesPage
             onNavigate={handleNavigate}
             onBookDemo={handleBookDemo}
+            initialOpenServiceId={focusedServiceId}
           />
         )}
 
-        {currentPage === 'transformations' && (
-          <TransformationsPage
+        {currentPage === 'senior-fitness' && (
+          <SeniorFitnessPage
+            onNavigate={handleNavigate}
+            onBookDemo={handleBookDemo}
+          />
+        )}
+
+        {currentPage === 'clients' && (
+          <ClientsExperiencePage
             onNavigate={handleNavigate}
             onBookDemo={() => handleBookDemo()}
             onOpenLightbox={(item) => setSelectedLightboxItem(item)}
             onOpenVideo={(item) => setSelectedVideoItem(item)}
-          />
-        )}
-
-        {currentPage === 'nutrition' && (
-          <NutritionPage
-            onNavigate={handleNavigate}
-            onBookDemo={handleBookDemo}
           />
         )}
 

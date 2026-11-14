@@ -23,10 +23,10 @@ export const PrototypeToolbar: React.FC<PrototypeToolbarProps> = ({
 }) => {
   const pages: { id: PageId; label: string }[] = [
     { id: 'home', label: '1. Home' },
-    { id: 'about', label: '2. About Samir' },
-    { id: 'services', label: '3. Services' },
-    { id: 'transformations', label: '4. Transformations' },
-    { id: 'nutrition', label: '5. Nutrition' },
+    { id: 'services', label: '2. Services' },
+    { id: 'senior-fitness', label: '3. Senior Fitness' },
+    { id: 'clients', label: '4. Clients Experience' },
+    { id: 'about', label: '5. About Samir' },
     { id: 'contact', label: '6. Demo Form' },
   ];
 

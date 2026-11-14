@@ -123,14 +123,14 @@ export const WordRotator: React.FC<WordRotatorProps> = ({
 
       {/* Core Sentence with Rotating Word */}
       <div className="my-4 sm:my-6">
-        <span className="text-xl sm:text-3xl lg:text-4xl font-display font-bold text-slate-200">
+        <span className="text-lg sm:text-2xl lg:text-3xl font-display font-bold text-slate-200">
           Personalised coaching engineered around your{' '}
         </span>
 
         {/* Word Rotator Box */}
         <span className="inline-block relative min-h-[44px] align-baseline">
           <span
-            className={`inline-block font-display font-extrabold text-xl sm:text-3xl lg:text-4xl tracking-tight transition-all duration-300 transform px-2 py-0.5 rounded-lg bg-gradient-to-r ${current.color} text-white shadow-lg ${
+            className={`inline-block font-display font-extrabold text-lg sm:text-2xl lg:text-3xl tracking-tight transition-all duration-300 transform px-2 py-0.5 rounded-lg bg-gradient-to-r ${current.color} text-white shadow-lg ${
               isAnimating
                 ? 'opacity-0 -translate-y-3 scale-95'
                 : 'opacity-100 translate-y-0 scale-100'
@@ -157,7 +157,7 @@ export const WordRotator: React.FC<WordRotatorProps> = ({
           </span>
         </div>
 
-        <p className="text-sm sm:text-base text-slate-100 font-medium mt-3 leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-100 font-medium mt-3 leading-relaxed">
           "{current.promise}"
         </p>
 

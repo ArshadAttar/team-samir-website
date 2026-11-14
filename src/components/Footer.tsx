@@ -76,28 +76,23 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
                 </button>
               </li>
               <li>
+                <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
+                  Services
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('senior-fitness')} className="hover:text-white transition-colors cursor-pointer text-left">
+                  Senior Fitness
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('clients')} className="hover:text-white transition-colors cursor-pointer text-left">
+                  Clients Experience
+                </button>
+              </li>
+              <li>
                 <button onClick={() => onNavigate('about')} className="hover:text-white transition-colors cursor-pointer text-left">
                   About Samir
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
-                  Training Services
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('transformations')} className="hover:text-white transition-colors cursor-pointer text-left">
-                  Transformations
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('nutrition')} className="hover:text-white transition-colors cursor-pointer text-left">
-                  Nutrition & Wellness
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('contact')} className="hover:text-white transition-colors cursor-pointer text-left">
-                  Contact & Demo
                 </button>
               </li>
             </ul>
@@ -114,17 +109,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
               </li>
               <li>
                 <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
-                  Fitness Coaching
+                  Health Management
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('nutrition')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
                   Nutrition Guidance
                 </button>
               </li>
               <li>
                 <button onClick={() => onNavigate('services')} className="hover:text-white transition-colors cursor-pointer text-left">
-                  Offline TS Fitness Studio
+                  Offline Training (Kothrud)
                 </button>
               </li>
             </ul>

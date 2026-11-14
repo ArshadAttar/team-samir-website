@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ShieldAlert,
   Dumbbell,
@@ -6,9 +6,6 @@ import {
   Brain,
   Trophy,
   ArrowRight,
-  Sparkles,
-  Play,
-  Pause,
   CheckCircle2,
 } from 'lucide-react';
 
@@ -81,185 +78,170 @@ interface ProcessesDrawProps {
   onBookDemo?: () => void;
 }
 
+/**
+ * Vertical, scroll-driven timeline: the line fills as the user scrolls,
+ * and the card whose circle has passed the middle of the viewport becomes active.
+ */
 export const ProcessesDraw: React.FC<ProcessesDrawProps> = ({ className = '', onBookDemo }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Processes Drawer auto-travels every 3.8s
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    let frame = 0;
 
-    const timer = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % PROCESS_STEPS.length);
-    }, 3800);
+    const update = () => {
+      frame = 0;
+      const track = trackRef.current;
+      if (!track) return;
 
-    return () => clearInterval(timer);
-  }, [isAutoPlaying]);
+      const viewportMid = window.innerHeight * 0.5;
+      const rect = track.getBoundingClientRect();
+      const ratio = (viewportMid - rect.top) / rect.height;
+      setProgress(Math.min(1, Math.max(0, ratio)));
 
-  const current = PROCESS_STEPS[activeStep];
-  const progressPercent = ((activeStep) / (PROCESS_STEPS.length - 1)) * 100;
+      let current = 0;
+      stepRefs.current.forEach((el, idx) => {
+        if (el && el.getBoundingClientRect().top <= viewportMid) current = idx;
+      });
+      setActiveStep(current);
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
 
   return (
     <div className={`rounded-2xl bg-[#111318] text-white border border-slate-800 p-5 sm:p-8 shadow-xl ${className}`}>
-      
-      {/* Top Header & Drawer Status */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-slate-800">
-        <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1769FF]/20 border border-[#1769FF]/40 text-[#00A3FF] text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Interactive Processes Drawer</span>
-          </div>
-          <h2 className="text-xl sm:text-3xl font-display font-extrabold text-white mt-2">
-            How The Gym Creates Real Life Transformation
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
-            Watch the animated Processes Drawer travel from phase to phase, illustrating the concrete cascade from gym discipline to daily life.
-          </p>
-        </div>
-
-        {/* Controls */}
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          <button
-            onClick={() => setIsAutoPlaying((prev) => !prev)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#1C2028] hover:bg-slate-800 border border-slate-700 text-slate-200 transition-colors cursor-pointer"
-          >
-            {isAutoPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-            <span>{isAutoPlaying ? 'Pause Drawer' : 'Play Travel'}</span>
-          </button>
-        </div>
+      {/* Header */}
+      <div className="pb-5 border-b border-slate-800 lg:text-center">
+        <h2 className="text-xl sm:text-3xl font-display font-extrabold text-white">
+          How The Gym Creates Real Life Transformation
+        </h2>
+        <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl lg:mx-auto">
+          Scroll through each phase to see how discipline in the gym turns into real changes in your daily life.
+        </p>
       </div>
 
-      {/* The Processes Drawer Track (Connecting Travel Line + Circles) */}
-      <div className="py-8 relative">
-        
-        {/* Background Track Line */}
-        <div className="absolute top-1/2 left-4 right-4 h-1 bg-slate-800 -translate-y-1/2 hidden md:block" />
-
-        {/* Traveling Drawer Active Fill Line */}
+      {/*
+        Zig-zag timeline. Mobile: line on the left, cards stacked.
+        Desktop (lg): line in the centre, cards alternate left / right and overlap
+        vertically (negative top margin) so three cards fit on one screen.
+        The overlap must stay below half a card's height, or same-side cards collide;
+        the lg:min-h on each card guarantees that.
+      */}
+      <div ref={trackRef} className="relative mt-6">
+        {/* Background line */}
         <div
-          className="absolute top-1/2 left-4 h-1 bg-gradient-to-r from-[#1769FF] via-[#00A3FF] to-emerald-400 -translate-y-1/2 transition-all duration-700 ease-out hidden md:block"
-          style={{ width: `calc(${progressPercent}% - 32px)` }}
+          className="absolute left-[18px] lg:left-1/2 lg:-translate-x-1/2 top-0 bottom-0 w-1 rounded-full bg-slate-800"
+          aria-hidden="true"
+        />
+        {/* Scroll-driven fill line */}
+        <div
+          className="absolute left-[18px] lg:left-1/2 lg:-translate-x-1/2 top-0 w-1 rounded-full bg-gradient-to-b from-[#1769FF] via-[#00A3FF] to-emerald-400 transition-[height] duration-150 ease-out"
+          style={{ height: `${progress * 100}%` }}
+          aria-hidden="true"
         />
 
-        {/* Stepper Circles */}
-        {/* Stepper Circles (Compact 2-col on mobile, 5-col on desktop) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-4 relative z-10">
+        <div className="space-y-4 lg:space-y-0">
           {PROCESS_STEPS.map((step, idx) => {
             const isCurrent = activeStep === idx;
             const isCompleted = idx < activeStep;
-            const isLast = idx === PROCESS_STEPS.length - 1;
+            const isLeft = idx % 2 === 0;
 
             return (
-              <button
+              <div
                 key={step.id}
-                onClick={() => {
-                  setActiveStep(idx);
-                  setIsAutoPlaying(false);
+                ref={(el) => {
+                  stepRefs.current[idx] = el;
                 }}
-                className={`text-left p-3 sm:p-4 rounded-xl transition-all cursor-pointer border ${
-                  isLast ? 'col-span-2 sm:col-span-1' : ''
-                } ${
-                  isCurrent
-                    ? 'bg-[#1C2028] border-[#00A3FF] ring-2 ring-[#00A3FF]/40 shadow-lg scale-102'
-                    : isCompleted
-                    ? 'bg-[#161B26] border-slate-700 text-slate-300'
-                    : 'bg-[#111318] border-slate-800/80 text-slate-500 hover:border-slate-700'
-                }`}
+                className={`relative pl-14 lg:w-1/2 ${
+                  isLeft ? 'lg:pl-0 lg:pr-10' : 'lg:ml-auto lg:pl-10'
+                } ${idx > 0 ? 'lg:-mt-20' : ''}`}
               >
-                <div className="flex items-center justify-between gap-2">
-                  <div
-                    className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
-                      isCurrent
-                        ? 'bg-[#1769FF] text-white shadow-md shadow-[#1769FF]/50 scale-110'
-                        : isCompleted
-                        ? 'bg-emerald-600/30 text-emerald-400 border border-emerald-500/40'
-                        : 'bg-slate-800 text-slate-400'
-                    }`}
-                  >
-                    {isCompleted ? <CheckCircle2 className="w-4 h-4" /> : step.phase}
-                  </div>
-                  <span className="text-[10px] font-semibold text-slate-400">
-                    {step.duration}
-                  </span>
+                {/* Step circle sitting on the line */}
+                <div
+                  className={`absolute z-10 top-4 left-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-300 ${
+                    isLeft ? 'lg:left-auto lg:-right-5' : 'lg:-left-5'
+                  } ${
+                    isCurrent
+                      ? 'bg-[#1769FF] text-white shadow-md shadow-[#1769FF]/50 scale-110'
+                      : isCompleted
+                      ? 'bg-emerald-900 text-emerald-400 border border-emerald-500/60'
+                      : 'bg-slate-800 text-slate-400'
+                  }`}
+                >
+                  {isCompleted ? <CheckCircle2 className="w-4 h-4" /> : step.phase}
                 </div>
 
-                <div className="mt-3">
-                  <h4
-                    className={`text-xs sm:text-sm font-display font-bold leading-tight ${
-                      isCurrent ? 'text-white' : 'text-slate-300'
-                    }`}
-                  >
-                    {step.title}
-                  </h4>
-                  <div className="text-[11px] font-medium text-emerald-400 mt-1">
+                {/* Compact step card */}
+                <div
+                  className={`p-4 lg:min-h-[190px] rounded-2xl border transition-all duration-500 ${
+                    isCurrent
+                      ? 'bg-[#1C2028] border-[#00A3FF] ring-2 ring-[#00A3FF]/30 shadow-lg opacity-100'
+                      : 'bg-[#161B26] border-slate-800 opacity-50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-slate-900 border border-slate-700 shrink-0">
+                      {step.icon}
+                    </div>
+                    <div>
+                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#00A3FF]">
+                        Phase {step.phase} · {step.duration}
+                      </span>
+                      <h3 className="text-sm sm:text-base lg:text-lg font-display font-bold text-white leading-tight">
+                        {step.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 space-y-1.5 text-xs sm:text-[13px] leading-relaxed">
+                    <p className="text-slate-300">
+                      <span className="font-semibold text-slate-100">🏋️ In the gym: </span>
+                      {step.gymPoint}
+                    </p>
+                    <p className="text-emerald-200/90">
+                      <span className="font-semibold text-emerald-300">🌱 In your life: </span>
+                      {step.lifeImpact}
+                    </p>
+                  </div>
+
+                  <div className="mt-2.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-950/50 border border-emerald-800/40 text-[11px] font-semibold text-emerald-400">
+                    <CheckCircle2 className="w-3 h-3" />
                     {step.outcome}
                   </div>
                 </div>
-              </button>
+              </div>
             );
           })}
         </div>
       </div>
 
-      {/* Selected Step Drawer Detail Card */}
-      <div className="p-5 sm:p-7 rounded-2xl bg-[#1C2028] border border-slate-700/80 mt-2 transition-all">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-700">
-                {current.icon}
-              </div>
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#00A3FF]">
-                  Phase {current.phase} · {current.duration}
-                </span>
-                <h3 className="text-lg sm:text-2xl font-display font-bold text-white">
-                  {current.title}
-                </h3>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-              <div className="p-3.5 rounded-xl bg-black/40 border border-slate-700">
-                <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                  🏋️ Inside The Gym Mechanism:
-                </div>
-                <p className="text-xs sm:text-sm text-slate-200 mt-1 leading-relaxed">
-                  {current.gymPoint}
-                </p>
-              </div>
-
-              <div className="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-800/40">
-                <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider">
-                  🌱 Tangible Everyday Life Impact:
-                </div>
-                <p className="text-xs sm:text-sm text-emerald-200 mt-1 leading-relaxed">
-                  {current.lifeImpact}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Action */}
-          <div className="shrink-0 flex flex-col gap-2 pt-2 lg:pt-0">
-            {onBookDemo && (
-              <button
-                onClick={onBookDemo}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#1769FF] hover:bg-[#00A3FF] text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-lg active:scale-95"
-              >
-                <span>Start Phase 01 Assessment</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            )}
-            <div className="text-[11px] text-slate-400 text-center">
-              Personalised coaching by Coach Samir
-            </div>
-          </div>
-
+      {/* Action */}
+      {onBookDemo && (
+        <div className="mt-6 pt-5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-xs sm:text-sm text-slate-400">Personalised coaching by Coach Samir</div>
+          <button
+            onClick={onBookDemo}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#1769FF] hover:bg-[#00A3FF] text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-lg active:scale-95"
+          >
+            <span>Start Phase 01 Assessment</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
-      </div>
-
+      )}
     </div>
   );
 };

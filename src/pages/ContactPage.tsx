@@ -567,9 +567,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                             className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E1E6EF] bg-white focus:outline-none focus:ring-2 focus:ring-[#1769FF]/20 focus:border-[#1769FF] transition-all cursor-pointer"
                           >
                             <option value="Personal Training">Personal Training (1-on-1)</option>
-                            <option value="Fitness Coaching">Fitness Coaching</option>
+                            <option value="Health Management">Health Management</option>
                             <option value="Nutrition Guidance">Nutrition Guidance</option>
                             <option value="Offline Training">Offline Training (Kothrud)</option>
+                            <option value="Senior Fitness">Senior Fitness (55+)</option>
                             <option value="Not Sure">Not Sure (Need Assessment)</option>
                           </select>
                         </div>

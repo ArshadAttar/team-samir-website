@@ -1,4 +1,4 @@
-export type PageId = 'home' | 'about' | 'services' | 'transformations' | 'nutrition' | 'contact';
+export type PageId = 'home' | 'services' | 'senior-fitness' | 'clients' | 'about' | 'contact';
 
 export interface ServiceItem {
   id: string;
@@ -9,6 +9,23 @@ export interface ServiceItem {
   format: string;
   features: string[];
   image: string;
+  /** Shown in the expandable "Plan Details" panel on the Services page */
+  planInfo: { label: string; value: string }[];
+  /** Days highlighted in the 7-day week strip (e.g. ['Mon', 'Tue', ...]) */
+  activeDays: WeekDay[];
+  activeDaysLabel: string;
+  plans: ServicePlan[];
+}
+
+export type WeekDay = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun';
+
+export interface ServicePlan {
+  name: string;
+  duration: string;
+  /** Percentage off; 0 = no discount badge */
+  discount: number;
+  points: string[];
+  popular?: boolean;
 }
 
 export interface TeamMember {
@@ -36,17 +53,6 @@ export interface TransformationItem {
   isVideo?: boolean;
   videoDuration?: string;
   consentNote: string;
-}
-
-export interface FoodCardItem {
-  id: string;
-  name: string;
-  type: 'vegetarian' | 'non-vegetarian';
-  primaryNutrient: string;
-  proteinApprox: string;
-  description: string;
-  prepTip: string;
-  image: string;
 }
 
 export interface DemoFormData {
@@ -77,4 +83,52 @@ export interface FormErrors {
   sessionTiming?: string;
   contactMethod?: string;
   consentAgreed?: string;
+}
+
+export interface ReviewItem {
+  id: string;
+  name: string;
+  location: string;
+  avatar: string;
+  stars: number;
+  comment: string;
+  resultBadge: string;
+  program: string;
+}
+
+export interface VideoFeedbackItem {
+  id: string;
+  src: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  tag: string;
+}
+
+/** Before & after card on the Client Experiences page. */
+export interface ClientTransformation {
+  id: string;
+  /** Path under public/, e.g. /images/transformations/client-01-before.jpg */
+  beforeSrc: string;
+  afterSrc: string;
+  /** Client name or initials, shown once a real photo pair is added */
+  clientName: string;
+  /** Short programme label, e.g. "Fat loss" or "Strength" */
+  focus: string;
+  /** Time between the two photos, e.g. "16 weeks" */
+  duration: string;
+  /** True for stock sample photos. Remove once real client photos are in. */
+  sample?: boolean;
+}
+
+/** Video card on the Client Experiences page. `src` is undefined for an empty slot. */
+export interface ClientVideo {
+  id: string;
+  src?: string;
+  title: string;
+  description: string;
+  /** Portrait (9:16) clip. Landscape clips open in a wide player. */
+  portrait?: boolean;
+  /** True for stock footage, false for real TS Fitness footage. */
+  stock?: boolean;
 }
