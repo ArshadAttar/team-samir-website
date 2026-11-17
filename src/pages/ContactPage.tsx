@@ -223,7 +223,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                       {BUSINESS_INFO.location.fullAddress}
                     </div>
                     <p className="text-[length:max(11px,calc(11rem/16))] text-slate-500 mt-1">
-                      DP Road, Kothrud, Pune, Maharashtra 411038
+                      Kothrud, Pune, Maharashtra 411038
                     </p>
                   </div>
                 </div>

@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
               Start Your Personalized Fitness Journey with Samir
             </h3>
             <p className="text-[#646B78] text-xs sm:text-sm mt-0.5 sm:mt-1 max-w-xl">
-              5 Years of Experience · 250+ Clients Trained · 25+ Celebrities Trained · TS Fitness Studio, Pune.
+              5+ Years of Experience · 520+ Clients Trained · 25+ Celebrities Trained · TS Fitness Studio, Pune.
             </p>
           </div>
           <button
@@ -134,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
               <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00A3FF] shrink-0 mt-0.5" />
               <div>
                 <p className="text-white font-medium text-xs sm:text-sm">{BUSINESS_INFO.location.fullAddress}</p>
-                <p className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400 mt-0.5">DP Road, Kothrud, Pune, Maharashtra 411038</p>
+                <p className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400 mt-0.5">Kothrud, Pune, Maharashtra 411038</p>
               </div>
             </div>
             

@@ -289,7 +289,7 @@ export const PriceRoll: React.FC<PriceRollProps> = ({ onBookDemo, className = ''
                   <ArrowRight className="w-4 h-4" />
                 </button>
                 <p className="text-[length:max(10px,calc(10rem/16))] text-slate-400 text-center mt-2">
-                  Assessment at TS Fitness Studio, DP Road, Kothrud
+                  Assessment at TS Fitness Studio, Kothrud
                 </p>
               </div>
 

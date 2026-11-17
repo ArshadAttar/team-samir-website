@@ -65,7 +65,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 sm:p-4 rounded-xl bg-black/85 backdrop-blur-md text-white border border-slate-700">
                   <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-[#00A3FF] font-semibold uppercase">TS Fitness Founder & Head Coach</div>
                   <div className="text-lg sm:text-xl font-display font-bold">Coach Samir</div>
-                  <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-300">5 Years Professional Experience · DP Road, Kothrud, Pune</div>
+                  <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-300">5 Years Professional Experience · Kothrud, Pune</div>
                 </div>
               </div>
 

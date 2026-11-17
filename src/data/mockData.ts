@@ -23,8 +23,8 @@ export const BUSINESS_INFO = {
     state: 'Maharashtra',
     country: 'India',
     pincode: '411038',
-    fullAddress: 'Flat No. 3, XYZ Apartment, DP Road, Kothrud, Pune, Maharashtra, India',
-    directionsQuery: 'DP Road, Kothrud, Pune, Maharashtra, India',
+    fullAddress: 'Flat No. 3, XYZ Apartment, Kothrud, Pune, Maharashtra, India',
+    directionsQuery: 'Kothrud, Pune, Maharashtra, India',
   },
   // Realistic dummy contact details for immediate mobile click-to-call & WhatsApp
   contact: {
@@ -145,10 +145,10 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 'personal-training',
     title: 'Personal Training',
-    shortDesc: 'One-on-one training where Samir guides every exercise, corrects your form, and keeps you on track.',
+    shortDesc: 'One-on-one training where TeamSamir Coaches guides every exercise, corrects your form, and keeps you on track in Nutrition.',
     fullDesc: 'You train one-on-one with Samir. He builds a workout plan for your body and goal, shows you the right way to do every exercise, and checks your progress every week. You don\'t need any gym experience. We start at your level and slowly make it harder as you get stronger.',
     suitableFor: 'Anyone who wants personal attention: beginners, people with back or knee issues, or anyone who wants faster results.',
-    format: '1-on-1 · TS Fitness Studio',
+    format: '1-on-1 Live',
     features: [
       'Workout plan made only for you',
       'Samir corrects your form on every rep',
@@ -158,7 +158,7 @@ export const SERVICES: ServiceItem[] = [
     image: '/images/hd_male_client_strength_1792417382210.jpg',
     planInfo: [
       { label: 'Session length', value: '60 minutes' },
-      { label: 'Where', value: 'TS Fitness Studio, DP Road, Kothrud' },
+      { label: 'Where', value: 'TS Fitness Studio, Kothrud' },
       { label: 'Trainer', value: 'Coach Samir, one-on-one' },
       { label: 'Timings', value: 'Morning or evening slot of your choice' },
     ],
@@ -169,7 +169,7 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 'health-management',
     title: 'Health Management',
-    shortDesc: 'Exercise and food plans that help you manage diabetes, BP, thyroid, PCOS and cholesterol.',
+    shortDesc: 'Exercise and food plans that help you manage PCOD/PCOS, diabetes, BP, thyroid, cholesterol, knee & back pain, fatty liver.',
     fullDesc: 'If you live with diabetes, high BP, thyroid, PCOS or high cholesterol, this plan helps you manage it better through safe exercise and simple food changes. We first look at your health reports and your doctor\'s advice. Then we plan gentle exercise and an Indian diet that fits your condition. This plan supports your medical treatment and does not replace it.',
     suitableFor: 'Adults managing diabetes, high BP, thyroid, PCOS/PCOD, high cholesterol or weight-related joint pain.',
     format: 'Lifestyle & Health Programme',
@@ -193,10 +193,10 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 'nutrition-guidance',
     title: 'Nutrition Guidance',
-    shortDesc: 'Lose weight or build muscle while still eating your favourite Indian home food.',
+    shortDesc: 'Lose weight/fat OR build muscle while still eating your favourite Indian home food.',
     fullDesc: 'You don\'t need to eat boring salads or count every calorie. We make a diet plan from the food you already eat at home, like dal, roti, rice, sabzi, paneer, eggs or chicken, and just change the portions and timing. You send your meal photos on WhatsApp and we guide you every week.',
     suitableFor: 'Anyone who wants to lose fat, gain muscle or feel more energetic without giving up home food.',
-    format: 'Diet Plan & Weekly Guidance',
+    format: 'Personalized Nutrition Coaching',
     features: [
       'Veg and non-veg options',
       'Built around your home food',
@@ -217,10 +217,10 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 'offline-training',
     title: 'Offline Training',
-    shortDesc: 'Train in person at the TS Fitness studio in Kothrud with a coach guiding you face to face.',
-    fullDesc: 'Come to the TS Fitness studio on DP Road, Kothrud, and train in person with full equipment. The coach is with you during your workout to show you each exercise, fix your posture and keep you motivated. It\'s ideal if you live or work near Kothrud and prefer training face to face instead of online.',
+    shortDesc: 'Train in person at GYM OR home in Pune with a TeamSamir coach guiding you face to face.',
+    fullDesc: 'Come to the TS Fitness studio in Kothrud, and train in person with full equipment. The coach is with you during your workout to show you each exercise, fix your posture and keep you motivated. It\'s ideal if you live or work near Kothrud and prefer training face to face instead of online.',
     suitableFor: 'People in and around Kothrud, Pune who like to train in a real gym with a coach beside them.',
-    format: 'In-Person · DP Road, Kothrud',
+    format: 'In-Person',
     features: [
       'Train with full gym equipment',
       'Coach corrects you on the spot',
@@ -230,7 +230,7 @@ export const SERVICES: ServiceItem[] = [
     image: '/images/offline_functional_training_1792415113638.jpg',
     planInfo: [
       { label: 'Session length', value: '60 minutes' },
-      { label: 'Where', value: 'TS Fitness Studio, DP Road, Kothrud' },
+      { label: 'Where', value: 'TS Fitness Studio, Kothrud' },
       { label: 'Equipment', value: 'Free weights, machines and functional training area' },
       { label: 'Timings', value: 'Mon – Sat, 6:00 AM – 9:00 PM' },
     ],
@@ -483,7 +483,7 @@ export const VIDEO_FEEDBACK: VideoFeedbackItem[] = [
     id: 'video-2',
     src: videoTwo,
     title: 'Inside TS Fitness',
-    subtitle: 'DP Road, Kothrud',
+    subtitle: 'Kothrud',
     description: 'Take a look around the studio: free weights, machines and open floor space for safe, supervised training.',
     tag: 'Studio Tour',
   },

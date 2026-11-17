@@ -9,7 +9,7 @@ interface GrowthDataPoint {
 }
 
 const GROWTH_HISTORY: GrowthDataPoint[] = [
-  { year: 2022, clients: 38, celebrities: 4, milestone: 'TS Fitness launched on DP Road, Kothrud' },
+  { year: 2022, clients: 38, celebrities: 4, milestone: 'TS Fitness launched in Kothrud' },
   { year: 2023, clients: 95, celebrities: 9, milestone: 'Expanded 1-on-1 biomechanics coaching lab' },
   { year: 2024, clients: 168, celebrities: 16, milestone: 'First Marathi cinema & regional fitness contracts' },
   { year: 2025, clients: 224, celebrities: 22, milestone: 'Celebrity conditioning protocols established' },

@@ -167,7 +167,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
               <span className="truncate">Book Free Demo</span>
             </button>
             <p className="text-[length:max(9px,calc(9rem/16))] text-center text-[#646B78] mt-1 truncate">
-              DP Road, Kothrud · Coach Samir
+              Kothrud · Coach Samir
             </p>
           </div>
 

@@ -49,7 +49,7 @@ const COMPARISON_DATA: ComparisonRow[] = [
     feature: 'Studio Atmosphere & Equipment Access',
     featureSub: 'Focus and privacy',
     othersText: 'Overcrowded chaotic floor, waiting 15 minutes for a single bench or machine',
-    usText: 'Exclusive personal training zones at TS Fitness Studio on DP Road, Kothrud',
+    usText: 'Exclusive personal training zones at TS Fitness Studio in Kothrud',
   },
 ];
 

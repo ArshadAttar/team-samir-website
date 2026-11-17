@@ -15,8 +15,8 @@ import {
 } from 'lucide-react';
 
 const HEADLINE_OPTIONS = [
-  '🔢 Tired of Counting Calories, 🥗 Boring Salads & 🌶️ Missing Your Masala Food? 💪 You’re in the Right Place! 🎯',
-  'Bored of counting 1, 2, 3, 4 during workouts? 🥱💪 It’s time to train smarter with the right techniques',
+  '🔢 Tired of Counting Calories, 🥗 Boring Salads & 🌶️ Missing Your Masala Food? 💪 You’re in the Right Place ! 🎯',
+  'Bored of counting 1, 2, 3, 4 during workouts? 🥱💪 It’s time to train smarter with the right techniques.',
   'World-Class Fitness Coaching, Powered by K11-Certified Experts.',
 ];
 const HEADLINE_ROTATE_MS = 5000;
@@ -83,7 +83,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               {/* Supporting Copy */}
               <p className="text-xs sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-                Personalised fitness coaching, expert guidance, and a structured approach to help you work towards your fitness goals in Pune.
+Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certified coaches, personalized workouts, Indian meal plans, and daily support.
               </p>
 
               {/* Credibility Line (Client-supplied claims with verification notice) */}
@@ -96,9 +96,9 @@ export const HomePage: React.FC<HomePageProps> = ({
               >
                 <div className="flex items-start sm:items-center justify-between gap-2">
                   <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs sm:text-sm font-medium text-slate-200">
-                    <span className="text-white font-semibold">5 Years Experience</span>
+                    <span className="text-white font-semibold">5+ Years Experience</span>
                     <span className="text-slate-500">|</span>
-                    <span className="text-white font-semibold">250+ Clients</span>
+                    <span className="text-white font-semibold">520+ Clients</span>
                     <span className="text-slate-500">|</span>
                     <span className="text-white font-semibold">25+ Celebrities</span>
                   </div>
@@ -138,12 +138,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <span>Explore Training</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#00A3FF]" />
                 </button>
-              </div>
-
-              {/* Local Venue Marker */}
-              <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400 flex items-center gap-2 pt-1">
-                <span className="w-2 h-2 rounded-full bg-[#16834A]" />
-                <span>TS Fitness Studio · Flat No. 3, DP Road, Kothrud, Pune</span>
               </div>
             </div>
 
@@ -205,7 +199,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 {/* Layered Location Badge */}
                 <div className="hidden sm:flex absolute -top-4 -left-4 bg-[#111318]/95 backdrop-blur-md border border-slate-700 px-3.5 py-2 rounded-xl shadow-xl items-center gap-2">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#16834A]" />
-                  <span className="text-xs font-medium text-slate-200">DP Road, Kothrud</span>
+                  <span className="text-xs font-medium text-slate-200">Kothrud</span>
                 </div>
 
               </div>
@@ -232,7 +226,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             />
 
             <CountUpStat
-              end={250}
+              end={520}
               suffix="+"
               label="Clients Trained"
               sublabel="*Client-supplied · Live Increment"
@@ -340,9 +334,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <p className="text-xs sm:text-sm text-[#646B78] leading-relaxed">
                       {service.shortDesc}
                     </p>
-                    <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-500 pt-2 border-t border-slate-100">
-                      <span className="font-medium text-[#171A21]">Best for:</span> {service.suitableFor}
-                    </div>
                   </div>
                 </div>
 
@@ -421,7 +412,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           <p className="text-[length:max(10px,calc(10rem/16))] sm:text-xs text-blue-200 pt-1 sm:pt-2">
-            *No automated charges or commitments. Flat No. 3, XYZ Apartment, DP Road, Kothrud, Pune.
+            *No automated charges or commitments. Flat No. 3, XYZ Apartment, Kothrud, Pune.
           </p>
         </div>
       </section>
