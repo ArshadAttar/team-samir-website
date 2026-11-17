@@ -13,8 +13,8 @@ import {
 } from 'lucide-react';
 
 const HEADLINE_OPTIONS = [
-  '🔢 Tired of Counting Calories, 🥗 Boring Salads & 🌶️ Missing Your Masala Food? 💪 You’re in the Right Place ! 🎯',
-  'Bored of counting 1, 2, 3, 4 during workouts? 🥱💪 It’s time to train smarter with the right techniques.',
+  'Tired of Counting Calories, 🥗 Boring Salads & Missing Your Masala Food ? 💪 You’re in the Right Place ! 🎯',
+  'Bored of counting 1, 2, 3, 4 during workouts ? 🥱💪  It’s time to train smarter with the right techniques.',
   'World-Class Fitness Coaching, Powered by K11-Certified Experts.',
 ];
 const HEADLINE_ROTATE_MS = 5000;
@@ -35,7 +35,6 @@ const getInitialHeadlineIndex = (): number => {
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
   onBookDemo: (preselectedService?: string) => void;
-  /** Opens the Services page with this service's Plan Details expanded */
   onOpenService: (serviceId: string) => void;
   highlightPlaceholders: boolean;
 }
@@ -242,7 +241,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
       {/* ============================================================
           C. TRAINING SERVICES PREVIEW (4 Clean Service Cards)
           ============================================================ */}
-      <section className="py-8 sm:py-12 lg:py-14 bg-white border-b border-[#E1E6EF]">
+      <section className="pt-5 pb-8 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-14 bg-white border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Section Header */}
@@ -279,7 +278,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
                   }
                 }}
                 aria-label={`View ${service.title} plan details`}
-                className="group cursor-pointer rounded-2xl overflow-hidden bg-white border border-[#E1E6EF] hover:border-[#1769FF] hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1769FF] transition-all flex flex-col justify-between"
+                className="group cursor-pointer rounded-2xl overflow-hidden bg-white border border-[#E1E6EF] hover:border-[#1769FF] hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1769FF] transition-all flex flex-col"
               >
                 <div>
                   {/* Card Image */}
@@ -296,7 +295,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-4 sm:p-6 space-y-2.5 sm:space-y-3">
+                  <div className="p-4 sm:p-6 pb-3 sm:pb-4 space-y-2.5 sm:space-y-3">
                     <h3 className="text-lg sm:text-xl font-display font-bold text-[#171A21] group-hover:text-[#1769FF] transition-colors">
                       {service.title}
                     </h3>
@@ -385,7 +384,6 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
           </p>
         </div>
       </section>
-
     </div>
   );
 };

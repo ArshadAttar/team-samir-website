@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PageId, ServiceItem, WeekDay } from '../types';
 import { SERVICES } from '../data/mockData';
+import { HeroReveal } from '../components/HeroReveal';
 import {
   ArrowRight,
   CheckCircle,
@@ -191,16 +192,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
       {/* Page Hero */}
       <section className="bg-[#111318] text-white py-6 sm:py-10 lg:py-14 border-b border-[#1C2028]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-2 sm:space-y-3">
-            <div className="flex items-center gap-1.5 sm:gap-2 text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] font-semibold text-[#00A3FF] uppercase tracking-wider">
-              <span>Tailored Coaching Programs</span>
-              <span className="text-slate-500">·</span>
-              <span>Pune, Maharashtra</span>
-            </div>
-            <h1 className="text-lg sm:text-2xl lg:text-4xl font-display font-extrabold tracking-tight text-white leading-tight">
-              Training Services Tailored to Your Body & Routine
-            </h1>
-            <p className="text-xs sm:text-sm lg:text-base text-slate-300 leading-relaxed">
+          <div className="space-y-2 sm:space-y-3">
+            {/* Same word-by-word reveal as the Home hero; single line, font scales with screen width */}
+            <HeroReveal
+              sentence="Training Services Tailored to Your Body & Routine"
+              highlightWords={['body', '&', 'routine']}
+              headingClassName="flex flex-nowrap whitespace-nowrap font-extrabold leading-tight text-[clamp(0.75rem,3.4vw,2.25rem)]"
+            />
+            <p className="max-w-3xl text-xs sm:text-sm lg:text-base text-slate-300 leading-relaxed">
               From 1-on-1 personal training in Kothrud to health management and nutrition guidance, find the plan that fits your goal and your daily routine.
             </p>
           </div>
@@ -208,10 +207,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
       </section>
 
       {/* Core Offerings: Detailed Service Portfolio */}
-      <section className="py-8 sm:py-12 lg:py-14 border-b border-[#E1E6EF]">
+      <section className="pt-5 pb-8 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-14 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           <div className="max-w-3xl space-y-2 sm:space-y-3">
-            <div className="text-xs font-bold text-[#1769FF] uppercase tracking-wider">Core Offerings</div>
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-display font-bold text-[#171A21] tracking-tight">
               Detailed Service Portfolio
             </h2>

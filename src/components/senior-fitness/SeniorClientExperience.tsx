@@ -59,14 +59,6 @@ const HIGHLIGHTS = [
   { title: 'Progress you can feel', desc: 'Small weekly steps that make daily tasks easier.' },
 ];
 
-const SampleChip: React.FC<{ label?: string; className?: string }> = ({ label = 'Sample', className = '' }) => (
-  <span
-    className={`inline-block text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] font-bold uppercase tracking-wider bg-[#FFB020] text-[#1A1300] rounded-full px-2.5 py-1 ${className}`}
-  >
-    {label}
-  </span>
-);
-
 const FadeUp: React.FC<{ children: React.ReactNode; delay?: number; className?: string }> = ({
   children,
   delay = 0,
@@ -196,7 +188,7 @@ const MediaViewer: React.FC<{ state: ViewerState; onClose: () => void; onChange:
                   <Play className="w-7 h-7 text-white fill-white ml-1" />
                 </span>
                 <p className="text-sm sm:text-base text-white max-w-xs bg-[#060910]/60 rounded-xl px-3 py-2">
-                  Sample preview. The real video will play here once it is added.
+                  Video coming soon.
                 </p>
               </div>
             )}
@@ -204,7 +196,6 @@ const MediaViewer: React.FC<{ state: ViewerState; onClose: () => void; onChange:
 
           <div className="w-full max-w-5xl flex justify-between items-start gap-4 text-white">
             <div>
-              <SampleChip className="mb-1.5" />
               <h3 className="text-lg sm:text-xl font-display font-semibold">
                 {item.title}
                 {video ? ` · ${video.duration}` : ''}
@@ -386,7 +377,6 @@ export const SeniorClientExperience: React.FC = () => {
                 <span className="absolute left-3 top-3 text-[length:max(11px,calc(11rem/16))] font-semibold uppercase tracking-wider bg-[#0A1020]/70 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">
                   {p.tag}
                 </span>
-                <SampleChip className="absolute right-3 top-3" />
               </span>
               <span className="block font-display font-semibold text-base sm:text-[length:max(17px,calc(17rem/16))] mt-3.5">{p.title}</span>
               <span className="block text-xs sm:text-[length:max(13.5px,calc(13.5rem/16))] text-[#9AA6BD] leading-relaxed mt-0.5">{p.caption}</span>
@@ -408,7 +398,6 @@ export const SeniorClientExperience: React.FC = () => {
               Pick a clip from the list. Each one shows how a type of session works.
             </p>
           </div>
-          <SampleChip label="Sample videos" />
         </FadeUp>
 
         <FadeUp delay={0.05} className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-5 lg:gap-6 items-start">
@@ -438,7 +427,6 @@ export const SeniorClientExperience: React.FC = () => {
               />
             </AnimatePresence>
             <span className="absolute inset-0 bg-gradient-to-b from-[#0A1020]/10 to-[#0A1020]/85" />
-            <SampleChip className="absolute left-4 top-4" />
             <span className="absolute right-4 top-4 bg-black/55 rounded-lg px-2.5 py-0.5 text-xs sm:text-sm font-semibold tabular-nums">
               {featured.duration}
             </span>

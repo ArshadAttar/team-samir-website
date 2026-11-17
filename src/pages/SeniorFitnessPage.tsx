@@ -239,7 +239,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
                 src={img('hero')}
                 alt="Senior woman lifting light dumbbells during a guided gym session"
                 position="22% center"
-                className="relative aspect-4/5 rounded-3xl border border-slate-700/80 shadow-2xl"
+                className="relative aspect-square rounded-3xl border border-slate-700/80 shadow-2xl"
               />
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

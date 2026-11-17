@@ -3,11 +3,20 @@ import React, { useState, useEffect } from 'react';
 interface HeroRevealProps {
   sentence?: string;
   className?: string;
+  /** Extra words (case-insensitive) to show in the blue gradient, e.g. ['body', '&', 'routine'] */
+  highlightWords?: string[];
+  /** Replaces the default heading size/layout classes (used by other page heroes) */
+  headingClassName?: string;
 }
+
+const DEFAULT_HEADING_CLASS =
+  'font-bold text-lg sm:text-2xl lg:text-[1.6rem] xl:text-[1.75rem] leading-snug flex flex-wrap gap-y-0.5 lg:min-h-[2.75em]';
 
 export const HeroReveal: React.FC<HeroRevealProps> = ({
   sentence = '🔢 Tired of Counting Calories, 🥗 Boring Salads & 🌶️ Missing Your Masala Food? 💪 You’re in the Right Place! 🎯',
   className = '',
+  highlightWords = [],
+  headingClassName = DEFAULT_HEADING_CLASS,
 }) => {
   const [revealedIndex, setRevealedIndex] = useState(-1);
   const words = sentence.split(' ');
@@ -24,14 +33,15 @@ export const HeroReveal: React.FC<HeroRevealProps> = ({
   return (
     <div className={className}>
       {/* Sized so the longest headline fits on two lines on desktop; min-height reserves both lines so the layout doesn't jump when headlines rotate */}
-      <h1 className="text-lg sm:text-2xl lg:text-[1.6rem] xl:text-[1.75rem] font-display font-bold tracking-tight text-white leading-snug flex flex-wrap items-center gap-x-[0.3em] gap-y-0.5 lg:min-h-[2.75em]">
+      <h1 className={`font-display tracking-tight text-white items-center gap-x-[0.3em] ${headingClassName}`}>
         {words.map((word, idx) => {
           const isRevealed = idx <= revealedIndex;
           const isHighlight =
             word.toLowerCase().includes('fitness') ||
             word.toLowerCase().includes('k11') ||
             word.toLowerCase().includes('life') ||
-            word.toLowerCase().includes('elevate');
+            word.toLowerCase().includes('elevate') ||
+            highlightWords.includes(word.toLowerCase());
 
           return (
             <span
