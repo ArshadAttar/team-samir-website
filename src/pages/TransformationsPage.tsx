@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { LazyVideo } from '../components/LazyVideo';
 import {
   AnimatePresence,
   MotionConfig,
@@ -229,7 +230,7 @@ const PhotoFrame: React.FC<{
   return (
     <div className={`relative overflow-hidden rounded-2xl bg-[#1C2028] ${className}`}>
       {state !== 'error' && (
-        <img
+        <img decoding="async"
           src={src}
           alt={alt}
           draggable={false}
@@ -507,14 +508,14 @@ const VideoCard: React.FC<{ video: ClientVideo; index: number; onOpen: () => voi
       >
         <div className="relative aspect-[9/16] overflow-hidden rounded-[20px] bg-[#1C2028]">
           {available ? (
-            <video
+            <LazyVideo
               ref={previewRef}
               src={`${video.src}#t=0.5`}
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              aria-label={video.title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
             />
           ) : (

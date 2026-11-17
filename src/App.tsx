@@ -13,12 +13,10 @@ import { PrototypeToolbar } from './components/PrototypeToolbar';
 import { PlaceholderDialog } from './components/PlaceholderDialog';
 import { WhatsAppFloat } from './components/WhatsAppFloat';
 
-import { HomePage } from './pages/HomePage';
-import { AboutPage } from './pages/AboutPage';
-import { ServicesPage } from './pages/ServicesPage';
-import { SeniorFitnessPage } from './pages/SeniorFitnessPage';
-import { TransformationsPage } from './pages/TransformationsPage';
-import { ContactPage } from './pages/ContactPage';
+import { Suspense } from 'react';
+import { PAGES } from './pages/registry';
+
+const { home: HomePage, about: AboutPage, services: ServicesPage, 'senior-fitness': SeniorFitnessPage, transformations: TransformationsPage, contact: ContactPage } = PAGES;
 
 interface AppProps {
   /** Page to render during prerendering (no window). In the browser it comes from the URL. */
@@ -110,6 +108,7 @@ export default function App({ initialPage }: AppProps) {
 
       {/* 3. Page views (URL-driven, see src/lib/routes.ts) */}
       <main className="flex-1" id="main-content">
+        <Suspense fallback={<div className="min-h-[70vh]" aria-busy="true" />}>
         {currentPage === 'home' && (
           <HomePage
             onNavigate={handleNavigate}
@@ -171,6 +170,7 @@ export default function App({ initialPage }: AppProps) {
             </a>
           </section>
         )}
+        </Suspense>
       </main>
 
       {/* 4. Global Footer */}

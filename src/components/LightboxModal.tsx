@@ -46,7 +46,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({ item, onClose, onB
                 Phase 1: Starting Baseline
               </div>
               <div className="relative aspect-4/3 rounded-xl overflow-hidden bg-slate-900 border border-slate-200">
-                <img
+                <img loading="lazy" decoding="async"
                   src={item.beforeImg}
                   alt={`Baseline condition for ${item.clientNamePlaceholder}`}
                   className="w-full h-full object-cover"
@@ -64,7 +64,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({ item, onClose, onB
                 Phase 2: Structured Progress
               </div>
               <div className="relative aspect-4/3 rounded-xl overflow-hidden bg-slate-900 border border-[#1769FF]/40">
-                <img
+                <img loading="lazy" decoding="async"
                   src={item.afterImg}
                   alt={`Progress outcome for ${item.clientNamePlaceholder}`}
                   className="w-full h-full object-cover"

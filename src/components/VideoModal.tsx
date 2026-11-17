@@ -20,21 +20,21 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose, onBookDem
       id: 1,
       title: 'TeamSamir Gym Presence Reel',
       sub: 'Official TeamSamir Polo in Gym Floor',
-      img: '/images/hero_samir_ts_fitness_1792417382753.jpg',
+      img: '/images/hero_samir_ts_fitness_1792417382753.webp',
       duration: '00:10',
     },
     {
       id: 2,
       title: 'Female Client Coaching & Posture',
       sub: 'Kettlebell Squat & Movement Assessment',
-      img: '/images/hd_female_client_coaching_1792417382622.jpg',
+      img: '/images/hd_female_client_coaching_1792417382622.webp',
       duration: '00:15',
     },
     {
       id: 3,
       title: 'Male Strength & Hypertrophy Session',
       sub: 'Dumbbell Press & Form Correction',
-      img: '/images/hd_male_client_strength_1792417382210.jpg',
+      img: '/images/hd_male_client_strength_1792417382210.webp',
       duration: '00:12',
     },
   ];
@@ -68,7 +68,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose, onBookDem
 
         {/* Video Canvas */}
         <div className="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
-          <img
+          <img loading="lazy" decoding="async"
             src={activeClip.img}
             alt={activeClip.title}
             className={`w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? 'opacity-90' : 'opacity-60'}`}

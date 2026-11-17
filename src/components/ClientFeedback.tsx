@@ -1,4 +1,5 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
+import { LazyVideo } from './LazyVideo';
 import { Star, Quote, CheckCircle2, Play, Pause, Video, Volume2, VolumeX } from 'lucide-react';
 import { REVIEWS, VIDEO_FEEDBACK } from '../data/mockData';
 import { ReviewItem, VideoFeedbackItem } from '../types';
@@ -27,7 +28,7 @@ const ReviewCard: React.FC<{ review: ReviewItem }> = ({ review }) => (
     </span>
 
     <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-      <img
+      <img decoding="async"
         src={review.avatar}
         alt=""
         loading="lazy"
@@ -53,10 +54,13 @@ const CONTROL_BUTTON =
 const VideoCard: React.FC<{ video: VideoFeedbackItem; isCopy: boolean }> = ({ video, isCopy }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const cardId = useId();
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   // True once the visitor presses pause, so scrolling back into view doesn't restart it
   const userPausedRef = useRef(false);
+  const onScreenRef = useRef(false);
+  const canAutoplay = () =>
+    onScreenRef.current && !userPausedRef.current && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
   // Only decode/play while the card is on screen (the strip repeats cards, so many exist)
   useEffect(() => {
@@ -64,7 +68,8 @@ const VideoCard: React.FC<{ video: VideoFeedbackItem; isCopy: boolean }> = ({ vi
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !userPausedRef.current) {
+        onScreenRef.current = entry.isIntersecting;
+        if (canAutoplay()) {
           el.play().catch(() => undefined);
         } else if (!entry.isIntersecting) {
           el.pause();
@@ -115,16 +120,16 @@ const VideoCard: React.FC<{ video: VideoFeedbackItem; isCopy: boolean }> = ({ vi
     <article className={`${GLASS} group/video overflow-hidden flex flex-col`}>
       <div className="relative aspect-4/5 bg-black/40">
         {/* Autoplay requires muted + playsInline (iOS) */}
-        <video
+        <LazyVideo
           ref={videoRef}
           src={video.src}
           className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
           aria-label={video.title}
+          // The file is fetched only when near the screen; start once it can play
+          onLoadedData={(e) => canAutoplay() && e.currentTarget.play().catch(() => undefined)}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         />

@@ -29,7 +29,7 @@ const SERVICE_NAME = 'Senior Fitness';
  * Photos live in public/images/senior-fitness/. Prompts for generating each one are in
  * docs/senior-fitness-image-prompts.md. Missing files fall back to a styled placeholder.
  */
-const img = (name: string) => `/images/senior-fitness/${name}.jpg`;
+const img = (name: string) => `/images/senior-fitness/${name}.webp`;
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -66,7 +66,9 @@ const SeniorImage: React.FC<{
   fill?: boolean;
   /** CSS object-position, to keep the subject in frame when the image is cropped */
   position?: string;
-}> = ({ src, alt, className = '', imgClassName = '', fill = false, position }) => {
+  /** Above-the-fold image: load immediately with high priority */
+  priority?: boolean;
+}> = ({ src, alt, className = '', imgClassName = '', fill = false, position, priority = false }) => {
   const [failed, setFailed] = useState(false);
 
   return (
@@ -88,7 +90,9 @@ const SeniorImage: React.FC<{
           <motion.img
             src={src}
             alt={alt}
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
+            decoding="async"
             onError={() => setFailed(true)}
             className="w-full h-full object-cover"
             style={position ? { objectPosition: position } : undefined}
@@ -237,6 +241,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
               <div className="absolute -inset-4 bg-gradient-to-tr from-[#1769FF]/30 via-transparent to-[#00A3FF]/20 rounded-3xl -rotate-2 blur-sm" />
               <SeniorImage
                 src={img('hero')}
+                priority
                 alt="Senior woman lifting light dumbbells during a guided gym session"
                 position="22% center"
                 className="relative aspect-square rounded-3xl border border-slate-700/80 shadow-2xl"

@@ -129,7 +129,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         className="relative w-full aspect-16/10 sm:aspect-16/9 rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-700 bg-slate-900 select-none cursor-ew-resize group"
       >
         {/* Layer 1: Background - "AFTER" Image (Full Width) */}
-        <img
+        <img loading="lazy" decoding="async"
           src={activeCase.afterImage}
           alt={`After: ${activeCase.name}`}
           className="absolute inset-0 w-full h-full object-cover object-center"
@@ -152,7 +152,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           className="absolute inset-0 overflow-hidden pointer-events-none"
           style={{ width: `${sliderPosition}%` }}
         >
-          <img
+          <img loading="lazy" decoding="async"
             src={activeCase.beforeImage}
             alt={`Before: ${activeCase.name}`}
             className="absolute inset-0 w-full h-full object-cover object-center filter grayscale-[35%]"

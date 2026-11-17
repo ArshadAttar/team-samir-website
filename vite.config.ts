@@ -6,6 +6,8 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
+    // manifest.json lets scripts/prerender.mjs preload each page's JS chunk
+    build: { manifest: true },
     resolve: {
       alias: {
         '@': path.resolve(import.meta.dirname, "."),

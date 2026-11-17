@@ -231,7 +231,7 @@ export const ReviewsShuffle: React.FC<ReviewsShuffleProps> = ({ className = '' }
             <div className="flex items-center gap-2.5 sm:gap-3">
               {/* Left corner small circle face pic */}
               <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-[#1769FF] shadow-md shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src={activeCard.avatar}
                   alt={activeCard.name}
                   className="w-full h-full object-cover"

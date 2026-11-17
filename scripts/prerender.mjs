@@ -10,9 +10,10 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const ssrDir = path.join(root, 'dist-ssr');
 
-const { render, headHtml, PAGE_META, PAGE_PATHS, SITE_URL } = await import(
+const { render, preloadAll, headHtml, PAGE_META, PAGE_PATHS, SITE_URL } = await import(
   pathToFileURL(path.join(ssrDir, 'entry-server.js')).href
 );
+await preloadAll();
 
 const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 const HEAD_RE = /<!--head:start-->[\s\S]*?<!--head:end-->/;
@@ -21,7 +22,35 @@ if (!HEAD_RE.test(template) || !template.includes(ROOT)) {
   throw new Error('index.html is missing the <!--head:start/end--> markers or the empty #root div');
 }
 
-const page = (id) => template.replace(HEAD_RE, headHtml(id)).replace(ROOT, `<div id="root">${render(id)}</div>`);
+// Preload each page's own JS chunk (and its imports) so it downloads in parallel with the entry.
+const manifest = JSON.parse(fs.readFileSync(path.join(dist, '.vite', 'manifest.json'), 'utf8'));
+const PAGE_FILES = {
+  home: 'src/pages/HomePage.tsx',
+  services: 'src/pages/ServicesPage.tsx',
+  'senior-fitness': 'src/pages/SeniorFitnessPage.tsx',
+  transformations: 'src/pages/TransformationsPage.tsx',
+  about: 'src/pages/AboutPage.tsx',
+  contact: 'src/pages/ContactPage.tsx',
+};
+const chunkFiles = (key, seen = new Set()) => {
+  const c = manifest[key];
+  if (!c || seen.has(key)) return [];
+  seen.add(key);
+  return [c.file, ...(c.imports || []).flatMap((k) => chunkFiles(k, seen))];
+};
+const entryFiles = new Set(chunkFiles('index.html'));
+const preloads = (id) =>
+  id && PAGE_FILES[id]
+    ? [...new Set(chunkFiles(PAGE_FILES[id]))]
+        .filter((f) => !entryFiles.has(f))
+        .map((f) => `<link rel="modulepreload" crossorigin href="/${f}">`)
+        .join('\n    ')
+    : '';
+
+const page = (id) =>
+  template
+    .replace(HEAD_RE, [headHtml(id), preloads(id)].filter(Boolean).join('\n    '))
+    .replace(ROOT, `<div id="root">${render(id)}</div>`);
 
 for (const [id, urlPath] of Object.entries(PAGE_PATHS)) {
   const file = path.join(dist, urlPath, 'index.html');
@@ -45,3 +74,4 @@ fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSite
 console.log('wrote sitemap.xml and robots.txt');
 
 fs.rmSync(ssrDir, { recursive: true, force: true });
+fs.rmSync(path.join(dist, '.vite'), { recursive: true, force: true }); // build metadata, not for the web

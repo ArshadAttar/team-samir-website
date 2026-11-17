@@ -10,4 +10,9 @@ import type { PageId } from './types';
 export { headHtml, PAGE_META, SITE_URL } from './lib/seo';
 export { PAGE_PATHS } from './lib/routes';
 
+import { PAGES } from './pages/registry';
+
+/** Load every page chunk before rendering (renderToString can't wait for lazy()). */
+export const preloadAll = () => Promise.all(Object.values(PAGES).map((p) => p.load()));
+
 export const render = (page: PageId | null) => renderToString(<App initialPage={page} />);

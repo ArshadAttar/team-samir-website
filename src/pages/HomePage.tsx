@@ -147,8 +147,8 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
                 <div className="group relative rounded-2xl overflow-hidden bg-[#1C2028] border border-slate-700/80 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-[1.01]">
                   <div className="aspect-16/10 sm:aspect-4/3 lg:aspect-4/3 @container relative overflow-hidden bg-black flex flex-col items-center justify-center gap-2 sm:gap-4 px-3">
                     {/* Logo mark: fixed-height box crops the empty black padding above and below the icon */}
-                    <img
-                      src="/images/logo/logo-black.jpeg"
+                    <img decoding="async"
+                      src="/images/logo/logo-black.webp"
                       alt="TeamSamir logo - TS Fitness Pune"
                       className="w-48 h-28 sm:w-72 sm:h-44 object-cover object-center shrink-0 transition-transform duration-500 ease-out group-hover:scale-120"
                       referrerPolicy="no-referrer"
@@ -283,7 +283,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
                 <div>
                   {/* Card Image */}
                   <div className="aspect-4/3 relative overflow-hidden bg-slate-100">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={service.image}
                       alt={service.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

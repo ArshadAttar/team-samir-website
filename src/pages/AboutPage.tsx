@@ -56,8 +56,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             {/* Owner Portrait Column */}
             <div className="lg:col-span-5 space-y-3 sm:space-y-4">
               <div className="rounded-2xl overflow-hidden bg-slate-900 border border-[#E1E6EF] shadow-lg relative aspect-16/10 sm:aspect-4/3 lg:aspect-4/3">
-                <img
-                  src="/images/hero_samir_ts_fitness_1792417382753.jpg"
+                <img fetchPriority="high" decoding="async"
+                  src="/images/hero_samir_ts_fitness_1792417382753.webp"
                   alt="TeamSamir - Founder & Head Coach at TS Fitness"
                   className="w-full h-full object-cover object-top"
                   referrerPolicy="no-referrer"

@@ -17,7 +17,7 @@ import clipDeadlift from '../../assets/videos/stock/strength-deadlift.mp4';
  * Add `videoSrc` to a video to play the real clip in the viewer instead of the placeholder message.
  */
 
-const img = (name: string) => `/images/senior-fitness/${name}.jpg`;
+const img = (name: string) => `/images/senior-fitness/${name}.webp`;
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 interface Photo {
@@ -171,7 +171,7 @@ const MediaViewer: React.FC<{ state: ViewerState; onClose: () => void; onChange:
                 className="max-h-[70vh] max-w-full rounded-2xl"
               />
             ) : (
-              <motion.img
+              <motion.img loading="lazy" decoding="async"
                 key={`${state.kind}-${state.index}`}
                 src={item.src}
                 alt={item.title}
@@ -366,7 +366,7 @@ export const SeniorClientExperience: React.FC = () => {
               className="group shrink-0 basis-[72%] sm:basis-[260px] lg:basis-[290px] snap-start text-left focus-visible:outline-2 focus-visible:outline-[#6EA2FF] focus-visible:outline-offset-4 rounded-[18px]"
             >
               <span className="relative block aspect-3/4 rounded-[18px] overflow-hidden border border-white/10 bg-[#121B31]">
-                <img
+                <img decoding="async"
                   src={p.src}
                   alt=""
                   loading="lazy"
@@ -450,7 +450,7 @@ export const SeniorClientExperience: React.FC = () => {
                 }`}
               >
                 <span className="relative block aspect-[16/10] rounded-[10px] overflow-hidden">
-                  <img src={v.src} alt="" loading="lazy" style={{ objectPosition: v.position }} className="w-full h-full object-cover" />
+                  <img decoding="async" src={v.src} alt="" loading="lazy" style={{ objectPosition: v.position }} className="w-full h-full object-cover" />
                   <span className="absolute right-1.5 bottom-1.5 bg-black/70 rounded-md px-1.5 text-[length:max(11px,calc(11rem/16))] tabular-nums">{v.duration}</span>
                 </span>
                 <span className="min-w-0">
