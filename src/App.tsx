@@ -8,6 +8,7 @@ import { LightboxModal } from './components/LightboxModal';
 import { VideoModal } from './components/VideoModal';
 import { PrototypeToolbar } from './components/PrototypeToolbar';
 import { PlaceholderDialog } from './components/PlaceholderDialog';
+import { WhatsAppFloat } from './components/WhatsAppFloat';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -20,7 +21,6 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [highlightPlaceholders, setHighlightPlaceholders] = useState(false);
-  const [isWireframeMode, setIsWireframeMode] = useState(false);
   const [preselectedService, setPreselectedService] = useState<string | undefined>(undefined);
 
   // Modals state
@@ -54,7 +54,7 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col bg-white text-[#171A21] relative pb-16 lg:pb-0 ${isWireframeMode ? 'wireframe-mode' : ''}`}>
+    <div className="min-h-screen flex flex-col bg-white text-[#171A21] relative pb-16 lg:pb-0">
       {/* Global Desktop & Mobile Sticky Header (Single Header) */}
       <Header
         currentPage={currentPage}
@@ -130,6 +130,9 @@ export default function App() {
         onBookDemo={() => handleBookDemo()}
       />
 
+      {/* Floating WhatsApp button (bottom-right, every page) */}
+      <WhatsAppFloat />
+
       {/* 6. Accessible Slide-in Mobile Drawer */}
       <MobileDrawer
         isOpen={isMobileDrawerOpen}
@@ -159,24 +162,6 @@ export default function App() {
         onClose={() => setDialogType(null)}
         onNavigateToDemo={() => handleBookDemo()}
       />
-
-      {/* 10. Discreet Floating Blueprint / Wireframe Mode Toggle */}
-      {/* Icon-only dot below md so it doesn't cover page text on phones; full label from md up */}
-      <div className="fixed bottom-20 lg:bottom-6 right-3 md:right-4 z-40">
-        <button
-          onClick={() => setIsWireframeMode(!isWireframeMode)}
-          className={`w-9 h-9 md:w-auto md:h-auto justify-center md:px-3 md:py-1.5 rounded-full text-xs font-semibold shadow-lg transition-all flex items-center gap-1.5 cursor-pointer border ${
-            isWireframeMode
-              ? 'bg-[#1769FF] text-white border-blue-400 ring-2 ring-blue-300'
-              : 'bg-[#111318]/90 text-white border-slate-700 hover:bg-black'
-          }`}
-          title="Toggle Wireframe Blueprint vs High-Fidelity Design"
-          aria-label={isWireframeMode ? 'Visual Design Active' : 'Wireframe Blueprint'}
-        >
-          <span className="w-2 h-2 rounded-full bg-[#00A3FF] shrink-0" />
-          <span className="hidden md:inline">{isWireframeMode ? 'Visual Design Active' : 'Wireframe Blueprint'}</span>
-        </button>
-      </div>
     </div>
   );
 }

@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PageId } from '../types';
 import { TeamSamirLogo } from './TeamSamirLogo';
-import { MessageSquare } from 'lucide-react';
-import { BUSINESS_INFO } from '../data/mockData';
+import { Calendar } from 'lucide-react';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -26,8 +25,37 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'about', label: 'About Samir' },
   ];
 
+  // Hide the header while scrolling down the page, bring it back on any scroll up.
+  // While it is hidden, a floating "Book Free Call" button takes its place.
+  const [isHidden, setIsHidden] = useState(false);
+  const lastY = useRef(0);
+
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const delta = y - lastY.current;
+        if (y < 80) setIsHidden(false);           // always visible near the top
+        else if (delta > 6) setIsHidden(true);    // scrolling down
+        else if (delta < -6) setIsHidden(false);  // scrolling up
+        if (Math.abs(delta) > 6 || y < 80) lastY.current = y;
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#E1E6EF] transition-all">
+    <>
+    <header
+      className={`sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#E1E6EF] transition-transform duration-300 ease-out ${
+        isHidden ? '-translate-y-full' : 'translate-y-0'
+      }`}
+    >
       {/* Primary Top Bar */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-18 lg:h-20 flex items-center justify-between gap-2 sm:gap-6">
         
@@ -121,5 +149,19 @@ export const Header: React.FC<HeaderProps> = ({
         })}
       </div>
     </header>
+
+    {/* Floating "Book Free Call" shown only while the header is hidden */}
+    <button
+      onClick={onBookDemo}
+      tabIndex={isHidden ? 0 : -1}
+      aria-hidden={!isHidden}
+      className={`fixed top-3 right-3 sm:right-6 lg:right-8 z-40 inline-flex items-center gap-2 min-h-[44px] px-4 lg:px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#1769FF] hover:bg-[#0B3D91] active:scale-[0.98] rounded-xl shadow-lg shadow-[#1769FF]/30 transition-all duration-300 ease-out cursor-pointer whitespace-nowrap ${
+        isHidden ? 'translate-y-0 opacity-100' : '-translate-y-16 opacity-0 pointer-events-none'
+      }`}
+    >
+      <Calendar className="w-4 h-4 shrink-0" />
+      Book Free Call
+    </button>
+    </>
   );
 };

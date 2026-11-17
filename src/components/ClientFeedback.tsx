@@ -200,7 +200,7 @@ export const ClientFeedback: React.FC = () => (
     <GlassBackdrop />
 
     {/* Written reviews */}
-    <section className="relative pt-12 sm:pt-20 pb-8 sm:pb-12">
+    <section className="relative pt-8 sm:pt-12 pb-4 sm:pb-6">
       <div className="relative">
         <SectionHeader
           kicker="Client Feedback & Social Proof"
@@ -219,7 +219,7 @@ export const ClientFeedback: React.FC = () => (
     </section>
 
     {/* Video feedback */}
-    <section className="relative pt-8 sm:pt-12 pb-12 sm:pb-20">
+    <section className="relative pt-4 sm:pt-6 pb-8 sm:pb-12">
       <div className="relative">
         <SectionHeader
           kicker="Video Feedback"

@@ -88,14 +88,14 @@ export const PlaceholderDialog: React.FC<PlaceholderDialogProps> = ({
                 <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#16834A] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900">5 Years Experience:</strong> Confirmed background narrative (former coach at Fitness Talk).
+                    <strong className="text-slate-900">{BUSINESS_INFO.experienceYears}+ Years Experience:</strong> Confirmed background narrative (former coach at Fitness Talk).
                   </div>
                 </div>
 
                 <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200 flex items-start gap-2">
                   <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-amber-950">250+ Clients & 25+ Celebrities:</strong> Client-supplied claims pending formal audit before public release.
+                    <strong className="text-amber-950">{BUSINESS_INFO.clientsTrained} Clients & {BUSINESS_INFO.celebritiesTrained} Celebrities:</strong> Client-supplied claims pending formal audit before public release.
                   </div>
                 </div>
 

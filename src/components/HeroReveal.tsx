@@ -29,6 +29,7 @@ export const HeroReveal: React.FC<HeroRevealProps> = ({
           const isRevealed = idx <= revealedIndex;
           const isHighlight =
             word.toLowerCase().includes('fitness') ||
+            word.toLowerCase().includes('k11') ||
             word.toLowerCase().includes('life') ||
             word.toLowerCase().includes('elevate');
 

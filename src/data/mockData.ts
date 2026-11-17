@@ -7,15 +7,23 @@ import stockBattleRopes from '../assets/videos/stock/battle-ropes.mp4';
 import stockSquats from '../assets/videos/stock/squat-training.mp4';
 import stockLunges from '../assets/videos/stock/lunge-workout.mp4';
 
+// Single source for the headline numbers shown across the whole site.
+// Change them here only; every page reads from BUSINESS_INFO.
+export const STATS = {
+  years: 5,
+  clients: 520,
+  celebrities: 25,
+};
+
 export const BUSINESS_INFO = {
   brandName: 'TeamSamir',
   trainerName: 'Samir',
   gymName: 'TS Fitness',
   tagline: 'Personalised Fitness & Coaching',
-  experienceYears: '5',
+  experienceYears: String(STATS.years),
   previousGym: 'Fitness Talk',
-  clientsTrained: '250+',
-  celebritiesTrained: '25+',
+  clientsTrained: `${STATS.clients}+`,
+  celebritiesTrained: `${STATS.celebrities}+`,
   location: {
     line1: 'Flat No. 3, XYZ Apartment (DP Road)',
     line2: 'Kothrud',
@@ -245,10 +253,10 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'team-samir',
     role: 'Personal Trainer',
     namePlaceholder: 'Samir (Head Trainer)',
-    experience: '5 Years Experience',
+    experience: `${STATS.years}+ Years Experience`,
     specialties: ['Hypertrophy & Strength', 'Functional Movement', 'Celebrity Coaching Protocol'],
     qualificationPlaceholder: 'Certified Fitness Specialist · Former Coach at Fitness Talk',
-    bioPlaceholder: 'Founder and lead trainer at TS Fitness with 5 years of industry experience, having trained 250+ clients and 25+ celebrity trainees in Pune.',
+    bioPlaceholder: `Founder and lead trainer at TS Fitness with ${STATS.years}+ years of industry experience, having trained ${STATS.clients}+ clients and ${STATS.celebrities}+ celebrity trainees in Pune.`,
   },
   {
     id: 'team-coach',
@@ -325,7 +333,7 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     beforeImg: '/images/hd_male_client_strength_1792417382210.jpg',
     afterImg: '/images/WhatsApp Image 2026-10-19 at 7.00.17 PM.jpeg',
     summary: 'Watch Coach Samir demonstrate athletic discipline and physique conditioning inside the Pune studio.',
-    milestone: '5 Years Professional Coaching Experience',
+    milestone: `${STATS.years}+ Years Professional Coaching Experience`,
     isVideo: true,
     videoDuration: '00:10',
     consentNote: 'Official Coach Samir training footage.',
@@ -355,7 +363,7 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     beforeImg: '/images/hd_male_client_strength_1792417382210.jpg',
     afterImg: '/images/WhatsApp Image 2026-10-19 at 7.00.17 PM.jpeg',
     summary: 'High-energy studio reel highlighting athletic conditioning and trainer-led motivation at TS Fitness.',
-    milestone: '25+ Celebrity trainees coached',
+    milestone: `${STATS.celebrities}+ Celebrity trainees coached`,
     isVideo: true,
     videoDuration: '00:10',
     consentNote: 'Official Coach Samir training footage.',

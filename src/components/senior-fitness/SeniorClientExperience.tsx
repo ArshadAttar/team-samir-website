@@ -1,6 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
+// Sample clips until real senior client videos are added
+import clipSquats from '../../assets/videos/stock/squat-training.mp4';
+import clipLunges from '../../assets/videos/stock/lunge-workout.mp4';
+import clipRopes from '../../assets/videos/stock/battle-ropes.mp4';
+import clipDeadlift from '../../assets/videos/stock/strength-deadlift.mp4';
 
 /**
  * Client Experience section for the Senior Fitness page ("Cinema Filmstrip" design).
@@ -42,10 +47,10 @@ const PHOTOS: Photo[] = [
 ];
 
 const VIDEOS: Video[] = [
-  { src: img('assessment'), position: '55% 45%', title: 'Your first session', duration: '1:20', desc: 'How the first assessment checks balance, mobility and comfort before any plan is set.' },
-  { src: img('cta'), position: '62% 30%', title: 'A 10-minute balance routine', duration: '2:45', desc: 'Standing drills you can repeat at home, with a chair nearby for support.' },
-  { src: img('why-me'), position: '50% 50%', title: 'Morning mobility flow', duration: '1:50', desc: 'Gentle stretches that ease stiffness in the hips, back and shoulders.' },
-  { src: img('hero'), position: '32% 40%', title: 'Dumbbell basics', duration: '2:10', desc: 'Light-weight strength moves for stronger arms and better posture.' },
+  { src: img('assessment'), position: '55% 45%', title: 'Your first session', duration: '1:20', desc: 'How the first assessment checks balance, mobility and comfort before any plan is set.', videoSrc: clipSquats },
+  { src: img('cta'), position: '62% 30%', title: 'A 10-minute balance routine', duration: '2:45', desc: 'Standing drills you can repeat at home, with a chair nearby for support.', videoSrc: clipLunges },
+  { src: img('why-me'), position: '50% 50%', title: 'Morning mobility flow', duration: '1:50', desc: 'Gentle stretches that ease stiffness in the hips, back and shoulders.', videoSrc: clipRopes },
+  { src: img('hero'), position: '32% 40%', title: 'Dumbbell basics', duration: '2:10', desc: 'Light-weight strength moves for stronger arms and better posture.', videoSrc: clipDeadlift },
 ];
 
 const HIGHLIGHTS = [
@@ -168,6 +173,9 @@ const MediaViewer: React.FC<{ state: ViewerState; onClose: () => void; onChange:
                 poster={video.src}
                 controls
                 autoPlay
+                muted
+                loop
+                playsInline
                 className="max-h-[70vh] max-w-full rounded-2xl"
               />
             ) : (
@@ -410,10 +418,17 @@ export const SeniorClientExperience: React.FC = () => {
             className="group relative w-full aspect-video rounded-[22px] overflow-hidden bg-[#121B31] text-left text-white cursor-pointer focus-visible:outline-2 focus-visible:outline-[#6EA2FF] focus-visible:outline-offset-4"
           >
             <AnimatePresence mode="wait">
-              <motion.img
+              {/* Featured clip autoplays muted on loop (falls back to the poster image) */}
+              <motion.video
                 key={activeVideo}
-                src={featured.src}
-                alt=""
+                src={featured.videoSrc}
+                poster={featured.src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
                 style={{ objectPosition: featured.position }}
                 initial={{ opacity: 0, scale: 1.04 }}
                 animate={{ opacity: 1, scale: 1 }}

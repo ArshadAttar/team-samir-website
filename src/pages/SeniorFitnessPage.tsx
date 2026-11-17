@@ -12,7 +12,6 @@ import {
   Dumbbell,
   HeartPulse,
   Home,
-  MessageSquare,
   Scale,
   ShieldCheck,
   Smile,
@@ -179,17 +178,13 @@ const WHY_ME = [
 /* ------------------------------------------------------------------ */
 
 export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo }) => {
-  const whatsappHref = `https://wa.me/${BUSINESS_INFO.contact.whatsappNumber}?text=${encodeURIComponent(
-    'Hi Samir, I would like to know more about your Senior Fitness training at TS Fitness, Kothrud.'
-  )}`;
-
   return (
     <MotionConfig reducedMotion="user">
       <div className="bg-white overflow-hidden">
         {/* ============================================================
             1. HERO
             ============================================================ */}
-        <section className="relative bg-[#111318] text-white py-10 sm:py-14 lg:py-20 border-b border-[#1C2028]">
+        <section className="relative bg-[#111318] text-white py-8 sm:py-12 lg:py-14 border-b border-[#1C2028]">
           <div className="absolute inset-0 pointer-events-none opacity-20">
             <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-[#1769FF] blur-3xl" />
             <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-[#00A3FF] blur-3xl" />
@@ -227,15 +222,6 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
                   <span>Start Your Fitness Journey</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl transition-all"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>Ask on WhatsApp</span>
-                </a>
               </Reveal>
               <Reveal delay={0.32} className="flex flex-wrap gap-x-5 gap-y-2 pt-1 text-xs sm:text-sm text-slate-300">
                 {['1-on-1 supervised sessions', 'Safe for beginners', 'Follows your doctor\'s advice'].map((t) => (
@@ -277,7 +263,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
         {/* ============================================================
             2. WHY SENIOR FITNESS MATTERS
             ============================================================ */}
-        <section className="py-12 sm:py-16 lg:py-24 bg-white">
+        <section className="py-8 sm:py-12 lg:py-14 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
             <SectionHeading
               kicker="Why It Matters"
@@ -302,7 +288,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
         {/* ============================================================
             3. WHY TRAIN WITH ME (content left, image right)
             ============================================================ */}
-        <section className="py-12 sm:py-16 lg:py-24 bg-slate-50 border-y border-[#E1E6EF]">
+        <section className="py-8 sm:py-12 lg:py-14 bg-slate-50 border-y border-[#E1E6EF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-7 space-y-8 order-2 lg:order-1">
               <SectionHeading
@@ -367,7 +353,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
         {/* ============================================================
             5. FINAL CTA (background image)
             ============================================================ */}
-        <section className="relative py-16 sm:py-24 lg:py-28 text-white">
+        <section className="relative py-12 sm:py-16 lg:py-20 text-white">
           <SeniorImage
             src={img('cta')}
             alt="Senior women exercising together in a group class"
@@ -395,15 +381,6 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
                 <span>Book Your Senior Fitness Consultation</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition-all"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>WhatsApp Samir</span>
-              </a>
             </Reveal>
             <Reveal delay={0.3}>
               <p className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400 max-w-xl mx-auto">

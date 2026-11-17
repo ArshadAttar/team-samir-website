@@ -208,7 +208,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
       </section>
 
       {/* Core Offerings: Detailed Service Portfolio */}
-      <section className="py-8 sm:py-14 lg:py-20 border-b border-[#E1E6EF]">
+      <section className="py-8 sm:py-12 lg:py-14 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           <div className="max-w-3xl space-y-2 sm:space-y-3">
             <div className="text-xs font-bold text-[#1769FF] uppercase tracking-wider">Core Offerings</div>

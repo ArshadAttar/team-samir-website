@@ -1,6 +1,5 @@
 import React from 'react';
-import { Home, Dumbbell, MessageSquare, Calendar } from 'lucide-react';
-import { BUSINESS_INFO } from '../data/mockData';
+import { Home, Dumbbell, Calendar } from 'lucide-react';
 import { PageId } from '../types';
 
 interface MobileBottomBarProps {
@@ -58,20 +57,6 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
           </div>
           <span className="text-[length:max(10px,calc(10rem/16))] font-bold text-[#1769FF] mt-0.5">Menu</span>
         </button>
-
-        {/* WhatsApp Direct Action */}
-        <a
-          href={`https://wa.me/${BUSINESS_INFO.contact.whatsappNumber}?text=${encodeURIComponent(
-            'Hi Samir, I want to book a free demo fitness training session at TS Fitness in Pune.'
-          )}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 rounded-lg text-emerald-700 hover:bg-emerald-50 transition-all cursor-pointer"
-          title="Chat on WhatsApp"
-        >
-          <MessageSquare className="w-4 h-4 text-[#16834A]" />
-          <span className="text-[length:max(10px,calc(10rem/16))] mt-0.5">WhatsApp</span>
-        </a>
 
         {/* Free Demo Action Tab (Balanced with other tabs) */}
         <button

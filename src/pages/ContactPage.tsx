@@ -127,7 +127,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   return (
     <div className="bg-white">
       {/* Page Hero */}
-      <section className="bg-[#111318] text-white py-8 sm:py-14 lg:py-20 border-b border-[#1C2028]">
+      <section className="bg-[#111318] text-white py-8 sm:py-12 lg:py-14 border-b border-[#1C2028]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-2.5 sm:space-y-4">
             <div className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2 gap-y-0.5 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider [&>span]:whitespace-nowrap">
@@ -146,7 +146,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
       </section>
 
       {/* Main Content: Contact Cards & 12-Field Form */}
-      <section className="py-8 sm:py-14 lg:py-20 border-b border-[#E1E6EF]">
+      <section className="py-8 sm:py-12 lg:py-14 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-start">
             
@@ -166,25 +166,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               </div>
 
               {/* Quick Action Button Group */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <a
                   href={`tel:${BUSINESS_INFO.contact.phoneRaw}`}
                   className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-slate-50 hover:bg-[#EEF5FF] text-[#171A21] border border-[#E1E6EF] hover:border-[#1769FF] text-xs font-semibold transition-all cursor-pointer shadow-xs"
                 >
                   <Phone className="w-4 h-4 text-[#1769FF]" />
                   <span>Call {BUSINESS_INFO.contact.phone}</span>
-                </a>
-
-                <a
-                  href={`https://wa.me/${BUSINESS_INFO.contact.whatsappNumber}?text=${encodeURIComponent(
-                    'Hi Samir, I want to book a free demo session at TS Fitness in Pune.'
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold transition-all cursor-pointer shadow-xs"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>WhatsApp Chat</span>
                 </a>
               </div>
 
@@ -206,7 +194,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                       Head Trainer & Founder
                     </span>
                     <div className="text-base font-bold text-[#171A21]">Coach Samir (TS Fitness)</div>
-                    <div className="text-xs text-[#646B78]">5 Years Experience · Former Coach at Fitness Talk</div>
+                    <div className="text-xs text-[#646B78]">{BUSINESS_INFO.experienceYears}+ Years Experience · Former Coach at Fitness Talk</div>
                   </div>
                 </div>
 

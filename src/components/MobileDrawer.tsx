@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { PageId } from '../types';
 import { TeamSamirLogo } from './TeamSamirLogo';
-import { X, ArrowRight, MapPin, Phone, MessageSquare, Calendar } from 'lucide-react';
+import { X, ArrowRight, MapPin, Phone, Calendar } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/mockData';
 
 interface MobileDrawerProps {
@@ -87,25 +87,13 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           </div>
 
           {/* Quick Mobile Contact Actions (Compact side-by-side) */}
-          <div className="p-2 sm:p-3 bg-slate-50 border-b border-[#E1E6EF] grid grid-cols-2 gap-1.5">
+          <div className="p-2 sm:p-3 bg-slate-50 border-b border-[#E1E6EF] grid grid-cols-1 gap-1.5">
             <a
               href={`tel:${BUSINESS_INFO.contact.phoneRaw}`}
               className="py-1.5 px-2 rounded-lg bg-white border border-[#E1E6EF] text-[#171A21] text-[length:max(11px,calc(11rem/16))] font-semibold shadow-2xs hover:border-[#1769FF] flex items-center justify-center gap-1 active:scale-[0.98]"
             >
               <Phone className="w-3 h-3 text-[#1769FF] shrink-0" />
               <span className="truncate">Call</span>
-            </a>
-
-            <a
-              href={`https://wa.me/${BUSINESS_INFO.contact.whatsappNumber}?text=${encodeURIComponent(
-                'Hi Samir, I want to book a free demo fitness training session in Pune.'
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-1.5 px-2 rounded-lg bg-emerald-600 text-white text-[length:max(11px,calc(11rem/16))] font-semibold shadow-2xs hover:bg-emerald-700 flex items-center justify-center gap-1 active:scale-[0.98]"
-            >
-              <MessageSquare className="w-3 h-3 shrink-0" />
-              <span className="truncate">WhatsApp</span>
             </a>
           </div>
 

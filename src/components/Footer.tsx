@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
               Start Your Personalized Fitness Journey with Samir
             </h3>
             <p className="text-[#646B78] text-xs sm:text-sm mt-0.5 sm:mt-1 max-w-xl">
-              5+ Years of Experience · 520+ Clients Trained · 25+ Celebrities Trained · TS Fitness Studio, Pune.
+              {BUSINESS_INFO.experienceYears}+ Years of Experience · {BUSINESS_INFO.clientsTrained} Clients Trained · {BUSINESS_INFO.celebritiesTrained} Celebrities Trained · TS Fitness Studio, Pune.
             </p>
           </div>
           <button
@@ -45,15 +45,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
             High-standard personal fitness training, athletic coaching, and sustainable nutrition guidance led by Coach Samir at TS Fitness in Kothrud, Pune.
           </p>
           <div className="flex items-center gap-2 sm:gap-3 pt-1">
-            <a
-              href={`https://wa.me/${BUSINESS_INFO.contact.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 min-h-9 lg:min-h-0 px-3 py-1.5 rounded-lg bg-[#1C2028] hover:bg-emerald-950/60 border border-emerald-800 text-[length:max(11px,calc(11rem/16))] sm:text-xs text-emerald-400 transition-colors"
-            >
-              <MessageSquare className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              <span>WhatsApp Chat</span>
-            </a>
             <a
               href={`tel:${BUSINESS_INFO.contact.phoneRaw}`}
               className="inline-flex items-center gap-1.5 min-h-9 lg:min-h-0 px-3 py-1.5 rounded-lg bg-[#1C2028] hover:bg-blue-950/60 border border-blue-800 text-[length:max(11px,calc(11rem/16))] sm:text-xs text-blue-400 transition-colors"

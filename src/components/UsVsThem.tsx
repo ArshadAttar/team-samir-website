@@ -1,4 +1,5 @@
 import React from 'react';
+import { BUSINESS_INFO } from '../data/mockData';
 import { X, Check, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react';
 
 interface ComparisonRow {
@@ -31,7 +32,7 @@ const COMPARISON_DATA: ComparisonRow[] = [
     feature: 'Trainer Track Record & Pedigree',
     featureSub: 'Credentials and verified milestones',
     othersText: 'Fresh weekend-certified interns who quit or rotate after 60 days',
-    usText: '5 Years proven experience, 250+ clients transformed, 25+ celebrities coached',
+    usText: `${BUSINESS_INFO.experienceYears}+ Years proven experience, ${BUSINESS_INFO.clientsTrained} clients transformed, ${BUSINESS_INFO.celebritiesTrained} celebrities coached`,
   },
   {
     feature: 'Biometric Progress Tracking',

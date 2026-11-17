@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageId } from '../types';
-import { BUSINESS_INFO, CERTIFICATIONS } from '../data/mockData';
+import { BUSINESS_INFO, STATS, CERTIFICATIONS } from '../data/mockData';
 import { CountUpStat } from '../components/CountUpStat';
 import { ProcessesDraw } from '../components/ProcessesDraw';
 import {
@@ -30,7 +30,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
   return (
     <div className="bg-white">
       {/* 1. Page Hero */}
-      <section className="bg-[#111318] text-white py-8 sm:py-14 lg:py-20 border-b border-[#1C2028]">
+      <section className="bg-[#111318] text-white py-8 sm:py-12 lg:py-14 border-b border-[#1C2028]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-2.5 sm:space-y-4">
             <div className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2 gap-y-0.5 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider [&>span]:whitespace-nowrap">
@@ -42,14 +42,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               Meet Samir — Your Fitness Journey, Guided by Experience.
             </h1>
             <p className="text-xs sm:text-base lg:text-lg text-slate-300 leading-relaxed">
-              5 years of dedicated coaching, a disciplined training methodology, and an unwavering commitment to safe, sustainable physical progress in Pune.
+              {BUSINESS_INFO.experienceYears}+ years of dedicated coaching, a disciplined training methodology, and an unwavering commitment to safe, sustainable physical progress in Pune.
             </p>
           </div>
         </div>
       </section>
 
       {/* 2 & 3. Large Owner Portrait & Professional Introduction */}
-      <section className="py-8 sm:py-14 lg:py-20 border-b border-[#E1E6EF]">
+      <section className="py-8 sm:py-12 lg:py-14 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-start">
             
@@ -65,7 +65,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 sm:p-4 rounded-xl bg-black/85 backdrop-blur-md text-white border border-slate-700">
                   <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-[#00A3FF] font-semibold uppercase">TS Fitness Founder & Head Coach</div>
                   <div className="text-lg sm:text-xl font-display font-bold">Coach Samir</div>
-                  <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-300">5 Years Professional Experience · Kothrud, Pune</div>
+                  <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-300">{BUSINESS_INFO.experienceYears}+ Years Professional Experience · Kothrud, Pune</div>
                 </div>
               </div>
 
@@ -73,7 +73,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               <div className="p-3 sm:p-4 rounded-xl bg-[#EEF5FF] border border-[#E1E6EF] text-xs text-[#171A21]">
                 <div>
                   <span className="text-[#646B78]">Coaching Timeline:</span>
-                  <div className="font-semibold text-xs sm:text-sm">5 Years In Industry</div>
+                  <div className="font-semibold text-xs sm:text-sm">{BUSINESS_INFO.experienceYears}+ Years In Industry</div>
                 </div>
               </div>
             </div>
@@ -98,27 +98,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 </p>
               </div>
 
-              {/* 6 & 7. 250+ Clients and 25+ Celebrities Trained (Count-Up Stats side-by-side in 2 columns on mobile) */}
+              {/* 6 & 7. Clients and Celebrities Trained (numbers come from STATS in mockData) (Count-Up Stats side-by-side in 2 columns on mobile) */}
               <div className="grid grid-cols-2 gap-2.5 sm:gap-4 pt-1 sm:pt-2">
                 <CountUpStat
-                  end={250}
+                  end={STATS.clients}
                   suffix="+"
                   label="Clients Coached"
                   sublabel="*Client-supplied records"
-                  allowLiveIncrement={true}
-                  incrementIntervalMs={16000}
-                  badge="Live"
                   className={highlightPlaceholders ? 'bg-amber-50 border-amber-300' : 'bg-slate-50 border-[#E1E6EF]'}
                   valueClassName="text-[#1769FF]"
                 />
 
                 <CountUpStat
-                  end={25}
+                  end={STATS.celebrities}
                   suffix="+"
                   label="Celebrity Trainees"
                   sublabel="*Camera-ready regimens"
-                  allowLiveIncrement={true}
-                  incrementIntervalMs={26000}
                   badge="Elite"
                   className={highlightPlaceholders ? 'bg-amber-50 border-amber-300' : 'bg-slate-50 border-[#E1E6EF]'}
                   valueClassName="text-[#111318]"
@@ -153,7 +148,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
       </section>
 
       {/* 9. Vision, Mission, and Goals */}
-      <section className="py-8 sm:py-14 lg:py-16 bg-slate-50 border-b border-[#E1E6EF]">
+      <section className="py-8 sm:py-12 lg:py-14 bg-slate-50 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
           
           <div className="text-center max-w-2xl mx-auto space-y-1.5 sm:space-y-2">
@@ -220,7 +215,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
       </section>
 
       {/* 11. Qualifications */}
-      <section className="py-8 sm:py-14 lg:py-16 bg-slate-50 border-b border-[#E1E6EF]">
+      <section className="py-8 sm:py-12 lg:py-14 bg-slate-50 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
 
           <div>
@@ -257,7 +252,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
       </section>
 
       {/* 12. CTA to book a free demo */}
-      <section className="py-10 sm:py-16 bg-[#111318] text-white">
+      <section className="py-8 sm:py-12 bg-[#111318] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
             Work Directly with Coach Samir in Pune

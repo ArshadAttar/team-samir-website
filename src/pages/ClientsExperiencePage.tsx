@@ -483,8 +483,6 @@ const VideoCard: React.FC<{ video: ClientVideo; index: number; onOpen: () => voi
   const onLeave = () => {
     mx.set(0);
     my.set(0);
-    const v = previewRef.current;
-    if (v) v.pause();
   };
 
   return (
@@ -512,6 +510,7 @@ const VideoCard: React.FC<{ video: ClientVideo; index: number; onOpen: () => voi
             <video
               ref={previewRef}
               src={`${video.src}#t=0.5`}
+              autoPlay
               muted
               loop
               playsInline
@@ -590,6 +589,7 @@ const VideoPlayerModal: React.FC<{ video: ClientVideo | null; onClose: () => voi
                 src={video.src}
                 controls
                 autoPlay
+                muted
                 playsInline
                 className={`block object-contain rounded-[22px] bg-black ${
                   video.portrait
@@ -639,7 +639,7 @@ export const ClientsExperiencePage: React.FC<ClientsExperiencePageProps> = () =>
     <MotionConfig reducedMotion="user">
       {/* 1. Health & fitness description */}
       {/* Same opening band as the other pages (Services, About, Contact) */}
-      <section className="bg-[#111318] text-white py-8 sm:py-14 lg:py-20 border-b border-[#1C2028]">
+      <section className="bg-[#111318] text-white py-8 sm:py-12 lg:py-14 border-b border-[#1C2028]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-2.5 sm:space-y-4">
             <motion.div
@@ -676,7 +676,7 @@ export const ClientsExperiencePage: React.FC<ClientsExperiencePageProps> = () =>
       {/* 2. Before & after gallery */}
       <section
         aria-labelledby="real-transformations"
-        className="relative overflow-hidden bg-[#111318] py-16 sm:py-24"
+        className="relative overflow-hidden bg-[#111318] py-10 sm:py-14"
       >
         <Glow className="w-[32.5rem] h-[32.5rem] -top-40 -left-32 bg-[#1769FF]/25" />
         <Glow className="w-[26.25rem] h-[26.25rem] bottom-0 right-[-7.5rem] bg-[#00A3FF]/15" />
@@ -712,7 +712,7 @@ export const ClientsExperiencePage: React.FC<ClientsExperiencePageProps> = () =>
       {/* 3. Video gallery */}
       <section
         aria-labelledby="training-in-motion"
-        className="relative overflow-hidden bg-[#0D0F14] py-16 sm:py-24 border-t border-white/5"
+        className="relative overflow-hidden bg-[#0D0F14] py-10 sm:py-14 border-t border-white/5"
       >
         <Glow className="w-[30rem] h-[30rem] top-10 right-[-5rem] bg-[#1769FF]/20" />
         <Glow className="w-[23.75rem] h-[23.75rem] -bottom-24 left-[10%] bg-[#0B3D91]/40" />
