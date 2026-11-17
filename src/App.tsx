@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { PageId, TransformationItem } from './types';
+import { BookingIntent, PageId, TransformationItem } from './types';
+import { SERVICES } from './data/mockData';
 import { Header } from './components/Header';
 import { MobileDrawer } from './components/MobileDrawer';
 import { Footer } from './components/Footer';
@@ -21,7 +22,10 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [highlightPlaceholders, setHighlightPlaceholders] = useState(false);
-  const [preselectedService, setPreselectedService] = useState<string | undefined>(undefined);
+  // What the enquiry page shows (plans + preselected plan + heading), set by the button clicked.
+  // bookingKey remounts the page so every click starts a fresh form.
+  const [bookingIntent, setBookingIntent] = useState<BookingIntent>({ kind: 'all' });
+  const [bookingKey, setBookingKey] = useState(0);
 
   // Modals state
   const [selectedLightboxItem, setSelectedLightboxItem] = useState<TransformationItem | null>(null);
@@ -34,6 +38,10 @@ export default function App() {
   // Navigation handler with smooth scroll to top
   const handleNavigate = (page: PageId) => {
     setFocusedServiceId(undefined);
+    if (page === 'contact') {
+      setBookingIntent({ kind: 'all' });
+      setBookingKey((k) => k + 1);
+    }
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -44,11 +52,18 @@ export default function App() {
     setCurrentPage('services');
   };
 
-  // Trigger booking from any page / service
-  const handleBookDemo = (service?: string) => {
-    if (service) {
-      setPreselectedService(service);
+  // Open the enquiry page from any button. A service title (string) or an explicit intent
+  // narrows the plans; anything else ("Book Free Demo", "Book Free Call", ...) shows all plans.
+  const handleBookDemo = (intent?: string | BookingIntent) => {
+    let next: BookingIntent = { kind: 'all' };
+    if (typeof intent === 'object') {
+      next = intent;
+    } else if (intent) {
+      const service = SERVICES.find((s) => s.title === intent);
+      if (service) next = { kind: 'service', serviceId: service.id };
     }
+    setBookingIntent(next);
+    setBookingKey((k) => k + 1);
     setCurrentPage('contact');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -60,7 +75,7 @@ export default function App() {
         currentPage={currentPage}
         onNavigate={handleNavigate}
         onOpenMobileMenu={() => setIsMobileDrawerOpen(true)}
-        onBookDemo={() => handleBookDemo()}
+        onBookDemo={() => handleBookDemo({ kind: 'all', heading: 'Book Your Free Call' })}
       />
 
       {/* 3. Main Multi-Page Prototype Views */}
@@ -108,10 +123,9 @@ export default function App() {
 
         {currentPage === 'contact' && (
           <ContactPage
-            initialService={preselectedService}
+            key={bookingKey}
+            bookingIntent={bookingIntent}
             highlightPlaceholders={highlightPlaceholders}
-            onCallPlaceholder={() => setDialogType('call')}
-            onWhatsAppPlaceholder={() => setDialogType('whatsapp')}
           />
         )}
       </main>
@@ -119,7 +133,7 @@ export default function App() {
       {/* 4. Global Footer */}
       <Footer
         onNavigate={handleNavigate}
-        onBookDemo={() => handleBookDemo()}
+        onBookDemo={() => handleBookDemo({ kind: 'all', heading: 'Book Your Free Demo Session' })}
       />
 
       {/* 5. Mobile Sticky Bottom Action Bar (<15% viewport height) */}

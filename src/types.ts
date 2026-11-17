@@ -55,35 +55,31 @@ export interface TransformationItem {
   consentNote: string;
 }
 
-export interface DemoFormData {
+/**
+ * Which plans the enquiry page shows, decided by the button the visitor clicked.
+ * - all: every plan (scrollable list) — the default for "Book Free Demo", "Book Free Call", etc.
+ * - trial: only the paid trial plan ("Book Trail – INR 1,999" on Home)
+ * - service: one service's plans (Services page "Enquire" / "Choose <plan>"); planName preselects that plan
+ * `heading` optionally overrides the form heading.
+ */
+export type BookingIntent =
+  | { kind: 'all'; heading?: string }
+  | { kind: 'trial'; heading?: string }
+  | { kind: 'service'; serviceId: string; planName?: string; heading?: string };
+
+/** The 6 enquiry fields plus preferred contact method */
+export interface EnquiryFormData {
   fullName: string;
-  mobileNumber: string;
   email: string;
-  ageGroup: string;
-  trainingType: string;
-  fitnessGoal: string;
-  fitnessExperience: string;
-  preferredLocation: string;
-  sessionTiming: string;
-  demoDate: string;
-  message: string;
-  contactMethod: string;
-  consentAgreed: boolean;
+  mobileNumber: string;
+  whatsappNumber: string;
+  goal: string;
+  /** '' = not sure, 'trial', or '<serviceId>::<plan name>' */
+  plan: string;
+  contactMethod: 'Phone Call' | 'WhatsApp' | 'Email';
 }
 
-export interface FormErrors {
-  fullName?: string;
-  mobileNumber?: string;
-  email?: string;
-  ageGroup?: string;
-  trainingType?: string;
-  fitnessGoal?: string;
-  fitnessExperience?: string;
-  preferredLocation?: string;
-  sessionTiming?: string;
-  contactMethod?: string;
-  consentAgreed?: string;
-}
+export type EnquiryFormErrors = Partial<Record<'fullName' | 'email' | 'mobileNumber' | 'whatsappNumber', string>>;
 
 export interface ReviewItem {
   id: string;

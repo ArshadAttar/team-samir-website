@@ -47,6 +47,25 @@ export const BUSINESS_INFO = {
 };
 
 // ------------------------------------------------------------------
+// Paid trial shown by the Home "Book Trail – INR 1,999" button.
+// Points are placeholders; confirm with Samir before launch.
+// ------------------------------------------------------------------
+export const TRIAL_PLAN = {
+  name: 'Trial Plan',
+  price: 'INR 1,999',
+  duration: '1 Month',
+  summary: 'Try 1-on-1 coaching with Samir for a month before committing to a longer plan.',
+  points: [
+    '12 one-on-one training sessions in 4 weeks',
+    'Fitness assessment on day 1 (posture, strength, mobility)',
+    'Workout plan made for your goal',
+    'Simple Indian diet plan with your home food',
+    'WhatsApp support from Samir',
+    'Progress check at the end of the month',
+  ],
+};
+
+// ------------------------------------------------------------------
 // Service plans. Discounts are placeholders; confirm with Samir before launch.
 // ------------------------------------------------------------------
 const PERSONAL_TRAINING_PLANS: ServicePlan[] = [

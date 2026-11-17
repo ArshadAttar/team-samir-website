@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PageId } from '../types';
+import { BookingIntent, PageId } from '../types';
 import { BUSINESS_INFO, STATS, SERVICES } from '../data/mockData';
 import { HeroReveal } from '../components/HeroReveal';
 import { CountUpStat } from '../components/CountUpStat';
@@ -34,7 +34,7 @@ const getInitialHeadlineIndex = (): number => {
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
-  onBookDemo: (preselectedService?: string) => void;
+  onBookDemo: (intent?: string | BookingIntent) => void;
   onOpenService: (serviceId: string) => void;
   highlightPlaceholders: boolean;
 }
@@ -117,11 +117,11 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
               {/* 2 Primary CTAs (2-column side-by-side on mobile); WhatsApp is the floating icon */}
               <div className="pt-1 grid grid-cols-2 sm:flex sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2 sm:gap-3">
                 <button
-                  onClick={() => onBookDemo()}
+                  onClick={() => onBookDemo({ kind: 'trial' })}
                   className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-6 sm:py-3.5 min-h-[40px] sm:min-h-[46px] text-xs sm:text-sm font-semibold text-white bg-[#1769FF] hover:bg-[#00A3FF] active:scale-[0.98] rounded-lg sm:rounded-xl shadow-md transition-all cursor-pointer"
                 >
                   <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                  <span className="truncate">Book Free Demo</span>
+                  <span className="truncate">Book Trail – INR 1,999</span>
                 </button>
 
                 <button
@@ -325,7 +325,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
           ============================================================ */}
       <section className="py-8 sm:py-12 bg-[#111318] border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProcessesDraw onBookDemo={() => onBookDemo('Processes Assessment')} />
+          <ProcessesDraw onBookDemo={() => onBookDemo({ kind: 'all', heading: 'Start Phase 01 Assessment' })} />
         </div>
       </section>
 
@@ -341,7 +341,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
           ============================================================ */}
       <section className="py-8 sm:py-12 lg:py-14 bg-slate-50 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <UsVsThem onBookDemo={() => onBookDemo('Standard Comparison Evaluation')} />
+          <UsVsThem onBookDemo={() => onBookDemo({ kind: 'all', heading: 'Book Your Free Assessment Demo' })} />
         </div>
       </section>
 
@@ -365,7 +365,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
 
           <div className="pt-2 sm:pt-4 grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-4 max-w-sm sm:max-w-none mx-auto">
             <button
-              onClick={() => onBookDemo()}
+              onClick={() => onBookDemo({ kind: 'all', heading: 'Book Your Free Demo' })}
               className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-8 py-2 sm:py-3.5 min-h-[40px] sm:min-h-[46px] text-xs sm:text-sm font-bold text-[#1769FF] bg-white hover:bg-slate-100 active:scale-95 rounded-lg sm:rounded-xl shadow-xl transition-all cursor-pointer"
             >
               <span>Book Free Demo</span>

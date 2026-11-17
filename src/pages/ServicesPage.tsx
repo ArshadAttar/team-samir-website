@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PageId, ServiceItem, WeekDay } from '../types';
+import { BookingIntent, PageId, ServiceItem, WeekDay } from '../types';
 import { SERVICES } from '../data/mockData';
 import { HeroReveal } from '../components/HeroReveal';
 import {
@@ -14,7 +14,7 @@ import {
 
 interface ServicesPageProps {
   onNavigate: (page: PageId) => void;
-  onBookDemo: (preselectedService?: string) => void;
+  onBookDemo: (intent?: string | BookingIntent) => void;
   /** Service id whose Plan Details should be open (and scrolled to) on arrival */
   initialOpenServiceId?: string;
 }
@@ -45,7 +45,7 @@ const steps = [
 ];
 
 /** Expandable panel: overview → 7-day week strip → plan cards */
-const PlanDetails: React.FC<{ service: ServiceItem; onBookDemo: (service?: string) => void }> = ({
+const PlanDetails: React.FC<{ service: ServiceItem; onBookDemo: (intent?: string | BookingIntent) => void }> = ({
   service,
   onBookDemo,
 }) => (
@@ -145,7 +145,7 @@ const PlanDetails: React.FC<{ service: ServiceItem; onBookDemo: (service?: strin
               </ul>
             </div>
             <button
-              onClick={() => onBookDemo(service.title)}
+              onClick={() => onBookDemo({ kind: 'service', serviceId: service.id, planName: plan.name })}
               className={`w-full py-2.5 px-4 text-xs font-semibold rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                 plan.popular
                   ? 'bg-[#1769FF] text-white hover:bg-[#0B3D91]'
@@ -294,7 +294,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
                           <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                         </button>
                         <button
-                          onClick={() => onBookDemo(service.title)}
+                          onClick={() => onBookDemo({ kind: 'service', serviceId: service.id })}
                           className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-semibold text-white bg-[#1769FF] hover:bg-[#0B3D91] rounded-xl shadow-sm transition-all cursor-pointer"
                         >
                           <span>Enquire for {service.title}</span>
@@ -352,7 +352,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
               </p>
             </div>
             <button
-              onClick={() => onBookDemo('Not Sure')}
+              onClick={() => onBookDemo()}
               className="shrink-0 w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-xs sm:text-sm font-semibold text-white bg-[#111318] hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
             >
               <Calendar className="w-4 h-4 text-[#00A3FF]" />
