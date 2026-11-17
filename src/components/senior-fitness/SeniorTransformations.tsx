@@ -8,7 +8,7 @@ import clipRopes from '../../assets/videos/stock/battle-ropes.mp4';
 import clipDeadlift from '../../assets/videos/stock/strength-deadlift.mp4';
 
 /**
- * Client Experience section for the Senior Fitness page ("Cinema Filmstrip" design).
+ * Transformations section for the Senior Fitness page ("Cinema Filmstrip" design).
  * 1. Description with three highlights
  * 2. Photo gallery: draggable / swipeable filmstrip, opens a full-screen viewer
  * 3. Video gallery: featured player + playlist
@@ -231,7 +231,7 @@ const MediaViewer: React.FC<{ state: ViewerState; onClose: () => void; onChange:
 /* Section                                                             */
 /* ------------------------------------------------------------------ */
 
-export const SeniorClientExperience: React.FC = () => {
+export const SeniorTransformations: React.FC = () => {
   const stripRef = useRef<HTMLDivElement>(null);
   const drag = useRef({ down: false, startX: 0, startScroll: 0, moved: 0 });
   const suppressClick = useRef(false);
@@ -300,7 +300,7 @@ export const SeniorClientExperience: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1. Description */}
         <FadeUp>
-          <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold uppercase tracking-[0.14em] text-[#6EA2FF]">Client Experience</div>
+          <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold uppercase tracking-[0.14em] text-[#6EA2FF]">Transformations</div>
           <h2 className="mt-3 mb-4 text-3xl sm:text-5xl lg:text-[3.6rem] font-display font-bold leading-[1.04] tracking-tight max-w-[16ch] text-balance">
             What training feels like, <span className="text-[#6EA2FF]">session by session</span>
           </h2>

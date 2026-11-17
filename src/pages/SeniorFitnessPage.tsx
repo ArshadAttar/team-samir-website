@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, MotionConfig } from 'motion/react';
 import { PageId } from '../types';
 import { BUSINESS_INFO } from '../data/mockData';
-import { SeniorClientExperience } from '../components/senior-fitness/SeniorClientExperience';
+import { SeniorTransformations } from '../components/senior-fitness/SeniorTransformations';
 import {
   Activity,
   ArrowRight,
@@ -351,9 +351,9 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
         </section>
 
         {/* ============================================================
-            4. CLIENT EXPERIENCE (description, photo gallery, video gallery)
+            4. TRANSFORMATIONS (description, photo gallery, video gallery)
             ============================================================ */}
-        <SeniorClientExperience />
+        <SeniorTransformations />
 
         {/* ============================================================
             5. FINAL CTA (background image)
