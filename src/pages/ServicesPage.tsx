@@ -195,12 +195,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
           <div className="space-y-2 sm:space-y-3">
             {/* Same word-by-word reveal as the Home hero; single line, font scales with screen width */}
             <HeroReveal
-              sentence="Training Services Tailored to Your Body & Routine"
-              highlightWords={['body', '&', 'routine']}
+              sentence="Your fitness. Your goals. Our expertise"
+              highlightWords={['Our','expertise']}
               headingClassName="flex flex-nowrap whitespace-nowrap font-extrabold leading-tight text-[clamp(0.75rem,3.4vw,2.25rem)]"
             />
             <p className="max-w-3xl text-xs sm:text-sm lg:text-base text-slate-300 leading-relaxed">
-              From 1-on-1 personal training in Kothrud to health management and nutrition guidance, find the plan that fits your goal and your daily routine.
+              Train with K11-Certified Fitness Coaches, Backed by One of the World’s Leading Fitness Education Institutes.
             </p>
           </div>
         </div>
@@ -214,7 +214,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
               Detailed Service Portfolio
             </h2>
             <p className="text-xs sm:text-base text-[#646B78] leading-relaxed">
-              Tap <strong className="text-[#171A21]">Plan Details</strong> on any program to see what's included, your weekly schedule, and the plans you can choose from.
+              Tap <strong className="text-[#171A21]">Plan Details</strong> on any program to see what's included, your monthly schedule and the plans you can choose from.
             </p>
           </div>
 
@@ -234,7 +234,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
                     {/* Image */}
                     <div className={`lg:col-span-5 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                       <div className="aspect-4/3 rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-[#E1E6EF] relative shadow-sm">
-                        <img
+                        <img loading="lazy" decoding="async"
                           src={service.image}
                           alt={service.title}
                           className="w-full h-full object-cover"
@@ -273,12 +273,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
                           ))}
                         </div>
                       </div>
-
-                      <div className="p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs">
-                        <strong className="text-[#171A21]">Best For:</strong>{' '}
-                        <span className="text-[#646B78]">{service.suitableFor}</span>
-                      </div>
-
                       <div className="pt-1 grid grid-cols-1 sm:flex sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
                         <button
                           onClick={() => togglePlan(service.id)}
@@ -319,29 +313,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
       {/* 4-Step Training Approach + "Not sure?" CTA, kept compact so both fit on one screen */}
       <section className="py-8 sm:py-10 bg-slate-50 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-6">
-          <div className="text-center max-w-2xl mx-auto space-y-1">
-            <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold text-[#1769FF] uppercase tracking-wider">Methodical Progression</div>
-            <h2 className="text-lg sm:text-2xl font-display font-bold text-[#171A21] tracking-tight">
-              Our 4-Step Training Approach
-            </h2>
-            <p className="text-xs sm:text-sm text-[#646B78]">
-              A proven framework ensuring every client trains with clear intention and zero guesswork.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {steps.map((s) => (
-              <div key={s.num} className="bg-white p-4 rounded-2xl border border-[#E1E6EF] space-y-1.5 shadow-xs">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg font-mono font-extrabold text-[#1769FF]">{s.num}</span>
-                  <h3 className="text-sm sm:text-base font-display font-bold text-[#171A21]">{s.title}</h3>
-                </div>
-                <p className="text-xs text-[#646B78] leading-relaxed">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Not sure? CTA strip */}
           <div className="rounded-2xl bg-[#EEF5FF] border border-[#1769FF]/20 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 text-center md:text-left">
             <div className="space-y-1">
               <h2 className="text-base sm:text-xl font-display font-bold text-[#171A21]">

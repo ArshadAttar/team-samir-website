@@ -40,6 +40,7 @@ export const HeroReveal: React.FC<HeroRevealProps> = ({
             word.toLowerCase().includes('fitness') ||
             word.toLowerCase().includes('k11') ||
             word.toLowerCase().includes('life') ||
+            word.toLowerCase().includes('Our') ||
             word.toLowerCase().includes('elevate') ||
             highlightWords.includes(word.toLowerCase());
 
