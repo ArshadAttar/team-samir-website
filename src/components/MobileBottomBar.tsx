@@ -1,6 +1,7 @@
 import React from 'react';
 import { Home, Dumbbell, Calendar } from 'lucide-react';
 import { PageId } from '../types';
+import { pageLink } from '../lib/routes';
 
 interface MobileBottomBarProps {
   currentPage: PageId;
@@ -22,26 +23,26 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
     >
       <div className="max-w-md mx-auto flex items-center justify-between gap-1">
         {/* Home Tab */}
-        <button
-          onClick={() => onNavigate('home')}
+        <a
+          {...pageLink('home', onNavigate)}
           className={`flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 rounded-lg transition-all cursor-pointer ${
             currentPage === 'home' ? 'text-[#1769FF] font-semibold' : 'text-[#646B78] hover:text-[#171A21]'
           }`}
         >
           <Home className="w-4 h-4" />
           <span className="text-[length:max(10px,calc(10rem/16))] mt-0.5">Home</span>
-        </button>
+        </a>
 
         {/* Services Tab */}
-        <button
-          onClick={() => onNavigate('services')}
+        <a
+          {...pageLink('services', onNavigate)}
           className={`flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 rounded-lg transition-all cursor-pointer ${
             currentPage === 'services' ? 'text-[#1769FF] font-semibold' : 'text-[#646B78] hover:text-[#171A21]'
           }`}
         >
           <Dumbbell className="w-4 h-4" />
           <span className="text-[length:max(10px,calc(10rem/16))] mt-0.5">Services</span>
-        </button>
+        </a>
 
         {/* The 3-Bars Menu Button in Bottom Bar */}
         <button

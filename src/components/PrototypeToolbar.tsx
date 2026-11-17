@@ -25,7 +25,7 @@ export const PrototypeToolbar: React.FC<PrototypeToolbarProps> = ({
     { id: 'home', label: '1. Home' },
     { id: 'services', label: '2. Services' },
     { id: 'senior-fitness', label: '3. Senior Fitness' },
-    { id: 'clients', label: '4. Clients Experience' },
+    { id: 'transformations', label: '4. Transformations' },
     { id: 'about', label: '5. About Samir' },
     { id: 'contact', label: '6. Demo Form' },
   ];

@@ -3,6 +3,7 @@ import { PageId } from '../types';
 import { TeamSamirLogo } from './TeamSamirLogo';
 import { X, ArrowRight, MapPin, Phone, Calendar } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/mockData';
+import { pageLink } from '../lib/routes';
 
 interface MobileDrawerProps {
   isOpen: boolean;
@@ -47,7 +48,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
     { id: 'home', label: 'Home', desc: 'TS Fitness studio overview & coach bio' },
     { id: 'services', label: 'Services', desc: '1-on-1 personal training & nutrition' },
     { id: 'senior-fitness', label: 'Senior Fitness', desc: 'Safe, personal training for ages 55+' },
-    { id: 'clients', label: 'Clients Experience', desc: 'Real client results, reviews & video reels' },
+    { id: 'transformations', label: 'Transformations', desc: 'Real client results, reviews & video reels' },
     { id: 'about', label: 'About Samir', desc: '5-year track record & coaching vision' },
   ];
 
@@ -107,12 +108,12 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
               {navItems.map((item) => {
                 const isActive = currentPage === item.id;
                 return (
-                  <button
+                  <a
                     key={item.id}
-                    onClick={() => {
-                      onNavigate(item.id);
+                    {...pageLink(item.id, (p) => {
+                      onNavigate(p);
                       onClose();
-                    }}
+                    })}
                     className={`w-full flex items-center justify-between p-2 rounded-lg text-left transition-all cursor-pointer ${
                       isActive
                         ? 'bg-[#EEF5FF] text-[#1769FF] font-semibold'
@@ -124,7 +125,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
                       <div className="text-[length:max(10px,calc(10rem/16))] text-[#646B78] truncate">{item.desc}</div>
                     </div>
                     <ArrowRight className={`w-3.5 h-3.5 shrink-0 transition-transform ${isActive ? 'text-[#1769FF] translate-x-0.5' : 'text-[#646B78]'}`} />
-                  </button>
+                  </a>
                 );
               })}
             </nav>

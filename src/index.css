@@ -123,7 +123,7 @@ h1, h2, h3, .font-display {
   }
 }
 
-/* Client Experiences page: horizontal gallery tracks.
+/* Transformations page: horizontal gallery tracks.
    Only the track scrolls sideways; the page itself never does.
    Side padding lines the first card up with the max-w-7xl content column. */
 .ce-track {

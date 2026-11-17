@@ -13,7 +13,7 @@ import { PageId, TransformationItem, ClientTransformation, ClientVideo } from '.
 import { CLIENT_TRANSFORMATIONS, CLIENT_VIDEOS } from '../data/mockData';
 
 /**
- * Client Experiences page. Exactly three sections:
+ * Transformations page. Exactly three sections:
  * 1. A short health & fitness paragraph
  * 2. "Real Transformations": horizontal before/after gallery with a lightbox
  * 3. "Training in Motion": horizontal video gallery with a player modal
@@ -21,7 +21,7 @@ import { CLIENT_TRANSFORMATIONS, CLIENT_VIDEOS } from '../data/mockData';
  * Content comes from CLIENT_TRANSFORMATIONS and CLIENT_VIDEOS in src/data/mockData.ts.
  */
 
-interface ClientsExperiencePageProps {
+interface TransformationsPageProps {
   onNavigate: (page: PageId) => void;
   onBookDemo: () => void;
   // Kept so App.tsx stays unchanged; this page uses its own lightbox and player.
@@ -622,7 +622,7 @@ const VideoPlayerModal: React.FC<{ video: ClientVideo | null; onClose: () => voi
 /* Page                                                                */
 /* ------------------------------------------------------------------ */
 
-export const ClientsExperiencePage: React.FC<ClientsExperiencePageProps> = () => {
+export const TransformationsPage: React.FC<TransformationsPageProps> = () => {
   const photoTrack = useRef<HTMLDivElement>(null);
   const videoTrack = useRef<HTMLDivElement>(null);
   useDragScroll(photoTrack);
@@ -648,7 +648,7 @@ export const ClientsExperiencePage: React.FC<ClientsExperiencePageProps> = () =>
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: EASE }}
             >
-              <span>Clients Experience</span>
+              <span>Transformations</span>
               <span className="text-slate-500">·</span>
               <span>Kothrud, Pune</span>
             </motion.div>

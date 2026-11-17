@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { PAGE_PATHS, pageFromPath, pageLink } from './lib/routes';
+import { applyHead } from './lib/seo';
 import { BookingIntent, PageId, TransformationItem } from './types';
 import { SERVICES } from './data/mockData';
 import { Header } from './components/Header';
@@ -15,11 +17,39 @@ import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { SeniorFitnessPage } from './pages/SeniorFitnessPage';
-import { ClientsExperiencePage } from './pages/ClientsExperiencePage';
+import { TransformationsPage } from './pages/TransformationsPage';
 import { ContactPage } from './pages/ContactPage';
 
-export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageId>('home');
+interface AppProps {
+  /** Page to render during prerendering (no window). In the browser it comes from the URL. */
+  initialPage?: PageId | null;
+}
+
+export default function App({ initialPage }: AppProps) {
+  // null = no page matches the URL (404)
+  const [currentPage, setCurrentPage] = useState<PageId | null>(() =>
+    initialPage !== undefined ? initialPage : pageFromPath(window.location.pathname)
+  );
+
+  /** Switch page and push its URL so every page has a real, shareable address. */
+  const goTo = (page: PageId) => {
+    if (window.location.pathname !== PAGE_PATHS[page]) {
+      window.history.pushState(null, '', PAGE_PATHS[page]);
+    }
+    setCurrentPage(page);
+  };
+
+  // Browser back / forward
+  useEffect(() => {
+    const onPop = () => setCurrentPage(pageFromPath(window.location.pathname));
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  // Title, description, canonical, Open Graph and JSON-LD follow the page
+  useEffect(() => {
+    applyHead(currentPage);
+  }, [currentPage]);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [highlightPlaceholders, setHighlightPlaceholders] = useState(false);
   // What the enquiry page shows (plans + preselected plan + heading), set by the button clicked.
@@ -42,14 +72,14 @@ export default function App() {
       setBookingIntent({ kind: 'all' });
       setBookingKey((k) => k + 1);
     }
-    setCurrentPage(page);
+    goTo(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Open the Services page scrolled to one service with its Plan Details expanded
   const handleOpenService = (serviceId: string) => {
     setFocusedServiceId(serviceId);
-    setCurrentPage('services');
+    goTo('services');
   };
 
   // Open the enquiry page from any button. A service title (string) or an explicit intent
@@ -64,7 +94,7 @@ export default function App() {
     }
     setBookingIntent(next);
     setBookingKey((k) => k + 1);
-    setCurrentPage('contact');
+    goTo('contact');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -72,13 +102,13 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-white text-[#171A21] relative pb-16 lg:pb-0">
       {/* Global Desktop & Mobile Sticky Header (Single Header) */}
       <Header
-        currentPage={currentPage}
+        currentPage={currentPage as PageId}
         onNavigate={handleNavigate}
         onOpenMobileMenu={() => setIsMobileDrawerOpen(true)}
         onBookDemo={() => handleBookDemo({ kind: 'all', heading: 'Book Your Free Call' })}
       />
 
-      {/* 3. Main Multi-Page Prototype Views */}
+      {/* 3. Page views (URL-driven, see src/lib/routes.ts) */}
       <main className="flex-1" id="main-content">
         {currentPage === 'home' && (
           <HomePage
@@ -112,8 +142,8 @@ export default function App() {
           />
         )}
 
-        {currentPage === 'clients' && (
-          <ClientsExperiencePage
+        {currentPage === 'transformations' && (
+          <TransformationsPage
             onNavigate={handleNavigate}
             onBookDemo={() => handleBookDemo()}
             onOpenLightbox={(item) => setSelectedLightboxItem(item)}
@@ -128,6 +158,19 @@ export default function App() {
             highlightPlaceholders={highlightPlaceholders}
           />
         )}
+        {currentPage === null && (
+          <section className="max-w-3xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center space-y-4">
+            <p className="text-xs font-bold text-[#1769FF] uppercase tracking-wider">404</p>
+            <h1 className="text-2xl sm:text-4xl font-display font-extrabold text-[#171A21]">Page not found</h1>
+            <p className="text-sm sm:text-base text-[#646B78]">This page doesn't exist or has moved.</p>
+            <a
+              {...pageLink('home', handleNavigate)}
+              className="inline-flex items-center justify-center min-h-[44px] px-6 py-3 rounded-xl bg-[#1769FF] hover:bg-[#0B3D91] text-white text-sm font-semibold transition-all"
+            >
+              Go to Home
+            </a>
+          </section>
+        )}
       </main>
 
       {/* 4. Global Footer */}
@@ -138,7 +181,7 @@ export default function App() {
 
       {/* 5. Mobile Sticky Bottom Action Bar (<15% viewport height) */}
       <MobileBottomBar
-        currentPage={currentPage}
+        currentPage={currentPage as PageId}
         onNavigate={handleNavigate}
         onOpenMobileMenu={() => setIsMobileDrawerOpen(true)}
         onBookDemo={() => handleBookDemo()}
@@ -151,7 +194,7 @@ export default function App() {
       <MobileDrawer
         isOpen={isMobileDrawerOpen}
         onClose={() => setIsMobileDrawerOpen(false)}
-        currentPage={currentPage}
+        currentPage={currentPage as PageId}
         onNavigate={handleNavigate}
         onBookDemo={() => handleBookDemo()}
       />

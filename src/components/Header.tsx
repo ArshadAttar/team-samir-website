@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { PageId } from '../types';
 import { TeamSamirLogo } from './TeamSamirLogo';
 import { Calendar } from 'lucide-react';
+import { pageLink } from '../lib/routes';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -21,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
     { id: 'senior-fitness', label: 'Senior Fitness' },
-    { id: 'clients', label: 'Clients Experience' },
+    { id: 'transformations', label: 'Transformations' },
     { id: 'about', label: 'About Samir' },
   ];
 
@@ -60,8 +61,8 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-18 lg:h-20 flex items-center justify-between gap-2 sm:gap-6">
         
         {/* Zone 1: Brand Wordmark (Compact on mobile so it never crowds controls) */}
-        <button
-          onClick={() => onNavigate('home')}
+        <a
+          {...pageLink('home', onNavigate)}
           className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1769FF] rounded-md transition-opacity hover:opacity-90 shrink-0 text-left"
           aria-label="Go to TeamSamir Home"
         >
@@ -71,16 +72,16 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="hidden sm:block">
             <TeamSamirLogo variant="light" size="md" />
           </div>
-        </button>
+        </a>
 
         {/* Zone 2: Desktop Navigation Links (single-line, unboxed, NO numbers) */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-medium text-[#171A21]" aria-label="Main Navigation">
           {navItems.map((item) => {
             const isActive = currentPage === item.id;
             return (
-              <button
+              <a
                 key={item.id}
-                onClick={() => onNavigate(item.id)}
+                {...pageLink(item.id, onNavigate)}
                 className={`cursor-pointer whitespace-nowrap shrink-0 transition-colors py-1 relative ${
                   isActive
                     ? 'text-[#1769FF] font-semibold'
@@ -92,7 +93,7 @@ export const Header: React.FC<HeaderProps> = ({
                 {isActive && (
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#1769FF] rounded-full" />
                 )}
-              </button>
+              </a>
             );
           })}
         </nav>
@@ -134,9 +135,9 @@ export const Header: React.FC<HeaderProps> = ({
         {navItems.map((item) => {
           const isActive = currentPage === item.id;
           return (
-            <button
+            <a
               key={item.id}
-              onClick={() => onNavigate(item.id)}
+              {...pageLink(item.id, onNavigate)}
               className={`cursor-pointer whitespace-nowrap text-[length:max(11px,calc(11rem/16))] sm:text-xs font-medium min-h-[34px] py-1.5 px-3 rounded-md transition-all shrink-0 ${
                 isActive
                   ? 'bg-[#1769FF] text-white font-semibold shadow-xs'
@@ -144,7 +145,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               {item.label}
-            </button>
+            </a>
           );
         })}
       </div>

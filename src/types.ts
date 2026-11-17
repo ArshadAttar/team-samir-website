@@ -1,11 +1,10 @@
-export type PageId = 'home' | 'services' | 'senior-fitness' | 'clients' | 'about' | 'contact';
+export type PageId = 'home' | 'services' | 'senior-fitness' | 'transformations' | 'about' | 'contact';
 
 export interface ServiceItem {
   id: string;
   title: string;
   shortDesc: string;
   fullDesc: string;
-  suitableFor: string;
   format: string;
   features: string[];
   image: string;
@@ -101,7 +100,7 @@ export interface VideoFeedbackItem {
   tag: string;
 }
 
-/** Before & after card on the Client Experiences page. */
+/** Before & after card on the Transformations page. */
 export interface ClientTransformation {
   id: string;
   /** Path under public/, e.g. /images/transformations/client-01-before.jpg */
@@ -117,7 +116,7 @@ export interface ClientTransformation {
   sample?: boolean;
 }
 
-/** Video card on the Client Experiences page. `src` is undefined for an empty slot. */
+/** Video card on the Transformations page. `src` is undefined for an empty slot. */
 export interface ClientVideo {
   id: string;
   src?: string;

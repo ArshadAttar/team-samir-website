@@ -3,6 +3,7 @@ import { PageId } from '../types';
 import { TeamSamirLogo } from './TeamSamirLogo';
 import { MapPin, Phone, Mail, Clock, MessageSquare, ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/mockData';
+import { pageLink } from '../lib/routes';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -50,29 +51,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
             <h4 className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-slate-300 uppercase tracking-wider">Pages</h4>
             <ul className="space-y-0.5 lg:space-y-2 text-xs sm:text-sm text-slate-400">
               <li>
-                <button onClick={() => onNavigate('home')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
+                <a {...pageLink('home', onNavigate)} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Home
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
+                <a {...pageLink('services', onNavigate)} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Services
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('senior-fitness')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
+                <a {...pageLink('senior-fitness', onNavigate)} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Senior Fitness
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('clients')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
-                  Clients Experience
-                </button>
+                <a {...pageLink('transformations', onNavigate)} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
+                  Transformations
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('about')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
+                <a {...pageLink('about', onNavigate)} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   About Samir
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -82,24 +83,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
             <h4 className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-slate-300 uppercase tracking-wider">Services</h4>
             <ul className="space-y-0.5 lg:space-y-2 text-xs sm:text-sm text-slate-400">
               <li>
-                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
+                <a {...pageLink('services', onNavigate)} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   1-on-1 Personal Training
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
+                <a {...pageLink('services', onNavigate)} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Health Management
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
+                <a {...pageLink('services', onNavigate)} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Nutrition Guidance
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('services')} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
+                <a {...pageLink('services', onNavigate)} className="inline-flex items-center min-h-[32px] lg:min-h-0 hover:text-white transition-colors cursor-pointer text-left">
                   Offline Training ( Pune )
-                </button>
+                </a>
               </li>
             </ul>
           </div>
