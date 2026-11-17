@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { DemoFormData, FormErrors } from '../types';
-import { BUSINESS_INFO } from '../data/mockData';
+import React, { useRef, useState } from 'react';
+import { submitEnquiry } from '../lib/submitEnquiry';
+import { BookingIntent, EnquiryFormData, EnquiryFormErrors } from '../types';
+import { BUSINESS_INFO, SERVICES } from '../data/mockData';
+import { EnquiryPlanPanel, planLabel, planValue, TRIAL_VALUE } from '../components/EnquiryPlanPanel';
 import {
   MapPin,
   Phone,
@@ -9,120 +11,175 @@ import {
   Clock,
   Navigation,
   CheckCircle2,
-  Calendar,
   ShieldCheck,
   AlertCircle,
   RotateCcw,
   Sparkles,
-  ArrowRight,
   Send,
 } from 'lucide-react';
 
 interface ContactPageProps {
-  initialService?: string;
+  /** Decides which plans show on the left, the preselected plan and the form heading */
+  bookingIntent: BookingIntent;
   highlightPlaceholders: boolean;
-  onCallPlaceholder: () => void;
-  onWhatsAppPlaceholder: () => void;
 }
 
-export const ContactPage: React.FC<ContactPageProps> = ({
-  initialService,
-  highlightPlaceholders,
-  onCallPlaceholder,
-  onWhatsAppPlaceholder,
-}) => {
-  // Form State with all 12 requested fields
-  const [formData, setFormData] = useState<DemoFormData>({
+const CONTACT_METHODS = ['Phone Call', 'WhatsApp', 'Email'] as const;
+
+const GOALS = [
+  'Fat Loss / Weight Management',
+  'Muscle Building',
+  'Strength Training',
+  'General Fitness & Health',
+  'Flexibility & Posture',
+  'Senior Fitness / Mobility',
+  'Other',
+];
+
+// Validation rules
+const NAME_MAX = 50;
+const EMAIL_MAX = 100;
+const PHONE_LEN = 10;
+const NAME_RE = /^[A-Za-z][A-Za-z .'-]*$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
+const IN_MOBILE_RE = /^[6-9]\d{9}$/; // Indian mobile: 10 digits starting 6-9
+
+const validate = (data: EnquiryFormData, sameAsMobile: boolean): EnquiryFormErrors => {
+  const errors: EnquiryFormErrors = {};
+  const name = data.fullName.trim();
+  if (!name) errors.fullName = 'Name is required.';
+  else if (name.length < 2) errors.fullName = 'Name must be at least 2 characters.';
+  else if (!NAME_RE.test(name)) errors.fullName = 'Use letters and spaces only.';
+
+  const email = data.email.trim();
+  if (email && !EMAIL_RE.test(email)) errors.email = 'Enter a valid email, e.g. name@example.com.';
+
+  if (!data.mobileNumber) errors.mobileNumber = 'Mobile number is required.';
+  else if (!IN_MOBILE_RE.test(data.mobileNumber)) errors.mobileNumber = 'Enter a valid 10-digit mobile number.';
+
+  if (!sameAsMobile) {
+    if (!data.whatsappNumber) errors.whatsappNumber = 'WhatsApp number is required.';
+    else if (!IN_MOBILE_RE.test(data.whatsappNumber)) errors.whatsappNumber = 'Enter a valid 10-digit WhatsApp number.';
+  }
+  return errors;
+};
+
+/** Plan preselected from the button the visitor clicked */
+const initialPlan = (intent: BookingIntent): string => {
+  if (intent.kind === 'trial') return TRIAL_VALUE;
+  if (intent.kind === 'service') {
+    const service = SERVICES.find((s) => s.id === intent.serviceId);
+    if (!service) return '';
+    const plan = service.plans.find((p) => p.name === intent.planName) ?? service.plans.find((p) => p.popular) ?? service.plans[0];
+    return plan ? planValue(service.id, plan.name) : '';
+  }
+  return '';
+};
+
+/** Form heading follows the button the visitor clicked */
+const formHeading = (intent: BookingIntent): { title: string; sub: string } => {
+  if (intent.heading) return { title: intent.heading, sub: 'Share your details and we will call you to plan your first session.' };
+  if (intent.kind === 'trial') return { title: 'Book Trial – INR 1,999', sub: 'Start your 1-month trial with Coach Samir. We will call you to confirm your slot.' };
+  if (intent.kind === 'service') {
+    const service = SERVICES.find((s) => s.id === intent.serviceId);
+    const name = service?.title ?? 'this program';
+    return intent.planName
+      ? { title: `Book ${name} – ${intent.planName}`, sub: 'Your chosen plan is already selected below. We will call you to confirm the details.' }
+      : { title: `Enquire for ${name}`, sub: 'Share your details and we will help you pick the right plan.' };
+  }
+  return { title: 'Book Your Free Demo Session', sub: 'Share your details and we will call you to plan your free demo.' };
+};
+
+const inputClass = (hasError: boolean) =>
+  `w-full px-3.5 py-2.5 text-sm rounded-xl border bg-white focus:outline-none focus:ring-2 transition-all disabled:bg-slate-50 disabled:text-slate-500 ${
+    hasError ? 'border-[#C62828] focus:ring-[#C62828]/20 bg-red-50/20' : 'border-[#E1E6EF] focus:ring-[#1769FF]/20 focus:border-[#1769FF]'
+  }`;
+
+const FieldError: React.FC<{ id: string; message?: string }> = ({ id, message }) =>
+  message ? (
+    <p id={id} className="text-xs text-[#C62828] mt-1 flex items-center gap-1">
+      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+      <span>{message}</span>
+    </p>
+  ) : null;
+
+export const ContactPage: React.FC<ContactPageProps> = ({ bookingIntent, highlightPlaceholders }) => {
+  const emptyForm = (): EnquiryFormData => ({
     fullName: '',
-    mobileNumber: '',
     email: '',
-    ageGroup: '20-29',
-    trainingType: initialService || 'Personal Training',
-    fitnessGoal: 'General Fitness',
-    fitnessExperience: 'Beginner',
-    preferredLocation: 'Kothrud',
-    sessionTiming: 'Morning',
-    demoDate: '',
-    message: '',
-    contactMethod: 'WhatsApp',
-    consentAgreed: false,
+    mobileNumber: '',
+    whatsappNumber: '',
+    goal: '',
+    plan: initialPlan(bookingIntent),
+    contactMethod: 'Phone Call',
   });
 
-  // Track if initialService changed
-  useEffect(() => {
-    if (initialService) {
-      setFormData((prev) => ({ ...prev, trainingType: initialService }));
-    }
-  }, [initialService]);
-
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [formData, setFormData] = useState<EnquiryFormData>(emptyForm);
+  const [sameAsMobile, setSameAsMobile] = useState(true);
+  const [errors, setErrors] = useState<EnquiryFormErrors>({});
+  const [triedSubmit, setTriedSubmit] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const shownAt = useRef(Date.now());
 
-  // Validation function
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
+  const heading = formHeading(bookingIntent);
 
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full Name is required.';
-    } else if (formData.fullName.trim().length < 2) {
-      newErrors.fullName = 'Please enter your complete name.';
-    }
-
-    if (!formData.mobileNumber.trim()) {
-      newErrors.mobileNumber = 'Mobile number is required.';
-    } else {
-      // Basic 10-digit Indian mobile check or international
-      const cleanPhone = formData.mobileNumber.replace(/[\s-]/g, '');
-      if (!/^\+?[0-9]{10,13}$/.test(cleanPhone)) {
-        newErrors.mobileNumber = 'Please enter a valid 10-digit mobile number.';
-      }
-    }
-
-    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      newErrors.email = 'Please provide a valid email address.';
-    }
-
-    if (!formData.consentAgreed) {
-      newErrors.consentAgreed = 'Please confirm consent to be contacted regarding this demo request.';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  // Update a field; once the visitor has tried to submit, re-check errors as they type
+  const update = (patch: Partial<EnquiryFormData>, same = sameAsMobile) => {
+    const next = { ...formData, ...patch };
+    setFormData(next);
+    if (triedSubmit) setErrors(validate(next, same));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const digitsOnly = (value: string) => value.replace(/\D/g, '').slice(0, PHONE_LEN);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      setIsSubmitting(true);
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        // Scroll to success banner
-        window.scrollTo({ top: 300, behavior: 'smooth' });
-      }, 600);
+    if (isSubmitting) return;
+    setTriedSubmit(true);
+    setSubmitError('');
+    const found = validate(formData, sameAsMobile);
+    setErrors(found);
+    if (Object.keys(found).length > 0) {
+      document.getElementById(Object.keys(found)[0])?.focus();
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      await submitEnquiry({
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        mobileNumber: formData.mobileNumber,
+        whatsappNumber: sameAsMobile ? formData.mobileNumber : formData.whatsappNumber,
+        goal: formData.goal,
+        plan: planLabel(formData.plan),
+        contactMethod: formData.contactMethod,
+        formTitle: heading.title,
+        pageUrl: window.location.href,
+        website: honeypot,
+        elapsedMs: Date.now() - shownAt.current,
+      });
+      setIsSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Could not send your request. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleReset = () => {
-    setFormData({
-      fullName: '',
-      mobileNumber: '',
-      email: '',
-      ageGroup: '20-29',
-      trainingType: 'Personal Training',
-      fitnessGoal: 'General Fitness',
-      fitnessExperience: 'Beginner',
-      preferredLocation: 'Kothrud',
-      sessionTiming: 'Morning',
-      demoDate: '',
-      message: '',
-      contactMethod: 'WhatsApp',
-      consentAgreed: false,
-    });
+    setFormData(emptyForm());
+    setSameAsMobile(true);
     setErrors({});
+    setTriedSubmit(false);
     setIsSubmitted(false);
+    setSubmitError('');
+    shownAt.current = Date.now();
   };
+
+  const whatsapp = sameAsMobile ? formData.mobileNumber : formData.whatsappNumber;
 
   return (
     <div className="bg-white">
@@ -145,611 +202,424 @@ export const ContactPage: React.FC<ContactPageProps> = ({
         </div>
       </section>
 
-      {/* Main Content: Contact Cards & 12-Field Form */}
+      {/* Section 1: Plans (left) + Enquiry form (right) */}
       <section className="py-8 sm:py-12 lg:py-14 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-start">
-            
-            {/* Left Column: Business Location, Hours, Contact Placeholders & Quick Actions */}
-            <div className="lg:col-span-5 space-y-5 sm:space-y-8">
-              
-              <div>
-                <div className="text-xs font-bold text-[#1769FF] uppercase tracking-wider mb-1">
-                  Connect Directly
-                </div>
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-[#171A21] tracking-tight">
-                  Trainer & Location Info
-                </h2>
-                <p className="text-xs sm:text-sm text-[#646B78] mt-1">
-                  Coaching available in Kothrud, Pune. Quick direct contact options below:
-                </p>
-              </div>
-
-              {/* Quick Action Button Group */}
-              <div className="grid grid-cols-1 gap-3">
-                <a
-                  href={`tel:${BUSINESS_INFO.contact.phoneRaw}`}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-slate-50 hover:bg-[#EEF5FF] text-[#171A21] border border-[#E1E6EF] hover:border-[#1769FF] text-xs font-semibold transition-all cursor-pointer shadow-xs"
-                >
-                  <Phone className="w-4 h-4 text-[#1769FF]" />
-                  <span>Call {BUSINESS_INFO.contact.phone}</span>
-                </a>
-              </div>
-
-              {/* Verified Address & Contact Details Card */}
-              <div
-                className={`p-6 rounded-2xl border space-y-5 transition-all ${
-                  highlightPlaceholders
-                    ? 'bg-amber-50/70 border-amber-400 ring-2 ring-amber-300'
-                    : 'bg-white border-[#E1E6EF] shadow-xs'
-                }`}
-              >
-                {/* Trainer Name & Gym */}
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-[#EEF5FF] text-[#1769FF] flex items-center justify-center shrink-0 mt-0.5">
-                    <Sparkles className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-[#1769FF] uppercase tracking-wider">
-                      Head Trainer & Founder
-                    </span>
-                    <div className="text-base font-bold text-[#171A21]">Coach Samir (TS Fitness)</div>
-                    <div className="text-xs text-[#646B78]">{BUSINESS_INFO.experienceYears}+ Years Experience · Former Coach at Fitness Talk</div>
-                  </div>
-                </div>
-
-                {/* Address */}
-                <div className="flex items-start gap-3 pt-3 border-t border-slate-100">
-                  <div className="w-9 h-9 rounded-lg bg-[#EEF5FF] text-[#1769FF] flex items-center justify-center shrink-0 mt-0.5">
-                    <MapPin className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                      Studio Location
-                    </span>
-                    <div className="text-sm font-semibold text-[#171A21]">
-                      {BUSINESS_INFO.location.fullAddress}
-                    </div>
-                    <p className="text-[length:max(11px,calc(11rem/16))] text-slate-500 mt-1">
-                      Kothrud, Pune, Maharashtra 411038
-                    </p>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex items-start gap-3 pt-3 border-t border-slate-100">
-                  <div className="w-9 h-9 rounded-lg bg-[#EEF5FF] text-[#1769FF] flex items-center justify-center shrink-0 mt-0.5">
-                    <Phone className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                      Phone Number
-                    </span>
-                    <div className="text-sm font-medium text-slate-900 mt-0.5">
-                      <a href={`tel:${BUSINESS_INFO.contact.phoneRaw}`} className="inline-block py-1.5 lg:py-0 hover:text-[#1769FF] transition-colors">
-                        {BUSINESS_INFO.contact.phone}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                {/* WhatsApp */}
-                <div className="flex items-start gap-3 pt-3 border-t border-slate-100">
-                  <div className="w-9 h-9 rounded-lg bg-emerald-50 text-[#16834A] flex items-center justify-center shrink-0 mt-0.5">
-                    <MessageSquare className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                      WhatsApp Business
-                    </span>
-                    <div className="text-sm font-medium text-[#16834A] mt-0.5">
-                      <a
-                        href={`https://wa.me/${BUSINESS_INFO.contact.whatsappNumber}?text=${encodeURIComponent(
-                          'Hi Samir, I want to book a free demo session at TS Fitness in Pune.'
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block py-1.5 lg:py-0 hover:underline"
-                      >
-                        {BUSINESS_INFO.contact.whatsapp} (Direct Chat)
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="flex items-start gap-3 pt-3 border-t border-slate-100">
-                  <div className="w-9 h-9 rounded-lg bg-[#EEF5FF] text-[#1769FF] flex items-center justify-center shrink-0 mt-0.5">
-                    <Mail className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                      Email Address
-                    </span>
-                    <div className="text-sm font-medium text-slate-900 mt-0.5">
-                      <a href={`mailto:${BUSINESS_INFO.contact.email}`} className="inline-block py-1.5 lg:py-0 break-all hover:text-[#1769FF] transition-colors">
-                        {BUSINESS_INFO.contact.email}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Hours */}
-                <div className="flex items-start gap-3 pt-3 border-t border-slate-100">
-                  <div className="w-9 h-9 rounded-lg bg-[#EEF5FF] text-[#1769FF] flex items-center justify-center shrink-0 mt-0.5">
-                    <Clock className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                      Operating Hours
-                    </span>
-                    <div className="text-xs font-medium text-slate-800 mt-0.5">
-                      {BUSINESS_INFO.contact.workingHours}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-
-{/* Live Google Maps Location */}
-<div className="rounded-2xl border border-[#E1E6EF] overflow-hidden bg-white p-6 space-y-4">
-  <div className="flex items-center justify-between gap-3">
-    <div>
-      <h3 className="text-sm font-bold text-[#171A21]">
-       Near Ashish Garden Banquet Hall
-      </h3>
-      <p className="text-xs text-[#646B78] mt-1">
-        Kothrud, Pune, Maharashtra
-      </p>
-    </div>
-
-    <Navigation className="w-5 h-5 text-[#1769FF] shrink-0" />
-  </div>
-
-  {/* Actual Google Map */}
-  <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200">
-    <iframe
-      title="Ashish Garden Banquet Hall Location"
-      src="https://maps.google.com/maps?q=18.5026368,73.8025847&z=17&output=embed"
-      width="100%"
-      height="100%"
-      style={{ border: 0, position: "absolute", inset: 0 }}
-      allowFullScreen
-      loading="lazy"
-      referrerPolicy="no-referrer-when-downgrade"
-    />
-  </div>
-
-  {/* Open exact venue in Google Maps */}
-  <a
-    href="https://www.google.com/maps/place/Ashish+Garden+Banquet+Hall/@18.5026368,73.8025847,17z"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1769FF] hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
-  >
-    <Navigation className="w-4 h-4" />
-    <span>Get Directions on Google Maps</span>
-  </a>
-</div>
-
-
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-start">
+            <div className="lg:col-span-5">
+              <EnquiryPlanPanel
+                intent={bookingIntent}
+                selectedPlan={formData.plan}
+                onSelectPlan={(plan) => update({ plan })}
+              />
             </div>
 
-            {/* Right Column: 12-Field Free Demo / Enquiry Form */}
             <div className="lg:col-span-7">
-              <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#E1E6EF] p-4 sm:p-6 lg:p-10 shadow-sm">
-                
+              <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#E1E6EF] p-4 sm:p-6 lg:p-8 shadow-sm">
                 {isSubmitted ? (
-                  /* ========================================================
-                     PROTOTYPE SUCCESS CONFIRMATION STATE
-                     ======================================================== */
+                  /* Success state */
                   <div className="space-y-6 text-center py-6 animate-in fade-in zoom-in-95 duration-300">
                     <div className="w-16 h-16 rounded-full bg-emerald-100 text-[#16834A] flex items-center justify-center mx-auto">
                       <CheckCircle2 className="w-10 h-10" />
                     </div>
-
                     <div className="space-y-2">
-                      <span className="text-xs uppercase font-bold text-[#16834A] tracking-wider">
-                        Prototype Request Validated
-                      </span>
                       <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#171A21]">
-                        Thank You, {formData.fullName}!
+                        Thank You, {formData.fullName.trim()}!
                       </h3>
                       <p className="text-sm text-[#646B78] max-w-md mx-auto leading-relaxed">
-                        Your free demo request for <strong className="text-[#171A21]">{formData.trainingType}</strong> in {formData.preferredLocation} has been registered in this design prototype.
+                        We have your request. Samir's team will contact you by <strong className="text-[#171A21]">{formData.contactMethod}</strong> soon.
                       </p>
                     </div>
 
-                    {/* Submission Summary Card */}
                     <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-left text-xs space-y-2.5 max-w-lg mx-auto">
                       <div className="text-xs font-bold text-slate-800 uppercase tracking-wider pb-1 border-b border-slate-200">
-                        Demo Booking Summary:
+                        Your Request
                       </div>
-                      <div className="grid grid-cols-2 gap-2 text-slate-700">
-                        <div><strong>Name:</strong> {formData.fullName}</div>
-                        <div><strong>Mobile:</strong> {formData.mobileNumber}</div>
-                        <div><strong>Preferred Service:</strong> {formData.trainingType}</div>
-                        <div><strong>Primary Goal:</strong> {formData.fitnessGoal}</div>
-                        <div><strong>Experience:</strong> {formData.fitnessExperience}</div>
-                        <div><strong>Age Bracket:</strong> {formData.ageGroup}</div>
-                        <div><strong>Location:</strong> {formData.preferredLocation}</div>
-                        <div><strong>Timing:</strong> {formData.sessionTiming}</div>
-                        <div><strong>Demo Date:</strong> {formData.demoDate || 'Flexible / Next Available'}</div>
-                        <div><strong>Contact Method:</strong> {formData.contactMethod}</div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700">
+                        <div><strong>Name:</strong> {formData.fullName.trim()}</div>
+                        <div><strong>Mobile:</strong> +91 {formData.mobileNumber}</div>
+                        <div><strong>WhatsApp:</strong> +91 {whatsapp}</div>
+                        <div><strong>Email:</strong> {formData.email.trim() || '—'}</div>
+                        <div><strong>Goal:</strong> {formData.goal || '—'}</div>
+                        <div><strong>Contact by:</strong> {formData.contactMethod}</div>
+                        <div className="sm:col-span-2"><strong>Plan:</strong> {planLabel(formData.plan)}</div>
                       </div>
-                      {formData.message && (
-                        <div className="pt-2 border-t border-slate-200 text-slate-600">
-                          <strong>Note:</strong> "{formData.message}"
-                        </div>
-                      )}
                     </div>
 
-                    {/* Mandatory Prototype Simulation Notice */}
                     <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 max-w-lg mx-auto flex items-start gap-2.5 text-left">
                       <ShieldCheck className="w-4 h-4 text-[#1769FF] shrink-0 mt-0.5" />
                       <p className="leading-relaxed">
-                        <strong>Prototype Phase Mode:</strong> Form validation was successfully simulated on the client side. No actual database transaction or live notification was transmitted. Production email and WhatsApp automation will be connected during backend implementation.
+                        Your details are shared only with Samir's team and used only to contact you about this request.
                       </p>
                     </div>
 
-                    <div className="pt-2">
-                      <button
-                        onClick={handleReset}
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1769FF] text-white font-semibold text-xs hover:bg-[#0B3D91] transition-all cursor-pointer shadow-sm"
-                      >
-                        <RotateCcw className="w-4 h-4" />
-                        <span>Submit Another Demo Request</span>
-                      </button>
-                    </div>
+                    <button
+                      onClick={handleReset}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1769FF] text-white font-semibold text-xs hover:bg-[#0B3D91] transition-all cursor-pointer shadow-sm"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                      <span>Submit Another Request</span>
+                    </button>
                   </div>
                 ) : (
-                  /* ========================================================
-                     12-FIELD FREE DEMO / ENQUIRY FORM
-                     ======================================================== */
-                  <form onSubmit={handleSubmit} noValidate className="space-y-8">
-                    
+                  /* Enquiry form: 6 fields + preferred contact method */
+                  <form onSubmit={handleSubmit} noValidate className="space-y-5 sm:space-y-6">
                     <div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-[#1769FF] uppercase tracking-wider">
-                          12-Field Enquiry Flow
-                        </span>
-                        <span className="text-xs text-slate-400">* Required fields</span>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-bold text-[#1769FF] uppercase tracking-wider">Enquiry Form</span>
+                        <span className="text-xs text-slate-400"><span className="text-red-500">*</span> Required</span>
                       </div>
-                      <h3 className="text-2xl font-display font-bold text-[#171A21] mt-1">
-                        Book Your Free Demo Session
-                      </h3>
-                      <p className="text-xs text-[#646B78] mt-1">
-                        Complete the fields below to simulate your personalized demo request.
-                      </p>
+                      <h2 className="text-xl sm:text-2xl font-display font-bold text-[#171A21] mt-1">{heading.title}</h2>
+                      <p className="text-xs sm:text-sm text-[#646B78] mt-1">{heading.sub}</p>
                     </div>
 
-                    {/* SECTION 1: Contact Details (Fields 1 - 4, 12) */}
-                    <div className="space-y-4 pt-2">
-                      <div className="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-1.5 flex items-center justify-between">
-                        <span>1. Your Contact Details</span>
-                        <span className="text-slate-400 font-normal">Section 1 of 3</span>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* 1. Full Name (Required) */}
-                        <div>
-                          <label htmlFor="fullName" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Full Name <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            id="fullName"
-                            type="text"
-                            value={formData.fullName}
-                            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                            placeholder="e.g. Rahul Patil"
-                            className={`w-full px-3.5 py-2.5 text-sm rounded-xl border bg-white focus:outline-none focus:ring-2 transition-all ${
-                              errors.fullName
-                                ? 'border-[#C62828] focus:ring-[#C62828]/20 bg-red-50/20'
-                                : 'border-[#E1E6EF] focus:ring-[#1769FF]/20 focus:border-[#1769FF]'
-                            }`}
-                          />
-                          {errors.fullName && (
-                            <p className="text-xs text-[#C62828] mt-1 flex items-center gap-1">
-                              <AlertCircle className="w-3.5 h-3.5" />
-                              <span>{errors.fullName}</span>
-                            </p>
-                          )}
-                        </div>
-
-                        {/* 2. Mobile Number (Required) */}
-                        <div>
-                          <label htmlFor="mobileNumber" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Mobile Number <span className="text-red-500">*</span>
-                          </label>
-                          <div className="relative">
-                            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500">
-                              +91
-                            </span>
-                            <input
-                              id="mobileNumber"
-                              type="tel"
-                              inputMode="tel"
-                              value={formData.mobileNumber}
-                              onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
-                              placeholder="98765 43210"
-                              className={`w-full pl-12 pr-3.5 py-2.5 text-sm rounded-xl border bg-white focus:outline-none focus:ring-2 transition-all ${
-                                errors.mobileNumber
-                                ? 'border-[#C62828] focus:ring-[#C62828]/20 bg-red-50/20'
-                                : 'border-[#E1E6EF] focus:ring-[#1769FF]/20 focus:border-[#1769FF]'
-                              }`}
-                            />
-                          </div>
-                          {errors.mobileNumber && (
-                            <p className="text-xs text-[#C62828] mt-1 flex items-center gap-1">
-                              <AlertCircle className="w-3.5 h-3.5" />
-                              <span>{errors.mobileNumber}</span>
-                            </p>
-                          )}
-                        </div>
-
-                        {/* 3. Email Address (Optional) */}
-                        <div>
-                          <label htmlFor="email" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Email Address <span className="text-slate-400 font-normal">(Optional)</span>
-                          </label>
-                          <input
-                            id="email"
-                            type="email"
-                            inputMode="email"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            placeholder="rahul@example.com"
-                            className={`w-full px-3.5 py-2.5 text-sm rounded-xl border bg-white focus:outline-none focus:ring-2 transition-all ${
-                              errors.email
-                                ? 'border-[#C62828] focus:ring-[#C62828]/20 bg-red-50/20'
-                                : 'border-[#E1E6EF] focus:ring-[#1769FF]/20 focus:border-[#1769FF]'
-                            }`}
-                          />
-                          {errors.email && (
-                            <p className="text-xs text-[#C62828] mt-1 flex items-center gap-1">
-                              <AlertCircle className="w-3.5 h-3.5" />
-                              <span>{errors.email}</span>
-                            </p>
-                          )}
-                        </div>
-
-                        {/* 4. Age Group (Dropdown) */}
-                        <div>
-                          <label htmlFor="ageGroup" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Age Group
-                          </label>
-                          <select
-                            id="ageGroup"
-                            value={formData.ageGroup}
-                            onChange={(e) => setFormData({ ...formData, ageGroup: e.target.value })}
-                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E1E6EF] bg-white focus:outline-none focus:ring-2 focus:ring-[#1769FF]/20 focus:border-[#1769FF] transition-all cursor-pointer"
-                          >
-                            <option value="Under 20">Under 20</option>
-                            <option value="20-29">20 – 29 Years</option>
-                            <option value="30-39">30 – 39 Years</option>
-                            <option value="40-49">40 – 49 Years</option>
-                            <option value="50+">50+ Years</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SECTION 2: Fitness Preferences (Fields 5, 6, 7, 8) */}
-                    <div className="space-y-4 pt-2">
-                      <div className="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-1.5 flex items-center justify-between">
-                        <span>2. Fitness Preferences & Goals</span>
-                        <span className="text-slate-400 font-normal">Section 2 of 3</span>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* 5. Preferred Training Type (Dropdown) */}
-                        <div>
-                          <label htmlFor="trainingType" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Preferred Training Type
-                          </label>
-                          <select
-                            id="trainingType"
-                            value={formData.trainingType}
-                            onChange={(e) => setFormData({ ...formData, trainingType: e.target.value })}
-                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E1E6EF] bg-white focus:outline-none focus:ring-2 focus:ring-[#1769FF]/20 focus:border-[#1769FF] transition-all cursor-pointer"
-                          >
-                            <option value="Personal Training">Personal Training (1-on-1)</option>
-                            <option value="Health Management">Health Management</option>
-                            <option value="Nutrition Guidance">Nutrition Guidance</option>
-                            <option value="Offline Training">Offline Training (Kothrud)</option>
-                            <option value="Senior Fitness">Senior Fitness (55+)</option>
-                            <option value="Not Sure">Not Sure (Need Assessment)</option>
-                          </select>
-                        </div>
-
-                        {/* 6. Primary Fitness Goal (Dropdown) */}
-                        <div>
-                          <label htmlFor="fitnessGoal" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Primary Fitness Goal
-                          </label>
-                          <select
-                            id="fitnessGoal"
-                            value={formData.fitnessGoal}
-                            onChange={(e) => setFormData({ ...formData, fitnessGoal: e.target.value })}
-                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E1E6EF] bg-white focus:outline-none focus:ring-2 focus:ring-[#1769FF]/20 focus:border-[#1769FF] transition-all cursor-pointer"
-                          >
-                            <option value="Strength">Strength & Compound Lifting</option>
-                            <option value="General Fitness">General Fitness & Health</option>
-                            <option value="Weight Management">Weight Management / Fat Loss</option>
-                            <option value="Muscle Building">Muscle Building / Hypertrophy</option>
-                            <option value="Flexibility">Flexibility & Posture Correction</option>
-                            <option value="Other">Other Specific Objective</option>
-                          </select>
-                        </div>
-
-                        {/* 7. Current Fitness Experience (Segmented or Dropdown) */}
-                        <div>
-                          <label htmlFor="fitnessExperience" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Current Fitness Experience
-                          </label>
-                          <select
-                            id="fitnessExperience"
-                            value={formData.fitnessExperience}
-                            onChange={(e) => setFormData({ ...formData, fitnessExperience: e.target.value })}
-                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E1E6EF] bg-white focus:outline-none focus:ring-2 focus:ring-[#1769FF]/20 focus:border-[#1769FF] transition-all cursor-pointer"
-                          >
-                            <option value="Beginner">Beginner (0–6 Months or starting afresh)</option>
-                            <option value="Intermediate">Intermediate (6+ Months regular gym)</option>
-                            <option value="Experienced">Experienced (2+ Years lifting history)</option>
-                          </select>
-                        </div>
-
-                        {/* 8. Preferred Training Location */}
-                        <div>
-                          <label htmlFor="preferredLocation" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Preferred Training Location
-                          </label>
-                          <select
-                            id="preferredLocation"
-                            value={formData.preferredLocation}
-                            onChange={(e) => setFormData({ ...formData, preferredLocation: e.target.value })}
-                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E1E6EF] bg-white focus:outline-none focus:ring-2 focus:ring-[#1769FF]/20 focus:border-[#1769FF] transition-all cursor-pointer"
-                          >
-                            <option value="Kothrud">Kothrud, Pune (DP Road Area)</option>
-                            <option value="Another Pune Location">Another Pune Location</option>
-                            <option value="Discuss With Team">Discuss With Team</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SECTION 3: Demo Scheduling & Preferences (Fields 9, 10, 11, 12 + Consent) */}
-                    <div className="space-y-4 pt-2">
-                      <div className="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-1.5 flex items-center justify-between">
-                        <span>3. Demo Scheduling & Details</span>
-                        <span className="text-slate-400 font-normal">Section 3 of 3</span>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* 9. Preferred Session Timing */}
-                        <div>
-                          <label htmlFor="sessionTiming" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Preferred Session Timing
-                          </label>
-                          <select
-                            id="sessionTiming"
-                            value={formData.sessionTiming}
-                            onChange={(e) => setFormData({ ...formData, sessionTiming: e.target.value })}
-                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E1E6EF] bg-white focus:outline-none focus:ring-2 focus:ring-[#1769FF]/20 focus:border-[#1769FF] transition-all cursor-pointer"
-                          >
-                            <option value="Morning">Morning (6:00 AM – 11:00 AM)</option>
-                            <option value="Afternoon">Afternoon (11:00 AM – 4:00 PM)</option>
-                            <option value="Evening">Evening (4:00 PM – 9:00 PM)</option>
-                            <option value="Flexible">Flexible</option>
-                          </select>
-                        </div>
-
-                        {/* 10. Preferred Demo Date (Date picker, Optional) */}
-                        <div>
-                          <label htmlFor="demoDate" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Preferred Demo Date <span className="text-slate-400 font-normal">(Optional)</span>
-                          </label>
-                          <input
-                            id="demoDate"
-                            type="date"
-                            value={formData.demoDate}
-                            onChange={(e) => setFormData({ ...formData, demoDate: e.target.value })}
-                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E1E6EF] bg-white focus:outline-none focus:ring-2 focus:ring-[#1769FF]/20 focus:border-[#1769FF] transition-all cursor-pointer"
-                          />
-                        </div>
-
-                        {/* 12. Preferred Contact Method */}
-                        <div className="sm:col-span-2">
-                          <label htmlFor="contactMethod" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Preferred Contact Method
-                          </label>
-                          <div className="grid grid-cols-3 gap-2">
-                            {(['WhatsApp', 'Phone Call', 'Email'] as const).map((method) => (
-                              <button
-                                key={method}
-                                type="button"
-                                onClick={() => setFormData({ ...formData, contactMethod: method })}
-                                className={`min-h-11 py-2 px-2 sm:px-3 text-xs font-semibold rounded-xl border transition-all cursor-pointer ${
-                                  formData.contactMethod === method
-                                    ? 'bg-[#EEF5FF] text-[#1769FF] border-[#1769FF]'
-                                    : 'bg-white text-slate-700 border-[#E1E6EF] hover:bg-slate-50'
-                                }`}
-                              >
-                                {method}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* 11. Additional Requirements / Message (Optional multiline) */}
-                        <div className="sm:col-span-2">
-                          <label htmlFor="message" className="block text-xs font-semibold text-[#171A21] mb-1.5">
-                            Additional Requirements / Questions <span className="text-slate-400 font-normal">(Optional)</span>
-                          </label>
-                          <textarea
-                            id="message"
-                            rows={3}
-                            value={formData.message}
-                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                            placeholder="Share any past injuries, specific targets, or questions for Samir..."
-                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E1E6EF] bg-white focus:outline-none focus:ring-2 focus:ring-[#1769FF]/20 focus:border-[#1769FF] transition-all"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Privacy & Consent Checkbox */}
-                    <div className="pt-2">
-                      <label className="flex items-start gap-3 cursor-pointer">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* 1. Name (required) */}
+                      <div>
+                        <label htmlFor="fullName" className="block text-xs font-semibold text-[#171A21] mb-1.5">
+                          Full Name <span className="text-red-500">*</span>
+                        </label>
                         <input
-                          type="checkbox"
-                          checked={formData.consentAgreed}
-                          onChange={(e) => setFormData({ ...formData, consentAgreed: e.target.checked })}
-                          className="mt-0.5 sm:mt-1 w-5 h-5 sm:w-4 sm:h-4 shrink-0 rounded text-[#1769FF] border-slate-300 focus:ring-[#1769FF] cursor-pointer"
+                          id="fullName"
+                          type="text"
+                          autoComplete="name"
+                          maxLength={NAME_MAX}
+                          value={formData.fullName}
+                          onChange={(e) => update({ fullName: e.target.value })}
+                          placeholder="e.g. Rahul Patil"
+                          aria-invalid={!!errors.fullName}
+                          aria-describedby={errors.fullName ? 'fullName-error' : undefined}
+                          className={inputClass(!!errors.fullName)}
                         />
-                        <span className="text-xs text-[#646B78] leading-relaxed">
-                          I consent to being contacted by Samir and the fitness team via {formData.contactMethod} regarding my demo session enquiry. No automated spam or third-party marketing.
-                        </span>
-                      </label>
-                      {errors.consentAgreed && (
-                        <p className="text-xs text-[#C62828] mt-1.5 flex items-center gap-1">
-                          <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                          <span>{errors.consentAgreed}</span>
-                        </p>
-                      )}
+                        <FieldError id="fullName-error" message={errors.fullName} />
+                      </div>
+
+                      {/* 2. Email (optional) */}
+                      <div>
+                        <label htmlFor="email" className="block text-xs font-semibold text-[#171A21] mb-1.5">
+                          Email <span className="text-slate-400 font-normal">(Optional)</span>
+                        </label>
+                        <input
+                          id="email"
+                          type="email"
+                          inputMode="email"
+                          autoComplete="email"
+                          maxLength={EMAIL_MAX}
+                          value={formData.email}
+                          onChange={(e) => update({ email: e.target.value })}
+                          placeholder="rahul@example.com"
+                          aria-invalid={!!errors.email}
+                          aria-describedby={errors.email ? 'email-error' : undefined}
+                          className={inputClass(!!errors.email)}
+                        />
+                        <FieldError id="email-error" message={errors.email} />
+                      </div>
+
+                      {/* 3. Mobile number (required, 10 digits) */}
+                      <div>
+                        <label htmlFor="mobileNumber" className="block text-xs font-semibold text-[#171A21] mb-1.5">
+                          Mobile Number <span className="text-red-500">*</span>
+                        </label>
+                        <div className="relative">
+                          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500">+91</span>
+                          <input
+                            id="mobileNumber"
+                            type="tel"
+                            inputMode="numeric"
+                            autoComplete="tel-national"
+                            maxLength={PHONE_LEN}
+                            value={formData.mobileNumber}
+                            onChange={(e) => update({ mobileNumber: digitsOnly(e.target.value) })}
+                            placeholder="98765 43210"
+                            aria-invalid={!!errors.mobileNumber}
+                            aria-describedby={errors.mobileNumber ? 'mobileNumber-error' : undefined}
+                            className={`${inputClass(!!errors.mobileNumber)} pl-12`}
+                          />
+                        </div>
+                        <FieldError id="mobileNumber-error" message={errors.mobileNumber} />
+                      </div>
+
+                      {/* 4. WhatsApp number (required, 10 digits; can copy mobile) */}
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <label htmlFor="whatsappNumber" className="block text-xs font-semibold text-[#171A21]">
+                            WhatsApp Number <span className="text-red-500">*</span>
+                          </label>
+                          <label className="inline-flex items-center gap-1.5 text-[length:max(11px,calc(11rem/16))] text-[#646B78] cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={sameAsMobile}
+                              onChange={(e) => {
+                                setSameAsMobile(e.target.checked);
+                                update({}, e.target.checked);
+                              }}
+                              className="w-3.5 h-3.5 rounded text-[#1769FF] border-slate-300 focus:ring-[#1769FF] cursor-pointer"
+                            />
+                            Same as mobile
+                          </label>
+                        </div>
+                        <div className="relative">
+                          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500">+91</span>
+                          <input
+                            id="whatsappNumber"
+                            type="tel"
+                            inputMode="numeric"
+                            maxLength={PHONE_LEN}
+                            value={whatsapp}
+                            disabled={sameAsMobile}
+                            onChange={(e) => update({ whatsappNumber: digitsOnly(e.target.value) })}
+                            placeholder="98765 43210"
+                            aria-invalid={!!errors.whatsappNumber}
+                            aria-describedby={errors.whatsappNumber ? 'whatsappNumber-error' : undefined}
+                            className={`${inputClass(!!errors.whatsappNumber)} pl-12`}
+                          />
+                        </div>
+                        <FieldError id="whatsappNumber-error" message={errors.whatsappNumber} />
+                      </div>
+
+                      {/* 5. Goal (optional) */}
+                      <div>
+                        <label htmlFor="goal" className="block text-xs font-semibold text-[#171A21] mb-1.5">
+                          Your Goal <span className="text-slate-400 font-normal">(Optional)</span>
+                        </label>
+                        <select
+                          id="goal"
+                          value={formData.goal}
+                          onChange={(e) => update({ goal: e.target.value })}
+                          className={`${inputClass(false)} cursor-pointer`}
+                        >
+                          <option value="">Select your goal</option>
+                          {GOALS.map((g) => (
+                            <option key={g} value={g}>{g}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* 6. Plan (optional; preselected from the button clicked) */}
+                      <div>
+                        <label htmlFor="plan" className="block text-xs font-semibold text-[#171A21] mb-1.5">
+                          Plan <span className="text-slate-400 font-normal">(Optional)</span>
+                        </label>
+                        <select
+                          id="plan"
+                          value={formData.plan}
+                          onChange={(e) => update({ plan: e.target.value })}
+                          className={`${inputClass(false)} cursor-pointer`}
+                        >
+                          <option value="">{planLabel('')}</option>
+                          <option value={TRIAL_VALUE}>{planLabel(TRIAL_VALUE)}</option>
+                          {SERVICES.map((s) => (
+                            <optgroup key={s.id} label={s.title}>
+                              {s.plans.map((p) => (
+                                <option key={p.name} value={planValue(s.id, p.name)}>
+                                  {s.title} – {p.name}
+                                </option>
+                              ))}
+                            </optgroup>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Preferred contact method: Phone Call (default), WhatsApp, Email */}
+                      <div className="sm:col-span-2">
+                        <span className="block text-xs font-semibold text-[#171A21] mb-1.5">Preferred Contact Method</span>
+                        <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="Preferred contact method">
+                          {CONTACT_METHODS.map((method) => (
+                            <button
+                              key={method}
+                              type="button"
+                              role="radio"
+                              aria-checked={formData.contactMethod === method}
+                              onClick={() => update({ contactMethod: method })}
+                              className={`min-h-11 py-2 px-2 sm:px-3 text-xs font-semibold rounded-xl border transition-all cursor-pointer ${
+                                formData.contactMethod === method
+                                  ? 'bg-[#EEF5FF] text-[#1769FF] border-[#1769FF]'
+                                  : 'bg-white text-slate-700 border-[#E1E6EF] hover:bg-slate-50'
+                              }`}
+                            >
+                              {method}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                     </div>
 
-                    {/* Submit Action */}
-                    <div className="pt-2">
+                    {/* Honeypot: hidden from people, bots fill it in */}
+                    <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+                      <label htmlFor="website">Website</label>
+                      <input
+                        id="website"
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      {submitError && (
+                        <div role="alert" className="mb-3 p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-[#C62828] flex items-start gap-2">
+                          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                          <span>
+                            {submitError} You can also call us at{' '}
+                            <a href={`tel:${BUSINESS_INFO.contact.phoneRaw}`} className="font-semibold underline">
+                              {BUSINESS_INFO.contact.phone}
+                            </a>
+                            .
+                          </span>
+                        </div>
+                      )}
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-2.5 sm:py-3.5 px-4 sm:px-5 min-h-[42px] sm:min-h-0 text-xs sm:text-sm font-bold text-white bg-[#1769FF] hover:bg-[#0B3D91] active:scale-[0.99] rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-75"
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 min-h-[44px] text-xs sm:text-sm font-bold text-white bg-[#1769FF] hover:bg-[#0B3D91] active:scale-[0.99] rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-75"
                       >
                         {isSubmitting ? (
-                          <span>Validating Details...</span>
+                          <span>Sending...</span>
                         ) : (
                           <>
                             <Send className="w-4 h-4" />
-                            <span>Request Free Demo Session</span>
+                            <span>Submit Request</span>
                           </>
                         )}
                       </button>
                       <p className="text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] text-center text-slate-400 mt-2">
-                        *Prototype simulation: tests form UX & validations before production launch.
+                        By submitting, you agree to be contacted by Samir's team about this request. No spam.
                       </p>
                     </div>
-
                   </form>
                 )}
-
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
+      {/* Section 2: Trainer & Location Info (horizontal) */}
+      <section className="py-8 sm:py-12 lg:py-14 bg-slate-50 border-b border-[#E1E6EF]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+            <div>
+              <div className="text-xs font-bold text-[#1769FF] uppercase tracking-wider mb-1">Connect Directly</div>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-[#171A21] tracking-tight">
+                Trainer & Location Info
+              </h2>
+              <p className="text-xs sm:text-sm text-[#646B78] mt-1">Coaching available in Kothrud, Pune.</p>
+            </div>
+            <a
+              href={`tel:${BUSINESS_INFO.contact.phoneRaw}`}
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-[#EEF5FF] text-[#171A21] border border-[#E1E6EF] hover:border-[#1769FF] text-xs font-semibold transition-all cursor-pointer shadow-xs shrink-0"
+            >
+              <Phone className="w-4 h-4 text-[#1769FF]" />
+              <span>Call {BUSINESS_INFO.contact.phone}</span>
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
+            {/* Contact details: 2-column grid of items */}
+            <div
+              className={`lg:col-span-6 p-5 sm:p-6 rounded-2xl border grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5 transition-all ${
+                highlightPlaceholders ? 'bg-amber-50/70 border-amber-400 ring-2 ring-amber-300' : 'bg-white border-[#E1E6EF] shadow-xs'
+              }`}
+            >
+              <InfoItem icon={<Sparkles className="w-4 h-4" />} label="Head Trainer & Founder" accent>
+                <div className="text-sm font-bold text-[#171A21]">Coach Samir (TS Fitness)</div>
+                <div className="text-xs text-[#646B78]">{BUSINESS_INFO.experienceYears}+ Years Experience · Former Coach at Fitness Talk</div>
+              </InfoItem>
+
+              <InfoItem icon={<MapPin className="w-4 h-4" />} label="Studio Location">
+                <div className="text-sm font-semibold text-[#171A21]">{BUSINESS_INFO.location.fullAddress}</div>
+                <p className="text-[length:max(11px,calc(11rem/16))] text-slate-500 mt-0.5">Kothrud, Pune, Maharashtra 411038</p>
+              </InfoItem>
+
+              <InfoItem icon={<Phone className="w-4 h-4" />} label="Phone Number">
+                <a href={`tel:${BUSINESS_INFO.contact.phoneRaw}`} className="inline-block py-1 lg:py-0 text-sm font-medium text-slate-900 hover:text-[#1769FF] transition-colors">
+                  {BUSINESS_INFO.contact.phone}
+                </a>
+              </InfoItem>
+
+              <InfoItem icon={<MessageSquare className="w-4 h-4" />} label="WhatsApp Business" green>
+                <a
+                  href={`https://wa.me/${BUSINESS_INFO.contact.whatsappNumber}?text=${encodeURIComponent(
+                    'Hi Samir, I want to book a free demo session at TS Fitness in Pune.'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block py-1 lg:py-0 text-sm font-medium text-[#16834A] hover:underline"
+                >
+                  {BUSINESS_INFO.contact.whatsapp} (Direct Chat)
+                </a>
+              </InfoItem>
+
+              <InfoItem icon={<Mail className="w-4 h-4" />} label="Email Address">
+                <a href={`mailto:${BUSINESS_INFO.contact.email}`} className="inline-block py-1 lg:py-0 text-sm font-medium text-slate-900 break-all hover:text-[#1769FF] transition-colors">
+                  {BUSINESS_INFO.contact.email}
+                </a>
+              </InfoItem>
+
+              <InfoItem icon={<Clock className="w-4 h-4" />} label="Operating Hours">
+                <div className="text-xs font-medium text-slate-800">{BUSINESS_INFO.contact.workingHours}</div>
+              </InfoItem>
+            </div>
+
+            {/* Live Google Map */}
+            <div className="lg:col-span-6 rounded-2xl border border-[#E1E6EF] bg-white p-5 sm:p-6 flex flex-col gap-4">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-sm font-bold text-[#171A21]">Near Ashish Garden Banquet Hall</h3>
+                  <p className="text-xs text-[#646B78] mt-1">Kothrud, Pune, Maharashtra</p>
+                </div>
+                <Navigation className="w-5 h-5 text-[#1769FF] shrink-0" />
+              </div>
+              <div className="relative w-full flex-1 min-h-[220px] rounded-xl overflow-hidden border border-slate-200">
+                <iframe
+                  title="Ashish Garden Banquet Hall Location"
+                  src="https://maps.google.com/maps?q=18.5026368,73.8025847&z=17&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, position: 'absolute', inset: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+              <a
+                href="https://www.google.com/maps/place/Ashish+Garden+Banquet+Hall/@18.5026368,73.8025847,17z"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1769FF] hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
+              >
+                <Navigation className="w-4 h-4" />
+                <span>Get Directions on Google Maps</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
     </div>
   );
 };
+
+/** One labelled row in the Trainer & Location card */
+const InfoItem: React.FC<{ icon: React.ReactNode; label: string; accent?: boolean; green?: boolean; children: React.ReactNode }> = ({
+  icon,
+  label,
+  accent,
+  green,
+  children,
+}) => (
+  <div className="flex items-start gap-3">
+    <div
+      className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${
+        green ? 'bg-emerald-50 text-[#16834A]' : 'bg-[#EEF5FF] text-[#1769FF]'
+      }`}
+    >
+      {icon}
+    </div>
+    <div className="min-w-0">
+      <span className={`text-xs font-bold uppercase tracking-wider ${accent ? 'text-[#1769FF]' : 'text-slate-500'}`}>{label}</span>
+      <div className="mt-0.5">{children}</div>
+    </div>
+  </div>
+);
