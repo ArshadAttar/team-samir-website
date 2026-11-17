@@ -126,7 +126,7 @@ export const EnquiryPlanPanel: React.FC<EnquiryPlanPanelProps> = ({ intent, sele
     intent.kind === 'trial' ? 'Your Trial Plan' : service ? `${service.title} Plans` : 'All Plans';
   const subtitle =
     intent.kind === 'trial'
-      ? 'One month of coaching to see how we work together.'
+      ? 'One Week of coaching to see how we work together.'
       : service
         ? 'Pick the plan that suits you, or decide on your free call.'
         : 'Scroll to compare every plan. Tap one to select it in the form.';

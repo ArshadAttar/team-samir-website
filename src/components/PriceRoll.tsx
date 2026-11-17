@@ -43,7 +43,7 @@ const PLANS: PlanTier[] = [
       'Spinal & Biomechanics Alignment Screening',
       'Ghar Ka Khana Macro Guideline Sheet',
       'Bi-weekly InBody Composition Scan',
-      'Direct Coach Samir Access on Studio Floor',
+      'Direct TeamSamir Access on Studio Floor',
     ],
     commitmentGift: 'Free Biomechanics Assessment (+₹2,500 value)',
   },
@@ -60,7 +60,7 @@ const PLANS: PlanTier[] = [
     },
     features: [
       '5 High-Intensity Sessions Weekly',
-      'Coach Samir Direct 1-on-1 Mentorship',
+      'TeamSamir Direct 1-on-1 Mentorship',
       'Daily WhatsApp Meal-by-Meal Photo Audit',
       'Weekly Digital Progress & Strength Graphing',
       'Custom Deload & CNS Recovery Protocols',

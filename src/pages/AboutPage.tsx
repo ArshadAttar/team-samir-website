@@ -58,13 +58,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               <div className="rounded-2xl overflow-hidden bg-slate-900 border border-[#E1E6EF] shadow-lg relative aspect-16/10 sm:aspect-4/3 lg:aspect-4/3">
                 <img
                   src="/images/hero_samir_ts_fitness_1792417382753.jpg"
-                  alt="Coach Samir - Founder & Head Coach at TS Fitness"
+                  alt="TeamSamir - Founder & Head Coach at TS Fitness"
                   className="w-full h-full object-cover object-top"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 sm:p-4 rounded-xl bg-black/85 backdrop-blur-md text-white border border-slate-700">
                   <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-[#00A3FF] font-semibold uppercase">TS Fitness Founder & Head Coach</div>
-                  <div className="text-lg sm:text-xl font-display font-bold">Coach Samir</div>
+                  <div className="text-lg sm:text-xl font-display font-bold">TeamSamir</div>
                   <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-300">{BUSINESS_INFO.experienceYears}+ Years Professional Experience · Kothrud, Pune</div>
                 </div>
               </div>
@@ -255,7 +255,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
       <section className="py-8 sm:py-12 bg-[#111318] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
-            Work Directly with Coach Samir in Pune
+            Work Directly with TeamSamir in Pune
           </h2>
           <p className="text-xs sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
             Book an initial 1-on-1 demo session to discuss your movement history, body composition targets, and tailored workout plan.

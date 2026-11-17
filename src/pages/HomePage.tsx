@@ -360,7 +360,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
           </h2>
 
           <p className="text-xs sm:text-base lg:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
-            Tell us about your goals and request a free demo session. Samir and our coaching team will guide you through a personalised assessment.
+            Tell us about your goals and request a free Consultation. Our Experts will guide you through a personalised assessment.
           </p>
 
           <div className="pt-2 sm:pt-4 grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-4 max-w-sm sm:max-w-none mx-auto">
@@ -368,20 +368,10 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
               onClick={() => onBookDemo({ kind: 'all', heading: 'Book Your Free Demo' })}
               className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-8 py-2 sm:py-3.5 min-h-[40px] sm:min-h-[46px] text-xs sm:text-sm font-bold text-[#1769FF] bg-white hover:bg-slate-100 active:scale-95 rounded-lg sm:rounded-xl shadow-xl transition-all cursor-pointer"
             >
-              <span>Book Free Demo</span>
+              <span>Free Consultation</span>
               <ArrowRight className="w-3.5 h-3.5 sm:w-5 sm:h-5 shrink-0" />
             </button>
-            <button
-              onClick={() => onNavigate('contact')}
-              className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-7 py-2 sm:py-3.5 min-h-[40px] sm:min-h-[46px] text-xs sm:text-sm font-semibold text-white bg-[#0B3D91] hover:bg-[#072a66] rounded-lg sm:rounded-xl transition-all cursor-pointer"
-            >
-              <span>Location & Hours</span>
-            </button>
           </div>
-
-          <p className="text-[length:max(10px,calc(10rem/16))] sm:text-xs text-blue-200 pt-1 sm:pt-2">
-            *No automated charges or commitments. Flat No. 3, XYZ Apartment, Kothrud, Pune.
-          </p>
         </div>
       </section>
     </div>

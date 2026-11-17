@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { submitEnquiry } from '../lib/submitEnquiry';
 import { BookingIntent, EnquiryFormData, EnquiryFormErrors } from '../types';
 import { BUSINESS_INFO, SERVICES } from '../data/mockData';
@@ -79,7 +79,7 @@ const initialPlan = (intent: BookingIntent): string => {
 /** Form heading follows the button the visitor clicked */
 const formHeading = (intent: BookingIntent): { title: string; sub: string } => {
   if (intent.heading) return { title: intent.heading, sub: 'Share your details and we will call you to plan your first session.' };
-  if (intent.kind === 'trial') return { title: 'Book Trial – INR 1,999', sub: 'Start your 1-month trial with Coach Samir. We will call you to confirm your slot.' };
+  if (intent.kind === 'trial') return { title: 'Book Trial – INR 1,999', sub: 'Start your 1-Week trial with TeamSamir. We will call you to confirm your slot.' };
   if (intent.kind === 'service') {
     const service = SERVICES.find((s) => s.id === intent.serviceId);
     const name = service?.title ?? 'this program';
@@ -94,6 +94,59 @@ const inputClass = (hasError: boolean) =>
   `w-full px-3.5 py-2.5 text-sm rounded-xl border bg-white focus:outline-none focus:ring-2 transition-all disabled:bg-slate-50 disabled:text-slate-500 ${
     hasError ? 'border-[#C62828] focus:ring-[#C62828]/20 bg-red-50/20' : 'border-[#E1E6EF] focus:ring-[#1769FF]/20 focus:border-[#1769FF]'
   }`;
+
+const SUCCESS_RESET_MS = 5000;
+
+/**
+ * Countdown bar on the success screen. Calls onDone after `duration` ms of
+ * un-paused time; pausing (hover / keyboard focus) freezes the remaining time.
+ */
+const AutoResetBar: React.FC<{ duration: number; paused: boolean; onDone: () => void }> = ({ duration, paused, onDone }) => {
+  const [elapsed, setElapsed] = useState(0);
+  const elapsedRef = useRef(0);
+  const doneRef = useRef(onDone);
+  doneRef.current = onDone;
+
+  useEffect(() => {
+    if (paused) return;
+    let frame = 0;
+    let last = performance.now();
+    const tick = (now: number) => {
+      elapsedRef.current = Math.min(duration, elapsedRef.current + (now - last));
+      last = now;
+      setElapsed(elapsedRef.current);
+      if (elapsedRef.current >= duration) {
+        doneRef.current();
+        return;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [paused, duration]);
+
+  const remaining = Math.max(0, duration - elapsed);
+  return (
+    <div className="max-w-lg mx-auto space-y-1.5" aria-live="off">
+      <div
+        className="h-1.5 w-full rounded-full bg-[#E1E6EF] overflow-hidden"
+        role="progressbar"
+        aria-label="Time until a new form opens"
+        aria-valuemin={0}
+        aria-valuemax={duration / 1000}
+        aria-valuenow={Math.ceil(remaining / 1000)}
+      >
+        <div
+          className={`h-full rounded-full ${paused ? 'bg-slate-400' : 'bg-[#1769FF]'}`}
+          style={{ width: `${(remaining / duration) * 100}%` }}
+        />
+      </div>
+      <p className="text-[length:max(11px,calc(11rem/16))] text-slate-500">
+        {paused ? 'Paused – move away to continue' : `A new form opens in ${Math.ceil(remaining / 1000)}s · hover to pause`}
+      </p>
+    </div>
+  );
+};
 
 const FieldError: React.FC<{ id: string; message?: string }> = ({ id, message }) =>
   message ? (
@@ -121,6 +174,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ bookingIntent, highlig
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [resetPaused, setResetPaused] = useState(false);
   const [honeypot, setHoneypot] = useState('');
   const shownAt = useRef(Date.now());
 
@@ -176,6 +230,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ bookingIntent, highlig
     setTriedSubmit(false);
     setIsSubmitted(false);
     setSubmitError('');
+    setResetPaused(false);
     shownAt.current = Date.now();
   };
 
@@ -217,8 +272,17 @@ export const ContactPage: React.FC<ContactPageProps> = ({ bookingIntent, highlig
             <div className="lg:col-span-7">
               <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#E1E6EF] p-4 sm:p-6 lg:p-8 shadow-sm">
                 {isSubmitted ? (
-                  /* Success state */
-                  <div className="space-y-6 text-center py-6 animate-in fade-in zoom-in-95 duration-300">
+                  /* Success state: auto-returns to a fresh form after 5s; hover or focus pauses */
+                  <div
+                    className="space-y-6 text-center py-6 animate-in fade-in zoom-in-95 duration-300"
+                    onMouseEnter={() => setResetPaused(true)}
+                    onMouseLeave={() => setResetPaused(false)}
+                    onFocus={() => setResetPaused(true)}
+                    onBlur={(e) => {
+                      if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setResetPaused(false);
+                    }}
+                  >
+                    <AutoResetBar duration={SUCCESS_RESET_MS} paused={resetPaused} onDone={handleReset} />
                     <div className="w-16 h-16 rounded-full bg-emerald-100 text-[#16834A] flex items-center justify-center mx-auto">
                       <CheckCircle2 className="w-10 h-10" />
                     </div>
@@ -485,7 +549,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ bookingIntent, highlig
                         )}
                       </button>
                       <p className="text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] text-center text-slate-400 mt-2">
-                        By submitting, you agree to be contacted by Samir's team about this request. No spam.
+                        By submitting, you agree to be contacted by TeamSamir about this request. No spam.
                       </p>
                     </div>
                   </form>
@@ -524,7 +588,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ bookingIntent, highlig
               }`}
             >
               <InfoItem icon={<Sparkles className="w-4 h-4" />} label="Head Trainer & Founder" accent>
-                <div className="text-sm font-bold text-[#171A21]">Coach Samir (TS Fitness)</div>
+                <div className="text-sm font-bold text-[#171A21]">TeamSamir (TS Fitness)</div>
                 <div className="text-xs text-[#646B78]">{BUSINESS_INFO.experienceYears}+ Years Experience · Former Coach at Fitness Talk</div>
               </InfoItem>
 

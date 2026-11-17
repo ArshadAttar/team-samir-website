@@ -18,7 +18,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose, onBookDem
   const clips = [
     {
       id: 1,
-      title: 'Coach Samir Gym Presence Reel',
+      title: 'TeamSamir Gym Presence Reel',
       sub: 'Official TeamSamir Polo in Gym Floor',
       img: '/images/hero_samir_ts_fitness_1792417382753.jpg',
       duration: '00:10',
@@ -151,7 +151,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose, onBookDem
           <div className="flex items-center justify-between text-xs text-slate-300">
             <span className="text-[#00A3FF] font-semibold flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Coach Samir Training Protocol</span>
+              <span>TeamSamir Training Protocol</span>
             </span>
             <span className="text-slate-400">TS Fitness, Kothrud Pune</span>
           </div>
@@ -174,7 +174,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose, onBookDem
               }}
               className="w-full sm:w-auto px-5 py-2.5 text-xs font-semibold text-white bg-[#1769FF] hover:bg-[#00A3FF] rounded-lg transition-colors cursor-pointer"
             >
-              Book Free Demo With Samir
+              Free Consultation With TeamSamir
             </button>
           </div>
         </div>

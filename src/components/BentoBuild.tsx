@@ -96,7 +96,7 @@ export const BentoBuild: React.FC<BentoBuildProps> = ({ onBookDemo, className = 
           </div>
 
           <div className="pt-6 flex items-center justify-between border-t border-slate-800/80 mt-6">
-            <span className="text-xs text-slate-400">Led by Coach Samir · Kothrud, Pune</span>
+            <span className="text-xs text-slate-400">Led by TeamSamir · Kothrud, Pune</span>
             <span className="text-xs font-semibold text-[#00A3FF] flex items-center gap-1">
               <span>Calibrated Routine</span>
               <ArrowRight className="w-3.5 h-3.5" />

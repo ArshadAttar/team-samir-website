@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   // Hide the header while scrolling down the page, bring it back on any scroll up.
-  // While it is hidden, a floating "Book Free Call" button takes its place.
+  // While it is hidden, a floating "Free Consultation" button takes its place.
   const [isHidden, setIsHidden] = useState(false);
   const lastY = useRef(0);
 
@@ -105,7 +105,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={onBookDemo}
             className="hidden sm:inline-flex items-center justify-center min-h-[44px] px-4 lg:px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#1769FF] hover:bg-[#0B3D91] active:scale-[0.98] rounded-xl shadow-sm transition-all cursor-pointer whitespace-nowrap shrink-0"
           >
-            Book Free Call
+            Free Consultation
           </button>
 
           {/* Compact, Sleek Mobile Three Bars Menu Button */}
@@ -150,7 +150,7 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
     </header>
 
-    {/* Floating "Book Free Call" shown only while the header is hidden */}
+    {/* Floating "Free Consultation" shown only while the header is hidden */}
     <button
       onClick={onBookDemo}
       tabIndex={isHidden ? 0 : -1}
@@ -160,7 +160,7 @@ export const Header: React.FC<HeaderProps> = ({
       }`}
     >
       <Calendar className="w-4 h-4 shrink-0" />
-      Book Free Call
+      Free Consultation
     </button>
     </>
   );

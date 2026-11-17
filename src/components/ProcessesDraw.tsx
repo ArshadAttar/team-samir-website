@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  ShieldAlert,
+  MessagesSquare,
+  ClipboardList,
+  Salad,
   Dumbbell,
-  Apple,
-  Brain,
-  Trophy,
+  TrendingUp,
   ArrowRight,
   CheckCircle2,
 } from 'lucide-react';
@@ -13,63 +13,46 @@ interface ProcessStep {
   id: number;
   phase: string;
   title: string;
-  gymPoint: string;
-  lifeImpact: string;
   icon: React.ReactNode;
-  duration: string;
-  outcome: string;
+  description: string;
 }
 
 const PROCESS_STEPS: ProcessStep[] = [
   {
     id: 1,
     phase: '01',
-    title: 'Biomechanics Calibration & Posture Reset',
-    gymPoint: 'Assessment of spine curvature, hip mobility, and shoulder impingement before touching weights.',
-    lifeImpact: 'Instantly reduces desk-bound lower back ache and neck stiffness within the first 14 days.',
-    icon: <ShieldAlert className="w-5 h-5 text-[#00A3FF]" />,
-    duration: 'Weeks 1 - 2',
-    outcome: 'Pain-Free Movement Baseline',
+    title: 'Free Consultation & Goal Discussion',
+    icon: <MessagesSquare className="w-5 h-5 text-[#00A3FF]" />,
+    description:
+      'Connect with our fitness expert to discuss your goals, fitness history, lifestyle, and challenges. We will help you choose the right coaching plan for your needs.',
   },
   {
     id: 2,
     phase: '02',
-    title: 'Progressive Overload & Neural Activation',
-    gymPoint: 'Calibrated resistance loading that triggers muscle hypertrophy without fatiguing joints.',
-    lifeImpact: 'Fires up dormant metabolic rate, burning calories even while sleeping or working at your desk.',
-    icon: <Dumbbell className="w-5 h-5 text-[#1769FF]" />,
-    duration: 'Weeks 3 - 6',
-    outcome: 'Metabolic Acceleration',
+    title: 'Enrollment & Health Screening',
+    icon: <ClipboardList className="w-5 h-5 text-[#1769FF]" />,
+    description: 'Get enrolled and complete your fitness profile, including an enrollment form and PAR-Q health questionnaire, to help us understand your needs and any health considerations.',
   },
   {
     id: 3,
     phase: '03',
-    title: 'Macro-Engineered Nutrition Synchronization',
-    gymPoint: 'Pairing lifting sessions with optimal Indian meal protein, electrolytes, and hydration.',
-    lifeImpact: 'Completely eliminates the 3 PM sugar crash and sluggishness, maintaining clean mental stamina.',
-    icon: <Apple className="w-5 h-5 text-[#16834A]" />,
-    duration: 'Weeks 7 - 10',
-    outcome: 'Sustained Daily Energy',
+    title: 'Meet Your Coach & Nutrition Planning',
+    icon: <Salad className="w-5 h-5 text-[#16834A]" />,
+    description: 'Get matched with your personal coach for a detailed nutrition consultation. Receive a customized meal plan based on your food preferences, lifestyle, and fitness goals.',
   },
   {
     id: 4,
     phase: '04',
-    title: 'Neurological Resilience & Stress Mastery',
-    gymPoint: 'High-intensity threshold drills that condition the cardiovascular and central nervous systems.',
-    lifeImpact: 'Lowers systemic cortisol, deepens slow-wave sleep, and builds mental composure under professional pressure.',
-    icon: <Brain className="w-5 h-5 text-purple-500" />,
-    duration: 'Weeks 11 - 16',
-    outcome: 'High Mental Focus & Sleep',
+    title: 'Live Fitness Assessment & Training',
+    icon: <Dumbbell className="w-5 h-5 text-purple-500" />,
+    description: 'Start with a live fitness assessment where your coach evaluates your fitness level, mobility, and strength to design a personalized workout plan and begin your training.',
   },
   {
     id: 5,
     phase: '05',
-    title: 'Peak Aesthetic Form & Sustainable Autonomy',
-    gymPoint: 'Consolidated body recomposition with high functional strength and lean definition.',
-    lifeImpact: 'Radical confidence shift in clothing, high physical capability, and effortless lifelong fitness habits.',
-    icon: <Trophy className="w-5 h-5 text-amber-500" />,
-    duration: 'Weeks 16+',
-    outcome: 'Permanent Transformation',
+    title: 'Ongoing Support & Progress Tracking',
+    icon: <TrendingUp className="w-5 h-5 text-amber-500" />,
+    description: 'Stay consistent with regular coaching, nutrition guidance, workout tracking, and progress reviews. See how far you will come after your first 30 days and keep working towards your goals.',
   },
 ];
 
@@ -127,10 +110,10 @@ export const ProcessesDraw: React.FC<ProcessesDrawProps> = ({ className = '', on
       {/* Header */}
       <div className="pb-5 border-b border-slate-800 lg:text-center">
         <h2 className="text-xl sm:text-3xl font-display font-extrabold text-white">
-          How The Gym Creates Real Life Transformation
+         Your Transformation Journey in 5 Simple Steps
         </h2>
         <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl lg:mx-auto">
-          Scroll through each phase to see how discipline in the gym turns into real changes in your daily life.
+          Explore each step and see how small efforts create lasting transformation.
         </p>
       </div>
 
@@ -199,7 +182,7 @@ export const ProcessesDraw: React.FC<ProcessesDrawProps> = ({ className = '', on
                     </div>
                     <div>
                       <span className="text-[length:max(10px,calc(10rem/16))] sm:text-[length:max(11px,calc(11rem/16))] font-bold uppercase tracking-wider text-[#00A3FF]">
-                        Phase {step.phase} · {step.duration}
+                        Phase {step.phase}
                       </span>
                       <h3 className="text-sm sm:text-base lg:text-lg font-display font-bold text-white leading-tight">
                         {step.title}
@@ -207,21 +190,10 @@ export const ProcessesDraw: React.FC<ProcessesDrawProps> = ({ className = '', on
                     </div>
                   </div>
 
-                  <div className="mt-3 space-y-1.5 text-xs sm:text-[length:max(13px,calc(13rem/16))] leading-relaxed">
-                    <p className="text-slate-300">
-                      <span className="font-semibold text-slate-100">🏋️ In the gym: </span>
-                      {step.gymPoint}
-                    </p>
-                    <p className="text-emerald-200/90">
-                      <span className="font-semibold text-emerald-300">🌱 In your life: </span>
-                      {step.lifeImpact}
-                    </p>
-                  </div>
-
-                  <div className="mt-2.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-950/50 border border-emerald-800/40 text-[length:max(11px,calc(11rem/16))] font-semibold text-emerald-400">
-                    <CheckCircle2 className="w-3 h-3" />
-                    {step.outcome}
-                  </div>
+                  <p className="mt-3 flex items-start gap-2 text-xs sm:text-[length:max(13px,calc(13rem/16))] leading-relaxed text-slate-300">
+                    <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-emerald-400" aria-hidden="true" />
+                    <span>{step.description}</span>
+                  </p>
                 </div>
               </div>
             );
@@ -231,8 +203,7 @@ export const ProcessesDraw: React.FC<ProcessesDrawProps> = ({ className = '', on
 
       {/* Action */}
       {onBookDemo && (
-        <div className="mt-6 pt-5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-xs sm:text-sm text-slate-400">Personalised coaching by Coach Samir</div>
+        <div className="mt-6 pt-5 border-t border-slate-800 flex justify-end">
           <button
             onClick={onBookDemo}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#1769FF] hover:bg-[#00A3FF] text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-lg active:scale-95"

@@ -18,30 +18,30 @@ export const STATS = {
 export const BUSINESS_INFO = {
   brandName: 'TeamSamir',
   trainerName: 'Samir',
-  gymName: 'TS Fitness',
+  gymName: 'TeamSamir',
   tagline: 'Personalised Fitness & Coaching',
   experienceYears: String(STATS.years),
   previousGym: 'Fitness Talk',
   clientsTrained: `${STATS.clients}+`,
   celebritiesTrained: `${STATS.celebrities}+`,
   location: {
-    line1: 'Flat No. 3, XYZ Apartment (DP Road)',
+    line1: 'Near By Ashish Garden, Kothrud, Pune',
     line2: 'Kothrud',
     city: 'Pune',
     state: 'Maharashtra',
     country: 'India',
     pincode: '411038',
-    fullAddress: 'Flat No. 3, XYZ Apartment, Kothrud, Pune, Maharashtra, India',
-    directionsQuery: 'Kothrud, Pune, Maharashtra, India',
+    fullAddress: 'Near By Ashish Garden, Kothrud, Pune',
+    directionsQuery: 'Pune, Maharashtra, India',
   },
   // Realistic dummy contact details for immediate mobile click-to-call & WhatsApp
   contact: {
-    phone: '+91 8421287284',
-    phoneRaw: '+918421287284',
-    whatsapp: '+91 8421287284',
-    whatsappNumber: '918421287284',
-    email: 'samir@teamsamirfitness.com',
-    workingHours: 'Mon – Sat: 6:00 AM – 9:00 PM (Sunday By Appointment)',
+    phone: '+91 7972688921',
+    phoneRaw: '+917972688921',
+    whatsapp: '+91 7972688921',
+    whatsappNumber: '917972688921',
+    email: 'teamsamir7@gmail.com',
+    workingHours: 'Mon – Sat: 6:00 AM – 10:00 PM,  IST',
   },
   disclaimerClaims: 'Client and celebrity training statistics are supplied by the client and are presented as editable figures pending formal verification before public launch.',
 };
@@ -53,15 +53,13 @@ export const BUSINESS_INFO = {
 export const TRIAL_PLAN = {
   name: 'Trial Plan',
   price: 'INR 1,999',
-  duration: '1 Month',
-  summary: 'Try 1-on-1 coaching with Samir for a month before committing to a longer plan.',
+  duration: '1 Week',
+  summary: 'Try 1-on-1 coaching with TeamSamir for a week before committing to a longer plan.',
   points: [
-    '12 one-on-one training sessions in 4 weeks',
-    'Fitness assessment on day 1 (posture, strength, mobility)',
-    'Workout plan made for your goal',
-    'Simple Indian diet plan with your home food',
-    'WhatsApp support from Samir',
-    'Progress check at the end of the month',
+    '3 one-on-one live sessions.',
+    'Alternate days cardio tasks.',
+    'Simple Indian food meals.',
+    'Daily checks on WhatsApp',
   ],
 };
 
@@ -186,7 +184,7 @@ export const SERVICES: ServiceItem[] = [
     planInfo: [
       { label: 'Session length', value: '60 minutes' },
       { label: 'Where', value: 'TS Fitness Studio, Kothrud' },
-      { label: 'Trainer', value: 'Coach Samir, one-on-one' },
+      { label: 'Trainer', value: 'TeamSamir, one-on-one' },
       { label: 'Timings', value: 'Morning or evening slot of your choice' },
     ],
     activeDays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
@@ -344,18 +342,18 @@ export const TRANSFORMATIONS: TransformationItem[] = [
   {
     id: 'tr-3',
     category: 'videos',
-    clientNamePlaceholder: 'Coach Samir Gym Video Reel (Posing & Form)',
+    clientNamePlaceholder: 'TeamSamir Gym Video Reel (Posing & Form)',
     duration: 'Official TS Fitness Reel',
     focusArea: 'Posing, Flexion & Studio Environment',
-    beforeLabel: 'Coach Samir in official white TeamSamir polo shirt',
+    beforeLabel: 'TeamSamir in official white TeamSamir polo shirt',
     afterLabel: 'TS Fitness studio floor, Kothrud Pune',
     beforeImg: '/images/hd_male_client_strength_1792417382210.jpg',
     afterImg: '/images/WhatsApp Image 2026-10-19 at 7.00.17 PM.jpeg',
-    summary: 'Watch Coach Samir demonstrate athletic discipline and physique conditioning inside the Pune studio.',
+    summary: 'Watch TeamSamir demonstrate athletic discipline and physique conditioning inside the Pune studio.',
     milestone: `${STATS.years}+ Years Professional Coaching Experience`,
     isVideo: true,
     videoDuration: '00:10',
-    consentNote: 'Official Coach Samir training footage.',
+    consentNote: 'Official TeamSamir training footage.',
   },
   {
     id: 'tr-4',
@@ -374,7 +372,7 @@ export const TRANSFORMATIONS: TransformationItem[] = [
   {
     id: 'tr-5',
     category: 'videos',
-    clientNamePlaceholder: 'Coach Samir Flex & Power Stance Reel',
+    clientNamePlaceholder: 'TeamSamir Flex & Power Stance Reel',
     duration: 'Strength & Form Showcase',
     focusArea: 'Bicep Peak & Shoulder Biomechanics',
     beforeLabel: 'Technique setup: Neutral spine and scapular retraction',
@@ -385,7 +383,7 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     milestone: `${STATS.celebrities}+ Celebrity trainees coached`,
     isVideo: true,
     videoDuration: '00:10',
-    consentNote: 'Official Coach Samir training footage.',
+    consentNote: 'Official TeamSamir training footage.',
   },
   {
     id: 'tr-6',
@@ -434,7 +432,7 @@ export const REVIEWS: ReviewItem[] = [
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
     stars: 5,
     comment:
-      'Coaching with Coach Samir took my clean barbell squat from 100kg to 160kg without knee strain. His understanding of joint load and progressive overload is unmatched.',
+      'Coaching with TeamSamir took my clean barbell squat from 100kg to 160kg without knee strain. His understanding of joint load and progressive overload is unmatched.',
     resultBadge: '+60kg Squat PR · Zero Knee Pain',
     program: 'Athletic Strength & Power',
   },
@@ -495,15 +493,15 @@ export const REVIEWS: ReviewItem[] = [
   },
 ];
 
-// Video feedback cards on the Home page. The current clips show Coach Samir at the studio;
+// Video feedback cards on the Home page. The current clips show TeamSamir at the studio;
 // replace `src` (files in src/assets/videos/) and the text with real client feedback videos.
 export const VIDEO_FEEDBACK: VideoFeedbackItem[] = [
   {
     id: 'video-1',
     src: videoOne,
-    title: 'Meet Coach Samir',
+    title: 'Meet TeamSamir',
     subtitle: 'TeamSamir · TS Fitness',
-    description: 'A quick hello from Coach Samir on the training floor, where every client session is personally guided.',
+    description: 'A quick hello from TeamSamir on the training floor, where every client session is personally guided.',
     tag: 'Coach Intro',
   },
   {
@@ -594,7 +592,7 @@ export const CLIENT_VIDEOS: ClientVideo[] = [
     id: 'cv-5',
     src: videoOne,
     title: 'Coach on the Floor',
-    description: 'Coach Samir at TS Fitness, guiding every session in person.',
+    description: 'TeamSamir at TS Fitness, guiding every session in person.',
     portrait: true,
   },
   {

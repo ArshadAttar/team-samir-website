@@ -53,7 +53,7 @@ export default function App() {
   };
 
   // Open the enquiry page from any button. A service title (string) or an explicit intent
-  // narrows the plans; anything else ("Book Free Demo", "Book Free Call", ...) shows all plans.
+  // narrows the plans; anything else ("Free Consultation", "Free Consultation", ...) shows all plans.
   const handleBookDemo = (intent?: string | BookingIntent) => {
     let next: BookingIntent = { kind: 'all' };
     if (typeof intent === 'object') {

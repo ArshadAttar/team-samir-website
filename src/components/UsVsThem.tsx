@@ -4,7 +4,6 @@ import { X, Check, ShieldCheck, ArrowRight } from 'lucide-react';
 
 interface ComparisonRow {
   feature: string;
-  featureSub: string;
   othersText: string;
   usText: string;
 }
@@ -12,46 +11,34 @@ interface ComparisonRow {
 const COMPARISON_DATA: ComparisonRow[] = [
   {
     feature: '1-on-1 Biomechanics & Rep Supervision',
-    featureSub: 'Hands-on posture & trajectory control',
     othersText: 'Trainers glued to their phones or casually managing 8–10 people at once',
-    usText: 'Undivided 1-on-1 attention from Coach Samir on every set, tempo, and bar path',
-  },
-  {
-    feature: 'Spinal Posture & Joint Injury Safety',
-    featureSub: 'Desk worker pain rehabilitation',
-    othersText: 'Reckless ego lifting that triggers lumbar slip, shoulder impingement, and knee strain',
-    usText: 'Pre-workout joint lubrication, thoracic extension, and anterior pelvic tilt correction',
+    usText: 'Undivided 1-on-1 attention from TeamSamir Coach on every set, tempo, and bar path',
   },
   {
     feature: 'Indian Household Nutrition Coaching',
-    featureSub: 'Ghar-ka-khana integration',
     othersText: 'Impractical generic PDF diet sheets, boiled chicken, or severe starvation',
     usText: 'Macro-calibrated roti, dal, paneer & eggs with daily WhatsApp plate audits',
   },
   {
+    feature: 'Workout planning & Tracking',
+    othersText: 'One-size-fits-all workout PDFs, random sets and reps, and no proper progress tracking.',
+    usText: `Science-backed workout programming, personalised intensity, weekly progress tracking, and expert coaching.`,
+  },
+  {
+    feature: 'Relentless Daily Accountability',
+    othersText: 'You miss workouts, ignore your diet, and nobody follows up—even after you will paid for the month.',
+    usText: 'Every single meal and workout is tracked with daily accountability, proactive follow-ups, and a coach available whenever you need guidance or support.',
+  },
+  {
     feature: 'Trainer Track Record & Pedigree',
-    featureSub: 'Credentials and verified milestones',
     othersText: 'Fresh weekend-certified interns who quit or rotate after 60 days',
     usText: `${BUSINESS_INFO.experienceYears}+ Years proven experience, ${BUSINESS_INFO.clientsTrained} clients transformed, ${BUSINESS_INFO.celebritiesTrained} celebrities coached`,
   },
   {
-    feature: 'Biometric Progress Tracking',
-    featureSub: 'Objective body recomposition scans',
-    othersText: 'Vague guesses using standard bathroom scales without body fat analysis',
-    usText: 'Weekly InBody scans tracking skeletal muscle, visceral fat, and hydration',
-  },
-  {
-    feature: 'Relentless Daily Accountability',
-    featureSub: 'Consistency & habit reinforcement',
-    othersText: 'Nobody notices or calls when you miss 2 weeks after paying annual fees',
-    usText: 'Direct WhatsApp hotline with Coach Samir; active habit tracking & check-ins',
-  },
-  {
-    feature: 'Studio Atmosphere & Equipment Access',
-    featureSub: 'Focus and privacy',
-    othersText: 'Overcrowded chaotic floor, waiting 15 minutes for a single bench or machine',
-    usText: 'Exclusive personal training zones at TS Fitness Studio in Kothrud',
-  },
+    feature: 'Spinal Posture & Joint Injury Safety',
+    othersText: 'Reckless ego lifting that triggers lumbar slip, shoulder impingement, and knee strain',
+    usText: 'Pre-workout joint lubrication, thoracic extension, and anterior pelvic tilt correction',
+  }
 ];
 
 interface UsVsThemProps {
@@ -66,11 +53,9 @@ export const UsVsThem: React.FC<UsVsThemProps> = ({ onBookDemo, className = '' }
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto space-y-2 sm:space-y-3">
         <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-[#171A21] tracking-tight">
-          Standard Gyms vs TS Fitness with Coach Samir
+        Other Platforms vs TeamSamir
         </h2>
-        <p className="text-xs sm:text-base text-[#646B78] leading-relaxed">
-          See why commercial gym memberships fail 85% of people in Pune within 3 months, and how our 1-on-1 coaching system guarantees measurable progress.
-        </p>
+
       </div>
 
       {/* 3-COLUMN COMPARISON TABLE */}
@@ -82,10 +67,10 @@ export const UsVsThem: React.FC<UsVsThemProps> = ({ onBookDemo, className = '' }
             Training Criteria / Features
           </div>
           <div className="hidden sm:block sm:col-span-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-rose-400 text-center">
-            Standard Commercial Gyms / Others
+          Other Platforms & commercial Gyms
           </div>
           <div className="hidden sm:block sm:col-span-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-emerald-400 text-center">
-            TS Fitness (Coach Samir)
+            TeamSamir
           </div>
         </div>
 
@@ -102,9 +87,6 @@ export const UsVsThem: React.FC<UsVsThemProps> = ({ onBookDemo, className = '' }
               <div className="col-span-12 sm:col-span-4 space-y-0.5">
                 <div className="text-xs sm:text-sm font-display font-bold text-[#171A21]">
                   {row.feature}
-                </div>
-                <div className="text-[length:max(11px,calc(11rem/16))] text-slate-500">
-                  {row.featureSub}
                 </div>
               </div>
 

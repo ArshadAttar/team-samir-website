@@ -96,7 +96,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
             Slide to Reveal Client Transformations
           </h2>
           <p className="text-xs sm:text-sm text-[#646B78] mt-1">
-            Drag the sliding divider left or right to inspect the exact anatomical changes under Coach Samir's guidance.
+            Drag the sliding divider left or right to inspect the exact anatomical changes under TeamSamir's guidance.
           </p>
         </div>
 

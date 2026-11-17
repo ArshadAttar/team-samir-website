@@ -152,10 +152,10 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
               className="w-full flex items-center justify-center gap-1.5 py-2 px-2.5 text-xs font-semibold text-white bg-[#1769FF] hover:bg-[#0B3D91] rounded-lg shadow-sm transition-all cursor-pointer"
             >
               <Calendar className="w-3.5 h-3.5 shrink-0" />
-              <span className="truncate">Book Free Demo</span>
+              <span className="truncate">Free Consultation</span>
             </button>
             <p className="text-[length:max(9px,calc(9rem/16))] text-center text-[#646B78] mt-1 truncate">
-              Kothrud · Coach Samir
+              Kothrud · TeamSamir
             </p>
           </div>
 

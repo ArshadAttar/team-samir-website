@@ -204,8 +204,8 @@ export const ClientFeedback: React.FC = () => (
       <div className="relative">
         <SectionHeader
           kicker="Client Feedback & Social Proof"
-          title="Real Experiences from Pune Trainees"
-          desc="What our clients say about training with Coach Samir. Hover over a card to pause."
+          title="Real Experiences from our clients"
+          desc="What our clients say about training with TeamSamir."
         />
         {/* Full-width strip (edge to edge) */}
         <div className="w-full">
@@ -223,8 +223,8 @@ export const ClientFeedback: React.FC = () => (
       <div className="relative">
         <SectionHeader
           kicker="Video Feedback"
-          title="Watch Real Training Moments"
-          desc="Short clips from TS Fitness. Videos play automatically with sound off. Hover over a video to pause the strip and use the sound and play controls."
+          title="Listen to Our Clients Share Their Experiences."
+          desc="Don't Just Take Our Word for It. Hear It from Our Clients."
           icon={<Video className="w-3.5 h-3.5" />}
         />
         {/* Full-width strip (edge to edge) */}
