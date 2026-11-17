@@ -47,7 +47,7 @@ export const BUSINESS_INFO = {
 };
 
 // ------------------------------------------------------------------
-// Paid trial shown by the Home "Book Trail – INR 1,999" button.
+// Paid trial shown by the Home "Book Trial – INR 1,999" button.
 // Points are placeholders; confirm with Samir before launch.
 // ------------------------------------------------------------------
 export const TRIAL_PLAN = {

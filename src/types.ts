@@ -58,7 +58,7 @@ export interface TransformationItem {
 /**
  * Which plans the enquiry page shows, decided by the button the visitor clicked.
  * - all: every plan (scrollable list) — the default for "Book Free Demo", "Book Free Call", etc.
- * - trial: only the paid trial plan ("Book Trail – INR 1,999" on Home)
+ * - trial: only the paid trial plan ("Book Trial – INR 1,999" on Home)
  * - service: one service's plans (Services page "Enquire" / "Choose <plan>"); planName preselects that plan
  * `heading` optionally overrides the form heading.
  */

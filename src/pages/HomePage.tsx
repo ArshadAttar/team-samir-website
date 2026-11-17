@@ -121,7 +121,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
                   className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-6 sm:py-3.5 min-h-[40px] sm:min-h-[46px] text-xs sm:text-sm font-semibold text-white bg-[#1769FF] hover:bg-[#00A3FF] active:scale-[0.98] rounded-lg sm:rounded-xl shadow-md transition-all cursor-pointer"
                 >
                   <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                  <span className="truncate">Book Trail – INR 1,999</span>
+                  <span className="truncate">Book Trial – INR 1,999</span>
                 </button>
 
                 <button
