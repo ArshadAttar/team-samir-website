@@ -24,6 +24,10 @@ interface AboutPageProps {
   highlightPlaceholders: boolean;
 }
 
+// About video plays only this segment (seconds), looping: 2s → 7s = 5s clip
+const ABOUT_VIDEO_START = 2;
+const ABOUT_VIDEO_END = 7;
+
 // Icon for each certification card (keyed by CERTIFICATIONS id in mockData)
 const CERT_ICONS: Record<string, LucideIcon> = {
   'cert-1': GraduationCap,
@@ -75,6 +79,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   muted
                   loop
                   playsInline
+                  // Play only the ABOUT_VIDEO_START–ABOUT_VIDEO_END segment, on loop
+                  onLoadedMetadata={(e) => {
+                    e.currentTarget.currentTime = ABOUT_VIDEO_START;
+                  }}
+                  onTimeUpdate={(e) => {
+                    const v = e.currentTarget;
+                    if (v.currentTime >= ABOUT_VIDEO_END || v.currentTime < ABOUT_VIDEO_START) {
+                      v.currentTime = ABOUT_VIDEO_START;
+                      if (v.paused) v.play().catch(() => undefined);
+                    }
+                  }}
                   aria-label="TeamSamir - Founder & Head Coach at TS Fitness"
                   className="w-full h-full object-cover object-[center_10%]"
                 />
