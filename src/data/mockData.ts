@@ -350,14 +350,37 @@ export const CERTIFICATIONS = [
   {
     id: 'cert-1',
     title: 'Diploma in Personal Training',
-    description:
-      'Formal training in exercise science, programme design, lifting technique and safe, progressive coaching for all fitness levels.',
+    description: 'Exercise science, programme design and safe lifting technique for every fitness level.',
   },
   {
     id: 'cert-2',
     title: 'Human Performance Nutrition',
-    description:
-      'Qualification in performance-focused nutrition, covering macronutrients, protein intake, hydration and practical meal planning.',
+    description: 'Macros, protein, hydration and practical meal planning for performance and recovery.',
+  },
+  {
+    id: 'cert-3',
+    title: 'REPs India Register',
+    description: 'Listed on the Register of Exercise Professionals India as a recognised fitness professional.',
+  },
+  {
+    id: 'cert-4',
+    title: 'Skill India Certificate',
+    description: 'Government-recognised Skill India certification in fitness training.',
+  },
+  {
+    id: 'cert-5',
+    title: 'PD: Approval Certificate',
+    description: 'Approved professional development credential for continued coaching education.',
+  },
+  {
+    id: 'cert-6',
+    title: 'Back Health Management Certificate',
+    description: 'Training to protect, strengthen and safely rehabilitate the lower back and spine.',
+  },
+  {
+    id: 'cert-7',
+    title: 'CPR-AED Certificate',
+    description: 'Certified in CPR and AED use to respond to emergencies during sessions.',
   },
 ];
 
