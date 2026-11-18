@@ -246,32 +246,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               </p>
             </div>
           </div>
-
-          {/* 5 Core Strategic Goals (hidden for now)
-          <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl border border-[#E1E6EF] space-y-4">
-            <h3 className="text-base sm:text-lg font-display font-bold text-[#171A21]">
-              Core Strategic Goals
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
-              {[
-                { title: 'Consistency & Discipline', desc: 'Instill steady weekly training habits that fit seamlessly into busy professional lives.' },
-                { title: 'Sustainable Habits', desc: 'Move clients away from crash transformations towards lifetime movement adherence.' },
-                { title: 'Strength & Mobility', desc: 'Develop balanced muscular strength and full joint range of motion.' },
-                { title: 'Practical Nutrition', desc: 'Demystify macronutrients and protein in everyday Indian cooking.' },
-                { title: 'Supportive Experience', desc: 'Provide an encouraging, judgement-free 1-on-1 coaching environment.' },
-              ].map((g, idx) => (
-                <div key={idx} className="p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
-                  <div className="w-6 h-6 rounded-md bg-[#1769FF] text-white text-[length:max(11px,calc(11rem/16))] font-bold flex items-center justify-center font-mono">
-                    0{idx + 1}
-                  </div>
-                  <h4 className="text-xs sm:text-sm font-bold text-[#171A21]">{g.title}</h4>
-                  <p className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-[#646B78] leading-relaxed">{g.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          */}
-
         </div>
       </section>
 
