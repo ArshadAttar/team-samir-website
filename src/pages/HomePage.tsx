@@ -148,7 +148,7 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
                   <div className="aspect-16/10 sm:aspect-4/3 lg:aspect-4/3 @container relative overflow-hidden bg-black flex flex-col items-center justify-center gap-2 sm:gap-4 px-3">
                     {/* Logo mark: fixed-height box crops the empty black padding above and below the icon */}
                     <img decoding="async"
-                      src="/images/logo/logo-black.webp"
+                      src="/media/shared/logo/logo-black.webp"
                       alt="TeamSamir logo - TS Fitness Pune"
                       className="w-48 h-28 sm:w-72 sm:h-44 object-cover object-center shrink-0 transition-transform duration-500 ease-out group-hover:scale-120"
                       referrerPolicy="no-referrer"
@@ -156,27 +156,14 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
 
                     {/* Identity text, centred under the logo with a soft glow */}
                     <div className="relative z-10 text-white text-center">
-                      {/* <div className="text-xs font-semibold text-[#00A3FF] uppercase tracking-wider flex items-center gap-1.5">
-                        <span>TS Fitness Pune</span>
-                        <span className="text-slate-500">·</span>
-                        <span>TeamSamir</span>
-                      </div> */}
                       {/* Single line: font size scales with the card width (cqw) so it never wraps */}
                       <div className="whitespace-nowrap text-[clamp(0.9rem,4.8cqw,1.75rem)] font-display font-extrabold [text-shadow:0_2px_10px_rgba(0,163,255,0.2)] transition-[text-shadow] duration-500 group-hover:[text-shadow:0_0_12px_rgba(0,163,255,0.45)]">
                         Experience Fitness Like Never Before
                       </div>
-                      {/* <div className="text-xs text-slate-300 mt-0.5">
-                        {BUSINESS_INFO.experienceYears}+ Years Experience · {BUSINESS_INFO.clientsTrained} Clients · Kothrud, Pune
-                      </div> */}
                     </div>
                   </div>
                 </div>
 
-                {/* Layered Location Badge */}
-                {/* <div className="hidden sm:flex absolute -top-4 -left-4 bg-[#111318]/95 backdrop-blur-md border border-slate-700 px-3.5 py-2 rounded-xl shadow-xl items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#16834A]" />
-                  <span className="text-xs font-medium text-slate-200">Kothrud</span>
-                </div> */}
 
               </div>
             </div>

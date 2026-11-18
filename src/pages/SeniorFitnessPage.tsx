@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, MotionConfig } from 'motion/react';
 import { PageId } from '../types';
 import { BUSINESS_INFO } from '../data/mockData';
+import { img } from '../data/seniorFitnessMedia';
 import { SeniorTransformations } from '../components/senior-fitness/SeniorTransformations';
 import {
   Activity,
@@ -24,12 +25,6 @@ interface SeniorFitnessPageProps {
 }
 
 const SERVICE_NAME = 'Senior Fitness';
-
-/**
- * Photos live in public/images/senior-fitness/. Prompts for generating each one are in
- * docs/senior-fitness-image-prompts.md. Missing files fall back to a styled placeholder.
- */
-const img = (name: string) => `/images/senior-fitness/${name}.webp`;
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 

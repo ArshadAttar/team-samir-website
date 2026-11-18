@@ -1,11 +1,22 @@
 # Senior Fitness page – AI image prompts
 
-The Senior Fitness page (`src/pages/SeniorFitnessPage.tsx`) loads 4 photos from
-`public/images/senior-fitness/`. Until a file exists, the page shows a styled placeholder
-in its place, so the page works with any number of images added.
+The Senior Fitness page (`src/pages/SeniorFitnessPage.tsx`) loads 4 photos, each from its
+section's folder under `public/media/senior-fitness/` (paths are listed in
+`src/data/seniorFitnessMedia.ts`):
 
-Generate each image with the prompt below, save it as **JPG** with the **exact filename**,
-and drop it into `public/images/senior-fitness/`. No code change is needed.
+| File | Folder |
+|---|---|
+| `hero` | `public/media/senior-fitness/hero/photos/` |
+| `why-me` | `public/media/senior-fitness/why-train-with-me/photos/` |
+| `assessment` | `public/media/senior-fitness/transformations/photos/` |
+| `cta` | `public/media/senior-fitness/final-cta/photos/` |
+
+Until a file exists, the page shows a styled placeholder in its place, so the page works with
+any number of images added.
+
+Generate each image with the prompt below, save it with the **exact filename** (keep the JPG
+original and add a compressed `.webp`, which is what the page loads) and drop it into the
+folder above. No code change is needed.
 
 Gender split for these 4 images: 3 women, 1 man.
 
@@ -48,7 +59,7 @@ off-centre) in `src/pages/SeniorFitnessPage.tsx`.
 
 ## Review portraits (reviews section)
 
-Circular avatars for the reviews section load from `public/images/senior-fitness/reviews/<id>.jpg`
+Circular avatars for the reviews section load from `public/media/senior-fitness/reviews/photos/<id>.jpg`
 (ids are in `src/components/senior-reviews/reviewData.ts`). Until a file exists, a gradient
 initials avatar is shown. The current reviews are **sample placeholders**. When real client reviews
 arrive, use the client's own photo (with consent) rather than an AI portrait.

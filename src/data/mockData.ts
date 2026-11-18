@@ -1,11 +1,4 @@
 import { ServiceItem, ServicePlan, TeamMember, TransformationItem, ReviewItem, VideoFeedbackItem, ClientTransformation, ClientVideo } from '../types';
-import videoOne from '../assets/videos/v1.mp4';
-import videoTwo from '../assets/videos/v2.mp4';
-import videoThree from '../assets/videos/v3.mp4';
-import stockDeadlift from '../assets/videos/stock/strength-deadlift.mp4';
-import stockBattleRopes from '../assets/videos/stock/battle-ropes.mp4';
-import stockSquats from '../assets/videos/stock/squat-training.mp4';
-import stockLunges from '../assets/videos/stock/lunge-workout.mp4';
 
 // Single source for the headline numbers shown across the whole site.
 // Change them here only; every page reads from BUSINESS_INFO.
@@ -234,7 +227,7 @@ export const SERVICES: ServiceItem[] = [
       'Daily follow-up by coach',
       'Travel & restaurant assistance',
     ],
-    image: '/images/hd_male_client_strength_1792417382210.webp',
+    image: '/media/services/service-cards/photos/hd_male_client_strength_1792417382210.webp',
     planInfo: [
       { label: 'Session length', value: '60 minutes' },
       { label: 'Where', value: 'World-Wide' },
@@ -257,7 +250,7 @@ export const SERVICES: ServiceItem[] = [
       'Indian food that suited on your condition',
       'Every month check on your reports',
     ],
-    image: '/images/fitness_coaching_tech_1792415136876.webp',
+    image: '/media/services/service-cards/photos/fitness_coaching_tech_1792415136876.webp',
     planInfo: [
       { label: 'Session length', value: '45–60 minutes' },
       { label: 'First step', value: 'Review of your reports, medicines and doctor\'s advice' },
@@ -280,7 +273,7 @@ export const SERVICES: ServiceItem[] = [
       'No crash diets or starving',
       'Daily updates on WhatsApp',
     ],
-    image: '/images/nutrition_wellness_bowl_1792415114008.webp',
+    image: '/media/services/service-cards/photos/nutrition_wellness_bowl_1792415114008.webp',
     planInfo: [
       { label: 'How it works', value: 'Online, on WhatsApp and calls' },
       { label: 'First step', value: 'A 45-60 minutes Counseling call about your food habits and goal' },
@@ -303,7 +296,7 @@ export const SERVICES: ServiceItem[] = [
       'Train anywhere in Pune',
       'Enjoy Personalised Face-to-Face Training',
     ],
-    image: '/images/offline_functional_training_1792415113638.webp',
+    image: '/media/services/service-cards/photos/offline_functional_training_1792415113638.webp',
     planInfo: [
       { label: 'Session length', value: '60 minutes' },
       { label: 'Trainer', value: 'According to Your time slot' },
@@ -393,8 +386,8 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     focusArea: 'Postural Alignment & Compound Strength',
     beforeLabel: 'Baseline: Lower back fatigue, desk worker posture',
     afterLabel: 'Current: Deadlift 140kg, upright posture, +4kg lean muscle',
-    beforeImg: '/images/hd_male_client_strength_1792417382210.webp',
-    afterImg: '/images/WhatsApp Image 2026-10-19 at 7.00.17 PM.webp',
+    beforeImg: '/media/services/service-cards/photos/hd_male_client_strength_1792417382210.webp',
+    afterImg: '/media/unused/photos/WhatsApp Image 2026-10-19 at 7.00.17 PM.webp',
     summary: 'Focused on progressive overload, unilateral stability work, and consistent protein intake under Samir\'s direct supervision.',
     milestone: '+60% Relative compound lifting strength',
     consentNote: 'Verified client milestone with photo release consent.',
@@ -407,8 +400,8 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     focusArea: 'Sustainable Fat Loss & Core Toning',
     beforeLabel: 'Baseline: Sedentary IT desk fatigue, irregular meal habits',
     afterLabel: 'Current: -8kg body fat, strong kettlebell squats, vibrant daily energy',
-    beforeImg: '/images/hd_female_functional_training_1792417382944.webp',
-    afterImg: '/images/hd_female_client_coaching_1792417382622.webp',
+    beforeImg: '/media/unused/photos/hd_female_functional_training_1792417382944.webp',
+    afterImg: '/media/unused/photos/hd_female_client_coaching_1792417382622.webp',
     summary: 'Integrated 3 gym days with daily step counts and high-protein home-cooked Indian meals without extreme starvation protocols.',
     milestone: 'Sustainable lifestyle change maintained over 6+ months',
     consentNote: 'Verified client milestone with photo release consent.',
@@ -421,8 +414,8 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     focusArea: 'Posing, Flexion & Studio Environment',
     beforeLabel: 'TeamSamir in official white TeamSamir polo shirt',
     afterLabel: 'TS Fitness studio floor, Kothrud Pune',
-    beforeImg: '/images/hd_male_client_strength_1792417382210.webp',
-    afterImg: '/images/WhatsApp Image 2026-10-19 at 7.00.17 PM.webp',
+    beforeImg: '/media/services/service-cards/photos/hd_male_client_strength_1792417382210.webp',
+    afterImg: '/media/unused/photos/WhatsApp Image 2026-10-19 at 7.00.17 PM.webp',
     summary: 'Watch TeamSamir demonstrate athletic discipline and physique conditioning inside the Pune studio.',
     milestone: `${STATS.years}+ Years Professional Coaching Experience`,
     isVideo: true,
@@ -437,8 +430,8 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     focusArea: 'Thoracic Mobility & Glute Activation',
     beforeLabel: 'Baseline: Cervical tightness from 9-hour laptop posture',
     afterLabel: 'Current: Pain-free overhead lifts, 10 strict bodyweight push-ups',
-    beforeImg: '/images/hd_female_client_coaching_1792417382622.webp',
-    afterImg: '/images/hd_female_functional_training_1792417382944.webp',
+    beforeImg: '/media/unused/photos/hd_female_client_coaching_1792417382622.webp',
+    afterImg: '/media/unused/photos/hd_female_functional_training_1792417382944.webp',
     summary: 'Focus was placed on habit sustainability, micro-goals, and ergonomic training alongside resistance workouts.',
     milestone: 'Zero cervical pain, completed 5k run',
     consentNote: 'Verified client milestone with photo release consent.',
@@ -451,8 +444,8 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     focusArea: 'Bicep Peak & Shoulder Biomechanics',
     beforeLabel: 'Technique setup: Neutral spine and scapular retraction',
     afterLabel: 'Controlled execution and muscle contraction',
-    beforeImg: '/images/hd_male_client_strength_1792417382210.webp',
-    afterImg: '/images/WhatsApp Image 2026-10-19 at 7.00.17 PM.webp',
+    beforeImg: '/media/services/service-cards/photos/hd_male_client_strength_1792417382210.webp',
+    afterImg: '/media/unused/photos/WhatsApp Image 2026-10-19 at 7.00.17 PM.webp',
     summary: 'High-energy studio reel highlighting athletic conditioning and trainer-led motivation at TS Fitness.',
     milestone: `${STATS.celebrities}+ Celebrity trainees coached`,
     isVideo: true,
@@ -467,8 +460,8 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     focusArea: 'Chest Hypertrophy & Rotator Cuff Health',
     beforeLabel: 'Initial: Shoulder clicking on bench presses',
     afterLabel: 'Current: Corrected elbow path, 95kg dumbbell press',
-    beforeImg: '/images/hd_male_client_strength_1792417382210.webp',
-    afterImg: '/images/WhatsApp Image 2026-10-19 at 7.00.17 PM.webp',
+    beforeImg: '/media/services/service-cards/photos/hd_male_client_strength_1792417382210.webp',
+    afterImg: '/media/unused/photos/WhatsApp Image 2026-10-19 at 7.00.17 PM.webp',
     summary: 'Targeted face-pulls, incline presses, and rotator cuff warmups paired with progressive loading.',
     milestone: 'Complete resolution of shoulder impingement',
     consentNote: 'Verified client milestone with photo release consent.',
@@ -568,11 +561,11 @@ export const REVIEWS: ReviewItem[] = [
 ];
 
 // Video feedback cards on the Home page. The current clips show TeamSamir at the studio;
-// replace `src` (files in src/assets/videos/) and the text with real client feedback videos.
+// replace `src` (files in public/media/home/video-feedback/videos/) and the text with real client feedback videos.
 export const VIDEO_FEEDBACK: VideoFeedbackItem[] = [
   {
     id: 'video-1',
-    src: videoOne,
+    src: '/media/home/video-feedback/videos/v1.mp4',
     title: 'Meet TeamSamir',
     subtitle: 'TeamSamir · TS Fitness',
     description: 'A quick hello from TeamSamir on the training floor, where every client session is personally guided.',
@@ -580,7 +573,7 @@ export const VIDEO_FEEDBACK: VideoFeedbackItem[] = [
   },
   {
     id: 'video-2',
-    src: videoTwo,
+    src: '/media/home/video-feedback/videos/v2.mp4',
     title: 'Inside TS Fitness',
     subtitle: 'Kothrud',
     description: 'Take a look around the studio: free weights, machines and open floor space for safe, supervised training.',
@@ -588,7 +581,7 @@ export const VIDEO_FEEDBACK: VideoFeedbackItem[] = [
   },
   {
     id: 'video-3',
-    src: videoThree,
+    src: '/media/home/video-feedback/videos/v3.mp4',
     title: 'Your Coach, Every Session',
     subtitle: 'Personal Training',
     description: 'Samir works with you one-on-one, correcting form and keeping you motivated from warm-up to cool-down.',
@@ -604,7 +597,7 @@ export const VIDEO_FEEDBACK: VideoFeedbackItem[] = [
 //
 // The five entries below are SAMPLE stock photos (Unsplash License, free for commercial use)
 // so the gallery looks complete. They are NOT client results (a small "illustrative" note shows under the gallery while any `sample: true` entry remains).
-// To show a real client: put consented photos in public/images/transformations/
+// To show a real client: put consented photos in public/media/transformations/before-after/photos/
 // (e.g. client-01-before.jpg / client-01-after.jpg, portrait 4:5 such as 1080 x 1350,
 // same pose and framing), point beforeSrc / afterSrc at them, fill in clientName,
 // focus and duration, and remove `sample: true`.
@@ -613,8 +606,8 @@ const samplePair = (n: number) => {
   const id = String(n).padStart(2, '0');
   return {
     id: `sample-${id}`,
-    beforeSrc: `/images/transformations/samples/sample-${id}-before.webp`,
-    afterSrc: `/images/transformations/samples/sample-${id}-after.webp`,
+    beforeSrc: `/media/transformations/before-after/photos/samples/sample-${id}-before.webp`,
+    afterSrc: `/media/transformations/before-after/photos/samples/sample-${id}-after.webp`,
     sample: true,
   };
 };
@@ -634,7 +627,7 @@ export const CLIENT_TRANSFORMATIONS: ClientTransformation[] = [
 export const CLIENT_VIDEOS: ClientVideo[] = [
   {
     id: 'cv-1',
-    src: stockDeadlift,
+    src: '/media/transformations/video-gallery/videos/strength-deadlift.mp4',
     title: 'Strength Training Session',
     description: 'A look into focused strength and conditioning workouts.',
     portrait: true,
@@ -642,14 +635,14 @@ export const CLIENT_VIDEOS: ClientVideo[] = [
   },
   {
     id: 'cv-2',
-    src: videoThree,
+    src: '/media/home/video-feedback/videos/v3.mp4',
     title: 'Personal Training Moments',
     description: 'Personal guidance, proper techniques and consistent efforts.',
     portrait: true,
   },
   {
     id: 'cv-3',
-    src: stockBattleRopes,
+    src: '/media/transformations/video-gallery/videos/battle-ropes.mp4',
     title: 'Workout Highlights',
     description: 'Small steps, daily efforts and memorable fitness moments.',
     portrait: true,
@@ -657,28 +650,28 @@ export const CLIENT_VIDEOS: ClientVideo[] = [
   },
   {
     id: 'cv-4',
-    src: stockSquats,
+    src: '/media/transformations/video-gallery/videos/squat-training.mp4',
     title: 'Fitness Journey',
     description: 'A glimpse of the dedication behind every transformation.',
     stock: true,
   },
   {
     id: 'cv-5',
-    src: videoOne,
+    src: '/media/home/video-feedback/videos/v1.mp4',
     title: 'Coach on the Floor',
     description: 'TeamSamir at TS Fitness, guiding every session in person.',
     portrait: true,
   },
   {
     id: 'cv-6',
-    src: stockLunges,
+    src: '/media/transformations/video-gallery/videos/lunge-workout.mp4',
     title: 'Lower Body Strength',
     description: 'Controlled lunges and leg work for strength and balance.',
     stock: true,
   },
   {
     id: 'cv-7',
-    src: videoTwo,
+    src: '/media/home/video-feedback/videos/v2.mp4',
     title: 'Inside TS Fitness',
     description: 'A look around the studio where the training happens.',
     portrait: true,

@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
-// Sample clips until real senior client videos are added
-import clipSquats from '../../assets/videos/stock/squat-training.mp4';
-import clipLunges from '../../assets/videos/stock/lunge-workout.mp4';
-import clipRopes from '../../assets/videos/stock/battle-ropes.mp4';
-import clipDeadlift from '../../assets/videos/stock/strength-deadlift.mp4';
+import { img } from '../../data/seniorFitnessMedia';
+
+// Sample clips (shared with the Transformations page video gallery) until real senior client videos are added
+const CLIPS = '/media/transformations/video-gallery/videos';
+const clipSquats = `${CLIPS}/squat-training.mp4`;
+const clipLunges = `${CLIPS}/lunge-workout.mp4`;
+const clipRopes = `${CLIPS}/battle-ropes.mp4`;
+const clipDeadlift = `${CLIPS}/strength-deadlift.mp4`;
 
 /**
  * Transformations section for the Senior Fitness page ("Cinema Filmstrip" design).
@@ -17,7 +20,6 @@ import clipDeadlift from '../../assets/videos/stock/strength-deadlift.mp4';
  * Add `videoSrc` to a video to play the real clip in the viewer instead of the placeholder message.
  */
 
-const img = (name: string) => `/images/senior-fitness/${name}.webp`;
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 interface Photo {

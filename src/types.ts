@@ -103,7 +103,7 @@ export interface VideoFeedbackItem {
 /** Before & after card on the Transformations page. */
 export interface ClientTransformation {
   id: string;
-  /** Path under public/, e.g. /images/transformations/client-01-before.jpg */
+  /** Path under public/, e.g. /media/transformations/before-after/photos/client-01-before.jpg */
   beforeSrc: string;
   afterSrc: string;
   /** Client name or initials, shown once a real photo pair is added */

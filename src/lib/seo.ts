@@ -21,7 +21,7 @@ export interface PageMeta {
   index: boolean;
 }
 
-const DEFAULT_IMAGE = '/images/og/og-default.jpg';
+const DEFAULT_IMAGE = '/media/shared/og/og-default.jpg';
 
 export const PAGE_META: Record<PageId, PageMeta> = {
   home: {
@@ -36,7 +36,7 @@ export const PAGE_META: Record<PageId, PageMeta> = {
     title: 'Personal Training & Nutrition Services | TeamSamir',
     description:
       'Explore TeamSamir coaching: 1-on-1 personal training, health management, nutrition guidance and offline training in Pune. Compare plans and book a free demo.',
-    image: '/images/og/og-services.jpg',
+    image: '/media/shared/og/og-services.jpg',
     imageAlt: 'Personal training session with a TeamSamir coach',
     index: true,
   },
@@ -44,7 +44,7 @@ export const PAGE_META: Record<PageId, PageMeta> = {
     title: 'Senior Fitness Training for Older Adults | TeamSamir',
     description:
       'One-on-one fitness training for senior citizens in Pune: safe, low-impact exercise for strength, balance and mobility, planned around your health needs.',
-    image: '/images/og/og-senior-fitness.jpg',
+    image: '/media/shared/og/og-senior-fitness.jpg',
     imageAlt: 'Senior fitness training session focused on strength and balance',
     index: true,
   },
@@ -52,7 +52,7 @@ export const PAGE_META: Record<PageId, PageMeta> = {
     title: 'Client Transformations & Training Stories | TeamSamir',
     description:
       'See training journeys, before-and-after progress and workout videos from TeamSamir coaching in Pune. Individual results vary with effort and consistency.',
-    image: '/images/og/og-transformations.jpg',
+    image: '/media/shared/og/og-transformations.jpg',
     imageAlt: 'Strength training highlights from TeamSamir coaching',
     index: true,
   },
@@ -60,7 +60,7 @@ export const PAGE_META: Record<PageId, PageMeta> = {
     title: 'About Samir | Personal Trainer & Fitness Coach in Pune',
     description:
       'Meet Samir, founder and head coach of TeamSamir in Kothrud, Pune. Learn about his coaching approach: technique first, progressive training and Indian nutrition.',
-    image: '/images/og/og-about.jpg',
+    image: '/media/shared/og/og-about.jpg',
     imageAlt: 'Samir, founder and head coach of TeamSamir',
     index: true,
   },
@@ -96,7 +96,7 @@ const organization = () => ({
   '@id': ORG_ID,
   name: SITE_NAME,
   url: `${SITE_URL}/`,
-  logo: abs('/images/logo/logo-black.jpeg'),
+  logo: abs('/media/shared/logo/logo-black.jpeg'),
   email: BUSINESS_INFO.contact.email,
   telephone: BUSINESS_INFO.contact.phoneRaw,
   founder: { '@id': PERSON_ID },

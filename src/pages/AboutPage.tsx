@@ -27,6 +27,8 @@ interface AboutPageProps {
 // About video plays only this segment (seconds), looping: 2s → 7s = 5s clip
 const ABOUT_VIDEO_START = 2;
 const ABOUT_VIDEO_END = 7;
+// Playback speed (0.5 = half speed / slow motion)
+const ABOUT_VIDEO_SPEED = 0.5;
 
 // Icon for each certification card (keyed by CERTIFICATIONS id in mockData)
 const CERT_ICONS: Record<string, LucideIcon> = {
@@ -73,8 +75,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             <div className="lg:col-span-4">
               <div className="rounded-2xl overflow-hidden bg-slate-900 border border-[#E1E6EF] shadow-lg relative aspect-[400/363] sm:aspect-[1000/1089]">
                 <LazyVideo
-                  src="/videos/about-samir/about-page.mp4"
-                  poster="/images/hero_samir_ts_fitness_1792417382753.webp"
+                  src="/media/about-samir/intro/videos/about-page.mp4"
+                  poster="/media/about-samir/intro/photos/hero_samir_ts_fitness_1792417382753.webp"
                   autoPlay
                   muted
                   loop
@@ -82,6 +84,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   // Play only the ABOUT_VIDEO_START–ABOUT_VIDEO_END segment, on loop
                   onLoadedMetadata={(e) => {
                     e.currentTarget.currentTime = ABOUT_VIDEO_START;
+                    e.currentTarget.playbackRate = ABOUT_VIDEO_SPEED;
+                  }}
+                  onPlay={(e) => {
+                    e.currentTarget.playbackRate = ABOUT_VIDEO_SPEED;
                   }}
                   onTimeUpdate={(e) => {
                     const v = e.currentTarget;
@@ -91,7 +97,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                     }
                   }}
                   aria-label="TeamSamir - Founder & Head Coach at TS Fitness"
-                  className="w-full h-full object-cover object-[center_10%]"
+                  className="w-full h-full object-cover object-[center_25%]"
                 />
 
               </div>
@@ -133,11 +139,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 lg:gap-6 items-center">
               <div className="lg:col-span-7 space-y-2 text-xs sm:text-sm lg:text-base text-[#646B78] leading-relaxed">
                 <p>
-                  His coaching philosophy is simple: <strong className="font-bold text-[#171A21]">Fitness should fit into your lifestyle, not force you to change your entire life.</strong>
-                </p>
-                <p>
                   Today, as Founder & Head Coach, he continues to lead Team Samir with a commitment to expert guidance, genuine client relationships, and long-term transformations.
                 </p>
+
+                                <p>
+                  His coaching philosophy is simple: <strong className="font-bold text-[#171A21]">Fitness should fit into your lifestyle, not force you to change your entire life.</strong>
+                </p>
+                
               </div>
               <figure className="lg:col-span-5 bg-white rounded-xl border border-[#E1E6EF] px-3 py-2.5 sm:px-4 sm:py-3 shadow-xs">
                 <div className="flex items-start gap-2 sm:gap-2.5">
@@ -181,28 +189,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               valueClassName="text-[#111318]"
             />
           </div>
-
-          {/* 8. Training Philosophy (hidden for now)
-          <div className="pt-3 border-t border-[#E1E6EF] space-y-2.5">
-            <h3 className="text-base sm:text-lg font-display font-bold text-[#171A21]">
-              Training Philosophy
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-xs">
-              <div className="p-3 rounded-lg bg-[#EEF5FF] border border-[#E1E6EF]">
-                <span className="font-bold text-[#1769FF] block mb-1">1. Mechanics First</span>
-                <span className="text-[#646B78] text-[length:max(11px,calc(11rem/16))] sm:text-xs">Strict posture and joint alignment before increasing load weights.</span>
-              </div>
-              <div className="p-3 rounded-lg bg-[#EEF5FF] border border-[#E1E6EF]">
-                <span className="font-bold text-[#1769FF] block mb-1">2. Consistency First</span>
-                <span className="text-[#646B78] text-[length:max(11px,calc(11rem/16))] sm:text-xs">Sustainable 4-day workouts consistently beat sporadic burnout sessions.</span>
-              </div>
-              <div className="p-3 rounded-lg bg-[#EEF5FF] border border-[#E1E6EF]">
-                <span className="font-bold text-[#1769FF] block mb-1">3. Realistic Diet</span>
-                <span className="text-[#646B78] text-[length:max(11px,calc(11rem/16))] sm:text-xs">Practical Indian meal balance with adequate protein, hydration, and sleep.</span>
-              </div>
-            </div>
-          </div>
-          */}
         </div>
       </section>
 

@@ -8,7 +8,7 @@ interface TeamSamirLogoProps {
 
 /**
  * Official TeamSamir logo: the original star-S mark (transparent PNG in
- * public/images/logo/) followed by the "TeamSamir" wordmark, matching the
+ * public/media/shared/logo/) followed by the "TeamSamir" wordmark, matching the
  * supplied logo files. `variant="light"` = dark text for light backgrounds,
  * `variant="dark"` = white text for dark backgrounds.
  */
@@ -34,7 +34,7 @@ export const TeamSamirLogo: React.FC<TeamSamirLogoProps> = ({
   return (
     <div className={`flex items-center gap-2 select-none ${className}`} aria-label="TeamSamir Fitness Logo">
       <img decoding="async"
-        src="/images/logo/logo-without-bg.webp"
+        src="/media/shared/logo/logo-without-bg.webp"
         alt=""
         aria-hidden="true"
         className={`${iconSizes[size]} w-auto shrink-0 transition-transform duration-300 hover:scale-105`}
