@@ -249,7 +249,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         </div>
       </section>
 
-      {/* 11. Qualifications — certifications held by Samir, Head Coach */}
       <section className="py-6 sm:py-10 lg:py-12 bg-linear-to-b from-[#EEF5FF] to-white border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-8">
 
