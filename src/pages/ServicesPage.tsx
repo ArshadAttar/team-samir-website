@@ -207,7 +207,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookDemo, initialO
       </section>
 
       {/* Core Offerings: Detailed Service Portfolio */}
-      <section className="pt-5 pb-8 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-14 border-b border-[#E1E6EF]">
+      <section className="pt-5 pb-8 sm:pt-6 sm:pb-10 lg:pt-8 lg:pb-10 border-b border-[#E1E6EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           <div className="max-w-3xl space-y-2 sm:space-y-3">
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-display font-bold text-[#171A21] tracking-tight">

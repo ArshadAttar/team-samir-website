@@ -195,22 +195,20 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
                 <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider">
                   <span>Senior Fitness</span>
                   <span className="text-slate-500">·</span>
-                  <span>Ages 55+</span>
-                  <span className="text-slate-500">·</span>
-                  <span>Kothrud, Pune</span>
+                  <span>Ages 50-80</span>
+
                 </div>
               </Reveal>
               <Reveal delay={0.08}>
                 <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight">
-                  Age Is Just a Number.{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00A3FF] via-[#38BDF8] to-[#1769FF]">
-                    Stay Strong at Every Age.
+                    Strong at Every Age. Fit for Life.
                   </span>
                 </h1>
               </Reveal>
               <Reveal delay={0.16}>
                 <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed max-w-2xl">
-                  Personal, one-on-one fitness training for senior citizens. I help older adults build strength, move freely, improve balance and stay independent, with safe exercises planned around your body and your health.
+Personal, one-on-one fitness training for senior citizens. we help older adults build strength, move freely, improve balance and stay independent, with safe exercises planned around your body and your health.
                 </p>
               </Reveal>
               <Reveal delay={0.24} className="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
@@ -253,7 +251,7 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
                 </div>
                 <div>
                   <div className="text-sm font-bold">Safety First</div>
-                  <div className="text-[length:max(11px,calc(11rem/16))] text-[#646B78]">Every move supervised by Samir</div>
+                  <div className="text-[length:max(11px,calc(11rem/16))] text-[#646B78]">Every move supervised by Coach</div>
                 </div>
               </motion.div>
             </div>
@@ -285,12 +283,18 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
             </div>
           </div>
         </section>
+
+        {/* ============================================================
+            4. TRANSFORMATIONS (description, photo gallery, video gallery)
+            ============================================================ */}
+        <SeniorTransformations />
+
         {/* ============================================================
             3. WHY TRAIN WITH ME (content left, image right)
             ============================================================ */}
         <section className="py-8 sm:py-12 lg:py-14 bg-slate-50 border-y border-[#E1E6EF]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            <div className="lg:col-span-7 space-y-8 order-2 lg:order-1">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center lg:items-stretch">
+            <div className="lg:col-span-7 space-y-8 order-2 lg:order-1 lg:self-center">
               <SectionHeading
                 center={false}
                 kicker="Why Train With Me"
@@ -314,12 +318,13 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
               </div>
             </div>
 
-            <div className="lg:col-span-5 relative order-1 lg:order-2">
+            {/* On desktop the image fills the row height set by the text column, so both sides match */}
+            <div className="lg:col-span-5 relative order-1 lg:order-2 lg:min-h-[360px]">
               <SeniorImage
                 src={img('why-me')}
                 alt="Mature woman holding a yoga triangle pose outdoors"
                 position="center 40%"
-                className="aspect-4/5 rounded-3xl shadow-2xl"
+                className="aspect-4/3 lg:aspect-auto lg:absolute lg:inset-0 rounded-3xl shadow-2xl"
               />
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -331,29 +336,14 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
                 <div className="text-2xl font-display font-extrabold text-[#00A3FF]">{BUSINESS_INFO.experienceYears}+ yrs</div>
                 <div className="text-[length:max(11px,calc(11rem/16))] text-slate-300">Coaching experience</div>
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.55, duration: 0.5, ease: EASE }}
-                className="absolute -bottom-4 left-3 sm:-left-5 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2.5"
-              >
-                <Bone className="w-5 h-5 text-[#1769FF]" />
-                <span className="text-xs sm:text-sm font-semibold text-[#171A21]">Joint-friendly training</span>
-              </motion.div>
             </div>
           </div>
         </section>
 
         {/* ============================================================
-            4. TRANSFORMATIONS (description, photo gallery, video gallery)
-            ============================================================ */}
-        <SeniorTransformations />
-
-        {/* ============================================================
             5. FINAL CTA (background image)
             ============================================================ */}
-        <section className="relative py-12 sm:py-16 lg:py-20 text-white">
+        <section className="relative py-10 sm:py-14 lg:py-16 text-white">
           <SeniorImage
             src={img('cta')}
             alt="Senior women exercising together in a group class"
@@ -382,13 +372,9 @@ export const SeniorFitnessPage: React.FC<SeniorFitnessPageProps> = ({ onBookDemo
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </Reveal>
-            <Reveal delay={0.3}>
-              <p className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-400 max-w-xl mx-auto">
-                Please consult your doctor before starting a new exercise programme. Training supports, but does not replace, medical care.
-              </p>
-            </Reveal>
           </div>
         </section>
+
       </div>
     </MotionConfig>
   );

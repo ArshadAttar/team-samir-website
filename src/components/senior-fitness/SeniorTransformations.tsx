@@ -53,6 +53,11 @@ const VIDEOS: Video[] = [
   { src: img('cta'), position: '62% 30%', title: 'A 10-minute balance routine', duration: '2:45', desc: 'Standing drills you can repeat at home, with a chair nearby for support.', videoSrc: clipLunges },
   { src: img('why-me'), position: '50% 50%', title: 'Morning mobility flow', duration: '1:50', desc: 'Gentle stretches that ease stiffness in the hips, back and shoulders.', videoSrc: clipRopes },
   { src: img('hero'), position: '32% 40%', title: 'Dumbbell basics', duration: '2:10', desc: 'Light-weight strength moves for stronger arms and better posture.', videoSrc: clipDeadlift },
+  // Same four sample clips again with new titles, until more real videos are added
+  { src: img('assessment'), position: '40% 50%', title: 'Chair sit-to-stand', duration: '1:35', desc: 'Build leg strength for getting up from a chair, sofa or car seat without help.', videoSrc: clipSquats },
+  { src: img('cta'), position: '45% 35%', title: 'Safe stepping practice', duration: '2:05', desc: 'Step forward and back with control to walk steadier and reduce the risk of falls.', videoSrc: clipLunges },
+  { src: img('why-me'), position: '50% 30%', title: 'Gentle cardio session', duration: '1:40', desc: 'Light arm and leg work that raises the heart rate without strain on the joints.', videoSrc: clipRopes },
+  { src: img('hero'), position: '55% 45%', title: 'Lift and carry safely', duration: '2:30', desc: 'Learn to pick up bags and boxes with a straight back, protecting knees and spine.', videoSrc: clipDeadlift },
 ];
 
 const HIGHLIGHTS = [
@@ -294,106 +299,27 @@ export const SeniorTransformations: React.FC = () => {
   const featured = VIDEOS[activeVideo];
 
   return (
-    <section className="relative py-14 sm:py-20 lg:py-24 text-[#F2F5FB] overflow-hidden bg-[#0A1020]">
+    <section className="relative py-8 sm:py-12 lg:py-14 text-[#F2F5FB] overflow-hidden bg-[#0A1020]">
       <div
         className="absolute inset-0 pointer-events-none bg-[radial-gradient(900px_500px_at_85%_0%,rgba(23,105,255,0.22),transparent_60%)]"
         aria-hidden="true"
       />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1. Description */}
-        <FadeUp>
+        <FadeUp className="text-center">
           <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs font-bold uppercase tracking-[0.14em] text-[#6EA2FF]">Transformations</div>
-          <h2 className="mt-3 mb-4 text-3xl sm:text-5xl lg:text-[3.6rem] font-display font-bold leading-[1.04] tracking-tight max-w-[16ch] text-balance">
+          {/* One line on desktop; wraps on smaller screens */}
+          <h2 className="mt-3 mb-4 text-[2rem] sm:text-[2.6rem] lg:text-[3.1rem] font-display font-bold leading-[1.1] tracking-tight text-balance lg:whitespace-nowrap">
             What training feels like, <span className="text-[#6EA2FF]">session by session</span>
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-[#9AA6BD] leading-relaxed max-w-2xl">
+          {/* Two lines on desktop */}
+          <p className="text-[length:max(13px,calc(13rem/16))] sm:text-[length:max(14.5px,calc(14.5rem/16))] lg:text-base text-[#9AA6BD] leading-relaxed max-w-6xl mx-auto text-balance">
             Every session is planned around your body on that day. We start slow, check your balance and joints, and build strength you can use at home: climbing stairs, carrying groceries and getting up from the floor with ease.
           </p>
         </FadeUp>
-        <FadeUp delay={0.1} className="mt-8 sm:mt-11 grid grid-cols-1 md:grid-cols-3 border-t border-white/10">
-          {HIGHLIGHTS.map((h, i) => (
-            <div
-              key={h.title}
-              className={`py-4 md:pt-5 md:pb-0 md:pr-6 ${i > 0 ? 'border-t md:border-t-0 md:border-l border-white/10 md:pl-6' : ''}`}
-            >
-              <h3 className="font-display font-semibold text-base sm:text-lg">{h.title}</h3>
-              <p className="text-xs sm:text-sm text-[#9AA6BD] mt-1 leading-relaxed">{h.desc}</p>
-            </div>
-          ))}
-        </FadeUp>
-
-        {/* 2. Photo gallery */}
-        <FadeUp className="flex justify-between items-end gap-4 flex-wrap mt-14 sm:mt-20 mb-6">
-          <div>
-            <h3 className="font-display font-semibold text-2xl sm:text-3xl">Photo gallery</h3>
-            <p className="text-sm sm:text-base text-[#9AA6BD] mt-1">
-              Drag or swipe through the sessions. Tap a photo to view it full screen.
-            </p>
-          </div>
-          <div className="hidden sm:flex gap-2.5">
-            {[-1, 1].map((dir) => (
-              <button
-                key={dir}
-                onClick={() => step(dir)}
-                aria-label={dir < 0 ? 'Previous photos' : 'Next photos'}
-                className="w-11 h-11 rounded-full border border-white/10 bg-[#121B31] hover:bg-[#18233D] hover:border-[#6EA2FF] text-white flex items-center justify-center cursor-pointer transition-colors"
-              >
-                {dir < 0 ? <ChevronLeft className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
-              </button>
-            ))}
-          </div>
-        </FadeUp>
-
-        <div
-          ref={stripRef}
-          onScroll={updateProgress}
-          onPointerDown={(e) => {
-            if (e.pointerType !== 'mouse') return;
-            drag.current = { down: true, startX: e.clientX, startScroll: stripRef.current?.scrollLeft ?? 0, moved: 0 };
-          }}
-          className={`flex gap-[18px] overflow-x-auto pb-4 -mr-4 sm:-mr-6 lg:mr-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
-            dragging ? 'cursor-grabbing snap-none' : 'cursor-grab snap-x snap-mandatory'
-          }`}
-        >
-          {PHOTOS.map((p, i) => (
-            <motion.button
-              key={`${p.title}-${i}`}
-              data-frame
-              onClick={() => !suppressClick.current && setViewer({ kind: 'photo', index: i })}
-              aria-label={`Open photo: ${p.title}`}
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: (i % 4) * 0.08, ease: EASE }}
-              className="group shrink-0 basis-[72%] sm:basis-[260px] lg:basis-[290px] snap-start text-left focus-visible:outline-2 focus-visible:outline-[#6EA2FF] focus-visible:outline-offset-4 rounded-[18px]"
-            >
-              <span className="relative block aspect-3/4 rounded-[18px] overflow-hidden border border-white/10 bg-[#121B31]">
-                <img decoding="async"
-                  src={p.src}
-                  alt=""
-                  loading="lazy"
-                  draggable={false}
-                  style={{ objectPosition: p.position }}
-                  className="w-full h-full object-cover saturate-[.9] transition duration-700 ease-out group-hover:scale-[1.06] group-hover:saturate-100 pointer-events-none"
-                />
-                <span className="absolute left-3 top-3 text-[length:max(11px,calc(11rem/16))] font-semibold uppercase tracking-wider bg-[#0A1020]/70 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">
-                  {p.tag}
-                </span>
-              </span>
-              <span className="block font-display font-semibold text-base sm:text-[length:max(17px,calc(17rem/16))] mt-3.5">{p.title}</span>
-              <span className="block text-xs sm:text-[length:max(13.5px,calc(13.5rem/16))] text-[#9AA6BD] leading-relaxed mt-0.5">{p.caption}</span>
-            </motion.button>
-          ))}
-        </div>
-        <div className="h-[3px] bg-white/10 rounded-full overflow-hidden mt-1.5" aria-hidden="true">
-          <div
-            className="h-full bg-[#6EA2FF] rounded-full transition-transform duration-150"
-            style={{ width: `${progress.width}%`, transform: `translateX(${(progress.offset / progress.width) * 100}%)` }}
-          />
-        </div>
 
         {/* 3. Video gallery */}
-        <FadeUp className="flex justify-between items-end gap-4 flex-wrap mt-14 sm:mt-20 mb-6">
+        <FadeUp className="flex justify-between items-end gap-4 flex-wrap mt-8 sm:mt-10 mb-5 sm:mb-6">
           <div>
             <h3 className="font-display font-semibold text-2xl sm:text-3xl">Video gallery</h3>
             <p className="text-sm sm:text-base text-[#9AA6BD] mt-1">
@@ -403,10 +329,11 @@ export const SeniorTransformations: React.FC = () => {
         </FadeUp>
 
         <FadeUp delay={0.05} className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-5 lg:gap-6 items-start">
+          <div>
           <button
             onClick={() => setViewer({ kind: 'video', index: activeVideo })}
             aria-label={`Play video: ${featured.title}`}
-            className="group relative w-full aspect-video rounded-[22px] overflow-hidden bg-[#121B31] text-left text-white cursor-pointer focus-visible:outline-2 focus-visible:outline-[#6EA2FF] focus-visible:outline-offset-4"
+            className="group relative block w-full aspect-video rounded-[22px] overflow-hidden bg-[#121B31] text-left text-white cursor-pointer focus-visible:outline-2 focus-visible:outline-[#6EA2FF] focus-visible:outline-offset-4"
           >
             <AnimatePresence mode="wait">
               {/* Featured clip autoplays muted on loop (falls back to the poster image) */}
@@ -428,20 +355,19 @@ export const SeniorTransformations: React.FC = () => {
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </AnimatePresence>
-            <span className="absolute inset-0 bg-gradient-to-b from-[#0A1020]/10 to-[#0A1020]/85" />
             <span className="absolute right-4 top-4 bg-black/55 rounded-lg px-2.5 py-0.5 text-xs sm:text-sm font-semibold tabular-nums">
               {featured.duration}
             </span>
-            <span className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#1769FF] flex items-center justify-center shadow-[0_0_0_12px_rgba(23,105,255,0.25),0_0_60px_rgba(23,105,255,0.6)] transition-transform duration-300 group-hover:scale-110">
-              <Play className="w-7 h-7 text-white fill-white ml-1" />
-            </span>
-            <span className="absolute inset-x-0 bottom-0 p-4 sm:p-6">
-              <span className="block font-display font-semibold text-lg sm:text-2xl">{featured.title}</span>
-              <span className="hidden sm:block text-sm sm:text-[length:max(15px,calc(15rem/16))] text-[#C9D2E3] max-w-xl mt-1">{featured.desc}</span>
-            </span>
           </button>
+          {/* Title and description sit below the video, not on top of it */}
+          <div className="mt-4 px-1">
+            <h4 className="font-display font-semibold text-lg sm:text-2xl">{featured.title}</h4>
+            <p className="text-sm sm:text-[length:max(15px,calc(15rem/16))] text-[#9AA6BD] max-w-xl mt-1">{featured.desc}</p>
+          </div>
+          </div>
 
-          <div className="grid gap-2.5">
+          {/* Playlist: 5 clips visible, the rest scroll inside this box only */}
+          <div className="grid gap-2.5 max-h-[440px] sm:max-h-[490px] overflow-y-auto overscroll-contain pr-1.5 [scrollbar-width:thin] [scrollbar-color:#2A3A5E_transparent]">
             {VIDEOS.map((v, i) => (
               <button
                 key={v.title}
@@ -463,10 +389,6 @@ export const SeniorTransformations: React.FC = () => {
             ))}
           </div>
         </FadeUp>
-
-        <p className="mt-8 sm:mt-9 text-xs sm:text-[length:max(13px,calc(13rem/16))] text-[#9AA6BD]">
-          These are placeholders. Real client photos and videos will be added with their consent.
-        </p>
       </div>
 
       <MediaViewer

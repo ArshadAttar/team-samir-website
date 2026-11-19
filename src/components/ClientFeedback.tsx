@@ -224,7 +224,8 @@ export const ClientFeedback: React.FC = () => (
     </section>
 
     {/* Video feedback */}
-    <section className="relative pt-4 sm:pt-6 pb-8 sm:pb-12">
+    {/* Little bottom padding: the card slots below already add space for the hover zoom */}
+    <section className="relative pt-4 sm:pt-6 pb-0 sm:pb-2">
       <div className="relative">
         <SectionHeader
           kicker="Video Feedback"
@@ -232,8 +233,8 @@ export const ClientFeedback: React.FC = () => (
           desc="Don't Just Take Our Word for It. Hear It from Our Clients."
           icon={<Video className="w-3.5 h-3.5" />}
         />
-        {/* Full-width strip (edge to edge) */}
-        <div className="w-full">
+        {/* Full-width strip (edge to edge). Pulled up a little to close the gap under the heading */}
+        <div className="w-full -mt-4 sm:-mt-6">
           {/*
             5 cards per screen on desktop (3 on tablet, ~1.7 on phones). The hovered card zooms
             to 120%, so it grows 10% of its width on each side: the side padding (px) is set a

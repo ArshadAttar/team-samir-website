@@ -677,12 +677,12 @@ export const TransformationsPage: React.FC<TransformationsPageProps> = () => {
       {/* 2. Before & after gallery */}
       <section
         aria-labelledby="real-transformations"
-        className="relative overflow-hidden bg-[#111318] py-10 sm:py-14"
+        className="relative overflow-hidden bg-[#111318] py-8 sm:py-12 lg:py-14"
       >
         <Glow className="w-[32.5rem] h-[32.5rem] -top-40 -left-32 bg-[#1769FF]/25" />
         <Glow className="w-[26.25rem] h-[26.25rem] bottom-0 right-[-7.5rem] bg-[#00A3FF]/15" />
 
-        <div className="relative space-y-8 sm:space-y-12">
+        <div className="relative space-y-6 sm:space-y-8">
           <div id="real-transformations">
             <SectionHeader
               title="Real Transformations"
@@ -713,12 +713,12 @@ export const TransformationsPage: React.FC<TransformationsPageProps> = () => {
       {/* 3. Video gallery */}
       <section
         aria-labelledby="training-in-motion"
-        className="relative overflow-hidden bg-[#0D0F14] py-10 sm:py-14 border-t border-white/5"
+        className="relative overflow-hidden bg-[#0D0F14] py-8 sm:py-12 lg:py-14 border-t border-white/5"
       >
         <Glow className="w-[30rem] h-[30rem] top-10 right-[-5rem] bg-[#1769FF]/20" />
         <Glow className="w-[23.75rem] h-[23.75rem] -bottom-24 left-[10%] bg-[#0B3D91]/40" />
 
-        <div className="relative space-y-8 sm:space-y-12">
+        <div className="relative space-y-6 sm:space-y-8">
           <div id="training-in-motion">
             <SectionHeader
               title="Training in Motion"
