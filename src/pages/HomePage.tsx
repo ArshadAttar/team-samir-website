@@ -140,27 +140,16 @@ Live 1-on-1 personal training worldwide and at your home or gym in Pune. Certifi
               {/* 3D Visual Depth Canvas Frame */}
               <div className="relative w-full max-w-md">
                 
-                {/* 3D sculptural background geometry */}
-                <div className="absolute -inset-4 bg-gradient-to-tr from-[#1769FF]/30 via-transparent to-[#00A3FF]/20 rounded-3xl transform -rotate-2 blur-sm" />
-                
                 {/* Main Card with Trainer Portrait in TS Fitnes Gym */}
-                <div className="group relative rounded-2xl overflow-hidden bg-[#1C2028] border border-slate-700/80 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-[1.01]">
-                  <div className="aspect-16/10 sm:aspect-4/3 lg:aspect-4/3 @container relative overflow-hidden bg-black flex flex-col items-center justify-center gap-2 sm:gap-4 px-3">
-                    {/* Logo mark: fixed-height box crops the empty black padding above and below the icon */}
+                <div className="group relative transition-transform duration-500 hover:rotate-0 hover:scale-[1.01]">
+                  <div className="aspect-16/10 sm:aspect-4/3 lg:aspect-4/3 relative flex items-center justify-center px-3">
+                    {/* Transparent logo mark */}
                     <img decoding="async"
-                      src="/media/shared/logo/logo-black.webp"
+                      src="/media/shared/logo/logo-without-bg.webp"
                       alt="TeamSamir logo - TS Fitness Pune"
-                      className="w-48 h-28 sm:w-72 sm:h-44 object-cover object-center shrink-0 transition-transform duration-500 ease-out group-hover:scale-120"
+                      className="w-3/5 h-3/4 object-contain object-center shrink-0 transition-transform duration-500 ease-out group-hover:scale-110"
                       referrerPolicy="no-referrer"
                     />
-
-                    {/* Identity text, centred under the logo with a soft glow */}
-                    <div className="relative z-10 text-white text-center">
-                      {/* Single line: font size scales with the card width (cqw) so it never wraps */}
-                      <div className="whitespace-nowrap text-[clamp(0.9rem,4.8cqw,1.75rem)] font-display font-extrabold [text-shadow:0_2px_10px_rgba(0,163,255,0.2)] transition-[text-shadow] duration-500 group-hover:[text-shadow:0_0_12px_rgba(0,163,255,0.45)]">
-                        Experience Fitness Like Never Before
-                      </div>
-                    </div>
                   </div>
                 </div>
 

@@ -88,16 +88,11 @@ export interface ReviewItem {
   stars: number;
   comment: string;
   resultBadge: string;
-  program: string;
 }
 
 export interface VideoFeedbackItem {
   id: string;
   src: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  tag: string;
 }
 
 /** Before & after card on the Transformations page. */

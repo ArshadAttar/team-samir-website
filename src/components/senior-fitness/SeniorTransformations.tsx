@@ -3,12 +3,18 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
 import { img } from '../../data/seniorFitnessMedia';
 
-// Sample clips (shared with the Transformations page video gallery) until real senior client videos are added
-const CLIPS = '/media/transformations/video-gallery/videos';
-const clipSquats = `${CLIPS}/squat-training.mp4`;
-const clipLunges = `${CLIPS}/lunge-workout.mp4`;
-const clipRopes = `${CLIPS}/battle-ropes.mp4`;
-const clipDeadlift = `${CLIPS}/strength-deadlift.mp4`;
+// Real senior client sessions (recorded live online coaching). Clips: senior-NN.mp4 (720x480, ~18 s);
+// thumbnails: senior-video-NN.webp (frame at 5 s). Originals are in ../media-originals/Website/senior-fitness-video/.
+const clip = (n: number) => `/media/senior-fitness/transformations/videos/senior-0${n}.mp4`;
+const thumb = (n: number) => `/media/senior-fitness/transformations/photos/senior-video-0${n}.webp`;
+const seniorVideo = (n: number, title: string, desc: string): Video => ({
+  src: thumb(n),
+  position: '50% 50%',
+  title,
+  duration: '0:18',
+  desc,
+  videoSrc: clip(n),
+});
 
 /**
  * Transformations section for the Senior Fitness page ("Cinema Filmstrip" design).
@@ -16,8 +22,8 @@ const clipDeadlift = `${CLIPS}/strength-deadlift.mp4`;
  * 2. Photo gallery: draggable / swipeable filmstrip, opens a full-screen viewer
  * 3. Video gallery: featured player + playlist
  *
- * All media below is SAMPLE content. Replace `src` with real client photos (shared with consent).
- * Add `videoSrc` to a video to play the real clip in the viewer instead of the placeholder message.
+ * The photos are SAMPLE content: replace `src` with real client photos (shared with consent).
+ * The videos are real client sessions (see `seniorVideo` above).
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -49,15 +55,15 @@ const PHOTOS: Photo[] = [
 ];
 
 const VIDEOS: Video[] = [
-  { src: img('assessment'), position: '55% 45%', title: 'Your first session', duration: '1:20', desc: 'How the first assessment checks balance, mobility and comfort before any plan is set.', videoSrc: clipSquats },
-  { src: img('cta'), position: '62% 30%', title: 'A 10-minute balance routine', duration: '2:45', desc: 'Standing drills you can repeat at home, with a chair nearby for support.', videoSrc: clipLunges },
-  { src: img('why-me'), position: '50% 50%', title: 'Morning mobility flow', duration: '1:50', desc: 'Gentle stretches that ease stiffness in the hips, back and shoulders.', videoSrc: clipRopes },
-  { src: img('hero'), position: '32% 40%', title: 'Dumbbell basics', duration: '2:10', desc: 'Light-weight strength moves for stronger arms and better posture.', videoSrc: clipDeadlift },
-  // Same four sample clips again with new titles, until more real videos are added
-  { src: img('assessment'), position: '40% 50%', title: 'Chair sit-to-stand', duration: '1:35', desc: 'Build leg strength for getting up from a chair, sofa or car seat without help.', videoSrc: clipSquats },
-  { src: img('cta'), position: '45% 35%', title: 'Safe stepping practice', duration: '2:05', desc: 'Step forward and back with control to walk steadier and reduce the risk of falls.', videoSrc: clipLunges },
-  { src: img('why-me'), position: '50% 30%', title: 'Gentle cardio session', duration: '1:40', desc: 'Light arm and leg work that raises the heart rate without strain on the joints.', videoSrc: clipRopes },
-  { src: img('hero'), position: '55% 45%', title: 'Lift and carry safely', duration: '2:30', desc: 'Learn to pick up bags and boxes with a straight back, protecting knees and spine.', videoSrc: clipDeadlift },
+  seniorVideo(1, 'Resistance band rows at home', 'Seated band pulls on a mat that strengthen the upper back and improve posture, coached live on a video call.'),
+  seniorVideo(2, 'Leg press for stronger legs', 'Slow, controlled leg presses that build thigh strength for climbing stairs and standing up from a chair.'),
+  seniorVideo(3, 'Standing dumbbell press', 'Light dumbbells pressed overhead for stronger shoulders and arms, with posture checked on every rep.'),
+  seniorVideo(4, 'Floor chest press', 'Lying on a mat with a pillow for support, pressing a light bar to build chest and arm strength safely.'),
+  seniorVideo(5, 'Chair-supported leg raises', 'Leg lifts while holding a chair, strengthening the hips and thighs without any strain on the back.'),
+  seniorVideo(6, 'Seated leg work', 'Gentle seated leg movements that keep the knees and ankles mobile and strong.'),
+  seniorVideo(7, 'Band press from a chair', 'Resistance band presses while seated, so the arms and shoulders work while the back stays supported.'),
+  seniorVideo(8, 'Bodyweight squats', 'Sit-back squats that train the legs for getting up from a chair, sofa or the floor with ease.'),
+  seniorVideo(9, 'Floor core exercises', 'Simple movements lying on the mat that strengthen the core and support the lower back.'),
 ];
 
 const HIGHLIGHTS = [
@@ -321,9 +327,9 @@ export const SeniorTransformations: React.FC = () => {
         {/* 3. Video gallery */}
         <FadeUp className="flex justify-between items-end gap-4 flex-wrap mt-8 sm:mt-10 mb-5 sm:mb-6">
           <div>
-            <h3 className="font-display font-semibold text-2xl sm:text-3xl">Video gallery</h3>
+            <h3 className="font-display font-semibold text-2xl sm:text-3xl">Real sessions with our senior clients</h3>
             <p className="text-sm sm:text-base text-[#9AA6BD] mt-1">
-              Pick a clip from the list. Each one shows how a type of session works.
+              Recorded during live one-on-one coaching. Pick a clip from the list to see how each session works.
             </p>
           </div>
         </FadeUp>
@@ -333,7 +339,7 @@ export const SeniorTransformations: React.FC = () => {
           <button
             onClick={() => setViewer({ kind: 'video', index: activeVideo })}
             aria-label={`Play video: ${featured.title}`}
-            className="group relative block w-full aspect-video rounded-[22px] overflow-hidden bg-[#121B31] text-left text-white cursor-pointer focus-visible:outline-2 focus-visible:outline-[#6EA2FF] focus-visible:outline-offset-4"
+            className="group relative block w-full aspect-video rounded-[22px] overflow-hidden bg-black text-left text-white cursor-pointer focus-visible:outline-2 focus-visible:outline-[#6EA2FF] focus-visible:outline-offset-4"
           >
             <AnimatePresence mode="wait">
               {/* Featured clip autoplays muted on loop (falls back to the poster image) */}
@@ -352,7 +358,7 @@ export const SeniorTransformations: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.45, ease: EASE }}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-contain"
               />
             </AnimatePresence>
             <span className="absolute right-4 top-4 bg-black/55 rounded-lg px-2.5 py-0.5 text-xs sm:text-sm font-semibold tabular-nums">

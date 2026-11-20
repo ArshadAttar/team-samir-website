@@ -642,7 +642,8 @@ export const TransformationsPage: React.FC<TransformationsPageProps> = () => {
       {/* Same opening band as the other pages (Services, About, Contact) */}
       <section className="bg-[#111318] text-white py-8 sm:py-12 lg:py-14 border-b border-[#1C2028]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-2.5 sm:space-y-4">
+          {/* Full container width so the description takes fewer lines */}
+          <div className="space-y-2.5 sm:space-y-4">
             <motion.div
               className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2 gap-y-0.5 text-[length:max(11px,calc(11rem/16))] sm:text-xs font-semibold text-[#00A3FF] uppercase tracking-wider [&>span]:whitespace-nowrap"
               initial={{ opacity: 0, y: 12 }}

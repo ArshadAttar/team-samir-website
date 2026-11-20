@@ -468,126 +468,152 @@ export const TRANSFORMATIONS: TransformationItem[] = [
   },
 ];
 
-// Client reviews (shown on Home and Transformations)
+
+// Client reviews (shown on Home). Each `comment` keeps the client's own paragraphs:
+// one array entry per paragraph, '\n' for a line break inside a paragraph, **text** for bold.
+// Avatars are 240px face crops in public/media/home/client-feedback/photos/.
+const AVATAR = (name: string) => `/media/home/client-feedback/photos/${name}.webp`;
+
 export const REVIEWS: ReviewItem[] = [
   {
     id: 'rev-1',
-    name: 'Rohan Mehta',
-    location: 'Kothrud, Pune',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+    name: 'Shraddha',
+    location: 'Canada',
+    avatar: AVATAR('shraddha'),
     stars: 5,
-    comment:
-      'Samir completely fixed my anterior pelvic tilt while helping me drop 14kg in 5 months. His posture and biomechanics coaching is lightyears ahead of normal commercial trainers in Pune.',
-    resultBadge: 'Lost 14 kg & Fixed Back Pain',
-    program: '1-on-1 Personal Training',
+    comment: [
+      'I completely 6 month’s and During this 6 months I experienced a lot of positive things throughout my journey.',
+      'From **first month itself my periods were on time** it’s completely a different feeling.',
+      'I was well prepared this time to stick to my diet & workout.',
+      'Samir sir was my trainer and he was really patient with me and help me to achieve my goals.',
+      'Today when I look back, I see how my personality has changed and I am more Firm in my life as it’s has made me mentally stronger than before.',
+      'I have lost few inches,\nstarted to look lean,\n2 kg weight loss,\nJawline is up to the mark.',
+      'Thank you for everything and yes Samir Sir is Dev Manus 🙏🥺',
+    ].join('\n\n'),
+    resultBadge: 'Looking lean & jawline visible',
   },
   {
     id: 'rev-2',
-    name: 'Priya Kulkarni',
-    location: 'Bavdhan, Pune',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+    name: 'Nikhil',
+    location: 'Texas, US',
+    avatar: AVATAR('nikhil'),
     stars: 5,
-    comment:
-      'Unlike other commercial gyms where trainers ignore you after day two, Samir reviews every single WhatsApp food log and corrects every inch of your barbell squat. Truly personalised!',
-    resultBadge: 'Toned Core · 22% Body Fat',
-    program: 'Lifestyle Recomposition',
+    comment: [
+      'Amazing Sir! 🤩',
+      'Thank you so much for the helping me complete the 90 days and for the transformation! 💪🏻',
+      'Also, thank you for being patient with me, teaching me how to lift weights from the basics, being flexible around my schedule and for taking regular follow ups 🥹',
+      'I have seen changes in my body, the clothes fit better now and my lower back does not pain when i work whole day on my desk!',
+      'I now feel more confident walking into the gym because of you!',
+    ].join('\n\n'),
+    resultBadge: 'Back pain relieved, old clothes fit again',
   },
   {
     id: 'rev-3',
-    name: 'Vikramaditya Deshmukh',
-    location: 'Deccan, Pune',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
+    name: 'Sabina',
+    location: 'Dubai',
+    avatar: AVATAR('sabina'),
     stars: 5,
-    comment:
-      'Coaching with TeamSamir took my clean barbell squat from 100kg to 160kg without knee strain. His understanding of joint load and progressive overload is unmatched.',
-    resultBadge: '+60kg Squat PR · Zero Knee Pain',
-    program: 'Athletic Strength & Power',
+    comment: [
+      'I want to express my heartfelt appreciation for Samir Reur, whose strict supervision and monitoring have made a remarkable difference in my health and fitness journey.',
+      'Successfully moved from pre-diabetes to a normal status without any medication but just with fitness training.',
+      'Sharing my experience below –',
+      '1) Notable gains in muscle mass and strength.',
+      '2) A perfect, tailored diet plan that supports weight training and cardio.',
+      '3) Improved body composition and fat loss.',
+      '4) Significant improvement in posture and overall alignment.',
+      'Routine was customized to my needs, goals, and lifestyle. Combining weight training, cardio, and nutrition created sustainable results.',
+      'Samir’s disciplined approach kept me consistently on track with workouts and recovery.',
+      'If you’re looking for a trainer who combines scientific nutrition, effective training methods, and strict supervision to achieve measurable health improvements, Samir Reur is an excellent choice.',
+    ].join('\n\n'),
+    resultBadge: 'Improved body composition and fat loss',
   },
   {
     id: 'rev-4',
-    name: 'Dr. Neha Joshi',
-    location: 'Karve Road, Pune',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80',
+    name: 'Tanya',
+    location: 'Bengaluru, India',
+    avatar: AVATAR('tanya'),
     stars: 5,
-    comment:
-      'As a doctor with grueling 14-hour hospital shifts, Samir structured a 35-minute split that gave me sustained energy without adrenal fatigue. My chronic neck spasms disappeared.',
-    resultBadge: 'Neck Spasms Resolved · High Stamina',
-    program: 'Executive Fitness Protocol',
+    comment: [
+      'My fitness journey with **TeamSamir** has been truly amazing. The personalized training, nutrition guidance, and consistent monitoring have made a significant difference in my health and fitness.',
+      '**Some of the key improvements I’ve experienced:**',
+      '1. Noticeable gains in muscle strength and endurance.\n2. Improved body composition and fat loss.\n3. A practical, personalized diet plan that fits my lifestyle.\n4. Better posture, flexibility, and overall fitness.\n5. Regular progress tracking and accountability that kept me motivated.',
+      'What I appreciate most is my coach’s dedication, attention to detail, and disciplined approach. Every workout and nutrition plan was designed around my individual goals.',
+      '**I highly recommend TeamSamir** to anyone looking for professional coaching, sustainable results, and a healthier lifestyle.',
+    ].join('\n\n'),
+    resultBadge: 'Reduced belly fat, toned midsection',
   },
   {
     id: 'rev-5',
-    name: 'Sameer Joshi',
-    location: 'Aundh, Pune',
-    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80',
+    name: 'Arpita',
+    location: 'Bengaluru, India',
+    avatar: AVATAR('arpita'),
     stars: 5,
-    comment:
-      'Dropped 18kg before my brother’s wedding in 4 months. Samir never forced impossible crash diets; he tailored the macros around my mother’s home-cooked Maharashtrian meals.',
-    resultBadge: 'Lost 18 kg in 16 Weeks',
-    program: 'Custom Nutrition & Training',
+    comment: [
+      'Training with Samir has been one of the most positive and transformative experiences for my health and fitness. What really sets his approach apart is that he doesn’t just tell you what to do, he takes the time to explain the science and reasoning behind every exercise, diet choice, and routine. Understanding why something works made me much more consistent and confident in the process.',
+      'Samir pushed me to do better than I thought I could, but always in a way that felt supportive rather than overwhelming. Our workouts were structured in a way where I could gradually see my progress and build strength over time. I found myself lifting weights I never thought I would be able to, which was incredibly empowering. Without even realizing it, my body became more toned and my overall structure stronger simply through the consistency and the right kind of training.',
+      'Another thing I really appreciated was how much importance he placed on internal health. He encouraged me to get regular blood tests to monitor how my body was responding to the training and diet plan. He took the time to explain what different markers meant, how certain deficiencies could affect my body and my progress, and what changes we needed to make to improve them. Tracking this regularly helped me see that the process was genuinely working from the inside out.',
+      'The focus was never just on weight or aesthetics, it was about becoming stronger, fitter, and healthier overall, which made the journey much more sustainable. One of the biggest impacts for me personally was on my health. My periods had become extremely irregular, and through the structured workout plan and balanced diet Samir designed, my cycle gradually became regular again without any external treatment. That was a huge sign of how much my overall health had improved.',
+      'I truly appreciate the knowledge, encouragement, and discipline Samir brings to his coaching. If you’re looking for a trainer who genuinely cares about long-term health, proper technique, and educating clients rather than just pushing workouts, I would highly recommend him.',
+    ].join('\n\n'),
+    resultBadge: 'Reversed PCOD, visible fat loss',
   },
   {
     id: 'rev-6',
-    name: 'Tanvi Sharma',
-    location: 'Model Colony, Pune',
-    avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&q=80',
+    name: 'Pooja',
+    location: 'Boston, US',
+    avatar: AVATAR('pooja'),
     stars: 5,
-    comment:
-      'Trained for commercial shoots and runway. Samir’s celebrity conditioning protocols sculpt razor-sharp muscle definition while keeping your limbs sleek and feminine. Highly recommended!',
-    resultBadge: 'Runway & Camera Conditioning',
-    program: 'Celebrity Coaching Protocol',
+    comment: [
+      'Moving to the U.S. came with a lot of changes in my food habits and lifestyle, and naturally, my body changed too. Training with Samir over the past year has honestly been an eye-opening experience.',
+      'What I really appreciate about Samir is how scientific and logical his approach is. He has answers to even the smallest or most random questions I ask about fitness and food, and everything is backed by reasoning, not trends! In a space where Instagram is full of misinformation and fluff, it was shocking (and refreshing) to learn how fitness actually works.',
+      'The transformation happened slowly, without me obsessing over it. One day I just realized that many problems I had been dealing with were simply gone. It wasn’t just a physical change it was mental too.',
+      'For women especially, fitness isn’t as simple as following a page or copying someone’s routine. Our bodies work differently, and that understanding matters. Samir makes this process easier by focusing on what actually works for you, not generic plans.',
+      'He’s extremely professional and detail-oriented, and this goes far beyond just gym workouts. It’s about building a healthier lifestyle eating better, sleeping better, and feeling better overall.',
+      'This past year has brought a very positive shift in my life, and I’m genuinely grateful for the guidance and structure Samir provides.',
+    ].join('\n\n'),
+    resultBadge: 'Lost inches and gained confidence',
   },
   {
     id: 'rev-7',
-    name: 'Aditya Rao',
-    location: 'Kothrud, Pune',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80',
+    name: 'Anam',
+    location: 'Abu Dhabi',
+    avatar: AVATAR('anam'),
     stars: 5,
-    comment:
-      'His glute activation and posterior chain routines completely eliminated my runner’s IT band syndrome. Clocked my half-marathon personal best at 1 hr 41 mins thanks to TS Fitness!',
-    resultBadge: 'Half-Marathon PB (1h 41m)',
-    program: 'Runner Injury Prevention',
+    comment: [
+      'Hello Samir and Trainer.',
+      'Thank you for giving me my first experience at strength training. Overall, it was a rewarding and energizing experience. I felt stronger, refreshed, and excited to return.',
+      'A big thank you to Trainer for pushing me through out and making me more active. Since training with her, I’ve gained strength, improved my endurance, and feel more confident than ever.',
+      'What really stands out is her ability to motivate and push you beyond what you think you’re capable of—while still making workouts enjoyable.',
+      'Thanks again ❤️',
+    ].join('\n\n'),
+    resultBadge: 'Gained strength, better endurance, more confident',
   },
   {
     id: 'rev-8',
-    name: 'Shweta Patil',
-    location: 'Erandwane, Pune',
-    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80',
+    name: 'Naiya',
+    location: 'Sydney, Australia',
+    avatar: AVATAR('naiya'),
     stars: 5,
-    comment:
-      'Gained strength I never thought possible in my 40s. Samir is respectful, ultra-knowledgeable, and keeps you relentlessly accountable without shouting. The best coach in Pune.',
-    resultBadge: 'Deadlift 85kg at Age 42',
-    program: 'Women’s Strength & Mobility',
+    comment: [
+      'Hello Samir and Trainer,',
+      'Thank you for introducing me to strength training and making my fitness journey such a positive experience. Every session has been motivating, enjoyable, and full of energy.',
+      'A special thanks to my trainer for constantly encouraging me, correcting my form, and pushing me to achieve more than I thought possible. Since starting my training, I’ve noticed improvements in my strength, stamina, and overall confidence.',
+      'What I appreciate most is the personalized attention, constant support, and dedication towards my progress. The workouts are challenging yet enjoyable, and I genuinely look forward to every session.',
+      'Thank you, TeamSamir, for making fitness such a wonderful experience! ❤️💪',
+    ].join('\n\n'),
+    resultBadge: 'Lost 5 kg fat, feeling more energetic',
   },
 ];
 
-// Video feedback cards on the Home page. The current clips show TeamSamir at the studio;
-// replace `src` (files in public/media/home/video-feedback/videos/) and the text with real client feedback videos.
-export const VIDEO_FEEDBACK: VideoFeedbackItem[] = [
-  {
-    id: 'video-1',
-    src: '/media/home/video-feedback/videos/v1.mp4',
-    title: 'Meet TeamSamir',
-    subtitle: 'TeamSamir · TS Fitness',
-    description: 'A quick hello from TeamSamir on the training floor, where every client session is personally guided.',
-    tag: 'Coach Intro',
-  },
-  {
-    id: 'video-2',
-    src: '/media/home/video-feedback/videos/v2.mp4',
-    title: 'Inside TS Fitness',
-    subtitle: 'Kothrud',
-    description: 'Take a look around the studio: free weights, machines and open floor space for safe, supervised training.',
-    tag: 'Studio Tour',
-  },
-  {
-    id: 'video-3',
-    src: '/media/home/video-feedback/videos/v3.mp4',
-    title: 'Your Coach, Every Session',
-    subtitle: 'Personal Training',
-    description: 'Samir works with you one-on-one, correcting form and keeping you motivated from warm-up to cool-down.',
-    tag: 'Personal Coaching',
-  },
-];
+// Client feedback videos on the Home page (muted, autoplay, loop; no text on the cards).
+// Files: public/media/home/video-feedback/videos/client-01.mp4 … client-13.mp4, web copies
+// (480px wide, no audio) of the originals in public/media/Website/feedback-video/.
+// To add a clip, add the file with the next number and raise VIDEO_FEEDBACK_COUNT.
+const VIDEO_FEEDBACK_COUNT = 13;
+export const VIDEO_FEEDBACK: VideoFeedbackItem[] = Array.from({ length: VIDEO_FEEDBACK_COUNT }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return { id: `video-${n}`, src: `/media/home/video-feedback/videos/client-${n}.mp4` };
+});
 
 // ---------------------------------------------------------------------------
 // Transformations page

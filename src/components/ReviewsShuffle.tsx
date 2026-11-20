@@ -246,7 +246,7 @@ export const ReviewsShuffle: React.FC<ReviewsShuffleProps> = ({ className = '' }
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 </div>
                 <div className="text-[length:max(11px,calc(11rem/16))] sm:text-xs text-slate-500">
-                  {activeCard.location} · {activeCard.program}
+                  {activeCard.location}
                 </div>
               </div>
             </div>
