@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { LazyVideo } from './LazyVideo';
-import { Star, Quote, CheckCircle2, Video, X, MapPin } from 'lucide-react';
+import { Star, Quote, CheckCircle2, Video, X, MapPin, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { REVIEWS, VIDEO_FEEDBACK } from '../data/mockData';
 import { ReviewItem, VideoFeedbackItem } from '../types';
 import { Marquee } from './Marquee';
@@ -198,26 +198,112 @@ const ReviewCard: React.FC<{ review: ReviewItem; isCopy: boolean }> = ({ review,
   );
 };
 
+/** Fired when a card turns its sound on, so every other card mutes (only one plays audio) */
+const UNMUTE_EVENT = 'feedback-video-unmute';
+
+const CONTROL_BUTTON =
+  'w-9 h-9 rounded-full flex items-center justify-center bg-black/55 backdrop-blur-md text-white border border-white/25 hover:bg-[#1769FF] hover:border-[#1769FF] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white';
+
 /**
- * Video only: no text, tags or buttons. Always muted, loops, and plays automatically while on
- * screen (LazyVideo fetches the file only when it gets near the screen and pauses it off screen).
+ * Video card with no text. Starts muted, loops, and plays automatically while on screen
+ * (LazyVideo fetches the file only when it gets near the screen and pauses it off screen).
+ * Hovering shows a sound button and a play/pause button (always shown on touch screens).
  */
-const VideoCard: React.FC<{ video: VideoFeedbackItem }> = ({ video }) => (
-  <article className={`${GLASS} overflow-hidden`}>
-    <div className="relative aspect-9/16 bg-black/40">
-      {/* Autoplay requires muted + playsInline (iOS) */}
-      <LazyVideo
-        src={video.src}
-        className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        disablePictureInPicture
-        aria-label="Client feedback video"
-      />
-    </div>
-  </article>
+const VideoCard: React.FC<{ video: VideoFeedbackItem; isCopy: boolean }> = ({ video, isCopy }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const cardId = useId();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+
+  // Mute this card when another card turns its sound on
+  useEffect(() => {
+    const onOtherUnmute = (e: Event) => {
+      if ((e as CustomEvent<string>).detail !== cardId && videoRef.current) {
+        videoRef.current.muted = true;
+        setIsMuted(true);
+      }
+    };
+    window.addEventListener(UNMUTE_EVENT, onOtherUnmute);
+    return () => window.removeEventListener(UNMUTE_EVENT, onOtherUnmute);
+  }, [cardId]);
+
+  const togglePlay = () => {
+    const el = videoRef.current;
+    if (!el) return;
+    if (el.paused) el.play().catch(() => undefined);
+    else el.pause();
+  };
+
+  const toggleMute = () => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.muted = !el.muted;
+    setIsMuted(el.muted);
+    if (!el.muted) {
+      window.dispatchEvent(new CustomEvent(UNMUTE_EVENT, { detail: cardId }));
+      if (el.paused) el.play().catch(() => undefined);
+    }
+  };
+
+  return (
+    <article className={`${GLASS} group/video overflow-hidden`}>
+      <div className="relative aspect-9/16 bg-black/40">
+        {/* Autoplay requires muted + playsInline (iOS) */}
+        <LazyVideo
+          ref={videoRef}
+          src={video.src}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          disablePictureInPicture
+          aria-label="Client feedback video"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        />
+
+        {/* Controls: shown on hover/focus (always shown on touch screens, which can't hover) */}
+        <div className="absolute top-2.5 right-2.5 flex gap-1.5 opacity-0 group-hover/video:opacity-100 has-[:focus-visible]:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity duration-200">
+          <button
+            type="button"
+            onClick={toggleMute}
+            tabIndex={isCopy ? -1 : undefined}
+            className={CONTROL_BUTTON}
+            aria-label={isMuted ? 'Turn sound on' : 'Turn sound off'}
+            title={isMuted ? 'Sound on' : 'Sound off'}
+          >
+            {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+          </button>
+          <button
+            type="button"
+            onClick={togglePlay}
+            tabIndex={isCopy ? -1 : undefined}
+            className={CONTROL_BUTTON}
+            aria-label={isPlaying ? 'Pause video' : 'Play video'}
+            title={isPlaying ? 'Pause' : 'Play'}
+          >
+            {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+/**
+ * Auto-scrolling strip of video-only cards (Home "Video Feedback" and the Transformations page).
+ * Full width; the hovered card zooms, and the slot padding leaves room for that zoom.
+ */
+export const FeedbackVideoStrip: React.FC<{ videos: VideoFeedbackItem[]; label: string }> = ({ videos, label }) => (
+  <Marquee
+    label={label}
+    secondsPerItem={5}
+    zoomOnHover
+    minItemsPerLoop={5}
+    slotClassName="w-[60cqw] px-[6cqw] sm:w-[calc(100cqw/3)] sm:px-[3cqw] lg:w-[20cqw] lg:px-[1.8cqw] py-10 sm:py-12"
+    items={videos.map((v) => ({ key: v.id, node: (isCopy: boolean) => <VideoCard video={v} isCopy={isCopy} /> }))}
+  />
 );
 
 /** Section background: dark gradient with soft colour blobs so the glass cards read well */
@@ -288,17 +374,7 @@ export const ClientFeedback: React.FC = () => (
             little larger than that so the zoomed card never touches its neighbours, and the
             vertical padding (py) leaves room for it to grow 10% up and down.
           */}
-          <Marquee
-            label="Video feedback"
-            secondsPerItem={5}
-            zoomOnHover
-            minItemsPerLoop={5}
-            slotClassName="w-[60cqw] px-[6cqw] sm:w-[calc(100cqw/3)] sm:px-[3cqw] lg:w-[20cqw] lg:px-[1.8cqw] py-10 sm:py-12"
-            items={VIDEO_FEEDBACK.map((v) => ({
-              key: v.id,
-              node: <VideoCard video={v} />,
-            }))}
-          />
+          <FeedbackVideoStrip videos={VIDEO_FEEDBACK} label="Video feedback" />
         </div>
       </div>
     </section>

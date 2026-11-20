@@ -95,30 +95,13 @@ export interface VideoFeedbackItem {
   src: string;
 }
 
-/** Before & after card on the Transformations page. */
+/** Before & after card on the Transformations page (one photo with both sides in it). */
 export interface ClientTransformation {
   id: string;
-  /** Path under public/, e.g. /media/transformations/before-after/photos/client-01-before.jpg */
-  beforeSrc: string;
-  afterSrc: string;
-  /** Client name or initials, shown once a real photo pair is added */
-  clientName: string;
-  /** Short programme label, e.g. "Fat loss" or "Strength" */
-  focus: string;
-  /** Time between the two photos, e.g. "16 weeks" */
-  duration: string;
-  /** True for stock sample photos. Remove once real client photos are in. */
-  sample?: boolean;
-}
-
-/** Video card on the Transformations page. `src` is undefined for an empty slot. */
-export interface ClientVideo {
-  id: string;
-  src?: string;
+  /** Large version for the full-screen view, e.g. /media/transformations/before-after/photos/transformation-01.webp */
+  src: string;
+  /** Smaller version shown on the card */
+  thumbSrc: string;
+  /** Bold line under the card */
   title: string;
-  description: string;
-  /** Portrait (9:16) clip. Landscape clips open in a wide player. */
-  portrait?: boolean;
-  /** True for stock footage, false for real TS Fitness footage. */
-  stock?: boolean;
 }

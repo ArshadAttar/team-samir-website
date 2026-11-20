@@ -1,4 +1,4 @@
-import { ServiceItem, ServicePlan, TeamMember, TransformationItem, ReviewItem, VideoFeedbackItem, ClientTransformation, ClientVideo } from '../types';
+import { ServiceItem, ServicePlan, TeamMember, TransformationItem, ReviewItem, VideoFeedbackItem, ClientTransformation } from '../types';
 
 // Single source for the headline numbers shown across the whole site.
 // Change them here only; every page reads from BUSINESS_INFO.
@@ -606,100 +606,65 @@ export const REVIEWS: ReviewItem[] = [
 ];
 
 // Client feedback videos on the Home page (muted, autoplay, loop; no text on the cards).
-// Files: public/media/home/video-feedback/videos/client-01.mp4 … client-13.mp4, web copies
-// (480px wide, no audio) of the originals in public/media/Website/feedback-video/.
+// Files: public/media/home/video-feedback/videos/feedback-01.mp4 … feedback-13.mp4, web copies
+// (480px wide, mono audio) of the originals in ../media-originals/Website/feedback-video/.
 // To add a clip, add the file with the next number and raise VIDEO_FEEDBACK_COUNT.
 const VIDEO_FEEDBACK_COUNT = 13;
 export const VIDEO_FEEDBACK: VideoFeedbackItem[] = Array.from({ length: VIDEO_FEEDBACK_COUNT }, (_, i) => {
   const n = String(i + 1).padStart(2, '0');
-  return { id: `video-${n}`, src: `/media/home/video-feedback/videos/client-${n}.mp4` };
+  return { id: `video-${n}`, src: `/media/home/video-feedback/videos/feedback-${n}.mp4` };
 });
 
 // ---------------------------------------------------------------------------
 // Transformations page
 // ---------------------------------------------------------------------------
 
-// Before & after photo pairs.
-//
-// The five entries below are SAMPLE stock photos (Unsplash License, free for commercial use)
-// so the gallery looks complete. They are NOT client results (a small "illustrative" note shows under the gallery while any `sample: true` entry remains).
-// To show a real client: put consented photos in public/media/transformations/before-after/photos/
-// (e.g. client-01-before.jpg / client-01-after.jpg, portrait 4:5 such as 1080 x 1350,
-// same pose and framing), point beforeSrc / afterSrc at them, fill in clientName,
-// focus and duration, and remove `sample: true`.
-// A missing file shows a styled "photo coming soon" placeholder instead of breaking.
-const samplePair = (n: number) => {
+// Before & after photos. Each photo already shows the before and after side by side, so one
+// card = one photo. Files in public/media/transformations/before-after/photos/:
+// transformation-NN.webp (max 1600px, shown in the large view) and transformation-NN-sm.webp
+// (max 800px, shown on the card). Originals: ../media-originals/transformations/before-after-photos/.
+// `title` is the bold line under each card; edit it freely (e.g. "Lost 8 kg in 90 days").
+const transformation = (n: number, title: string): ClientTransformation => {
   const id = String(n).padStart(2, '0');
-  return {
-    id: `sample-${id}`,
-    beforeSrc: `/media/transformations/before-after/photos/samples/sample-${id}-before.webp`,
-    afterSrc: `/media/transformations/before-after/photos/samples/sample-${id}-after.webp`,
-    sample: true,
-  };
+  const base = `/media/transformations/before-after/photos/transformation-${id}`;
+  return { id: `transformation-${id}`, src: `${base}.webp`, thumbSrc: `${base}-sm.webp`, title };
 };
 
+// Titles describe what each photo shows (and the time span printed on it, where there is one).
 export const CLIENT_TRANSFORMATIONS: ClientTransformation[] = [
-  { ...samplePair(1), clientName: '', focus: 'Strength & muscle gain', duration: '' },
-  { ...samplePair(2), clientName: '', focus: 'Fat loss & toning', duration: '' },
-  { ...samplePair(3), clientName: '', focus: 'Strength foundations', duration: '' },
-  { ...samplePair(4), clientName: '', focus: 'Body recomposition', duration: '' },
-  { ...samplePair(5), clientName: '', focus: 'Fitness & conditioning', duration: '' },
+  transformation(1, 'Belly fat loss & toned waist'),
+  transformation(2, 'Slimmer waist & flatter belly'),
+  transformation(3, 'Fat loss & better posture'),
+  transformation(4, 'Fat loss & toned arms'),
+  transformation(5, 'Belly fat loss'),
+  transformation(6, 'Inch loss & toned legs'),
+  transformation(7, 'Major belly fat loss, jeans fit loose'),
+  transformation(8, 'Fat loss & slimmer face'),
+  transformation(9, 'Belly fat loss & leaner frame'),
+  transformation(10, 'Flatter stomach & better posture'),
+  transformation(11, 'Fat loss & slimmer arms'),
+  transformation(12, 'Major belly fat loss'),
+  transformation(13, 'Muscle gain & defined abs'),
+  transformation(14, 'Belly fat loss in 6 months'),
+  transformation(15, 'Fat loss & leaner build'),
+  transformation(16, 'Inch loss in 30 days'),
+  transformation(17, 'Lean & toned in 90 days'),
+  transformation(18, 'Belly fat loss in 90 days'),
+  transformation(19, 'Flat stomach & toned waist'),
+  transformation(20, 'Toned body in 90 days'),
+  transformation(21, 'Visible belly fat loss in 90 days'),
+  transformation(22, 'Muscle gain in 37 days'),
+  transformation(23, 'Reduced belly & slimmer frame'),
+  transformation(24, 'Major fat loss & inch loss'),
+  transformation(25, 'Fat loss & flatter stomach'),
 ];
 
-// Training videos.
-// `stock: true` clips are free stock footage from Mixkit (Mixkit License, free for commercial
-// use, no attribution needed). The others are real
-// TS Fitness clips. Replace stock clips with your own footage when you have it.
-export const CLIENT_VIDEOS: ClientVideo[] = [
-  {
-    id: 'cv-1',
-    src: '/media/transformations/video-gallery/videos/strength-deadlift.mp4',
-    title: 'Strength Training Session',
-    description: 'A look into focused strength and conditioning workouts.',
-    portrait: true,
-    stock: true,
-  },
-  {
-    id: 'cv-2',
-    src: '/media/home/video-feedback/videos/v3.mp4',
-    title: 'Personal Training Moments',
-    description: 'Personal guidance, proper techniques and consistent efforts.',
-    portrait: true,
-  },
-  {
-    id: 'cv-3',
-    src: '/media/transformations/video-gallery/videos/battle-ropes.mp4',
-    title: 'Workout Highlights',
-    description: 'Small steps, daily efforts and memorable fitness moments.',
-    portrait: true,
-    stock: true,
-  },
-  {
-    id: 'cv-4',
-    src: '/media/transformations/video-gallery/videos/squat-training.mp4',
-    title: 'Fitness Journey',
-    description: 'A glimpse of the dedication behind every transformation.',
-    stock: true,
-  },
-  {
-    id: 'cv-5',
-    src: '/media/home/video-feedback/videos/v1.mp4',
-    title: 'Coach on the Floor',
-    description: 'TeamSamir at TS Fitness, guiding every session in person.',
-    portrait: true,
-  },
-  {
-    id: 'cv-6',
-    src: '/media/transformations/video-gallery/videos/lunge-workout.mp4',
-    title: 'Lower Body Strength',
-    description: 'Controlled lunges and leg work for strength and balance.',
-    stock: true,
-  },
-  {
-    id: 'cv-7',
-    src: '/media/home/video-feedback/videos/v2.mp4',
-    title: 'Inside TS Fitness',
-    description: 'A look around the studio where the training happens.',
-    portrait: true,
-  },
-];
+// Client videos on the Transformations page ("Training in Motion"), shown the same way as the
+// Home page feedback videos (muted, autoplay, loop, no text). This page has its own copies:
+// public/media/transformations/video-gallery/videos/feedback-NN.mp4. To add a clip, add the
+// file with the next number and raise TRANSFORMATION_VIDEO_COUNT.
+const TRANSFORMATION_VIDEO_COUNT = 13;
+export const TRANSFORMATION_VIDEOS: VideoFeedbackItem[] = Array.from({ length: TRANSFORMATION_VIDEO_COUNT }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return { id: `transformation-video-${n}`, src: `/media/transformations/video-gallery/videos/feedback-${n}.mp4` };
+});

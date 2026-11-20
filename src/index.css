@@ -91,36 +91,25 @@ h1, h2, h3, .font-display {
   filter: grayscale(85%) contrast(90%);
 }
 
-/* Right-to-left auto-scrolling marquee (used by components/Marquee.tsx).
-   The track holds the item list twice and slides by -50%, so the loop is seamless. */
-@keyframes marquee-rtl {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+/* Endless card strip (components/Marquee.tsx). It is a real horizontal scroller: the component
+   moves it slowly with JavaScript, and visitors can drag, swipe or trackpad-scroll it. */
+.marquee-viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
 }
-
-.marquee-track {
-  animation: marquee-rtl var(--marquee-duration, 40s) linear infinite;
+.marquee-viewport::-webkit-scrollbar {
+  display: none;
 }
-
-/* Pause while the pointer is over the strip or something inside it has keyboard focus.
-   :focus-visible (not :focus-within) so a mouse-clicked button doesn't keep it paused. */
-.marquee-viewport:hover .marquee-track,
-.marquee-viewport:has(:focus-visible) .marquee-track {
-  animation-play-state: paused;
+.marquee-viewport.is-dragging {
+  cursor: grabbing;
+  user-select: none;
 }
-
-/* Reduced motion: no auto-scroll; let people swipe/scroll instead */
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-  .marquee-viewport {
-    overflow-x: auto;
-  }
+.marquee-viewport img,
+.marquee-viewport video {
+  -webkit-user-drag: none;
 }
 
 /* Transformations page: horizontal gallery tracks.
@@ -148,6 +137,19 @@ h1, h2, h3, .font-display {
 }
 @media (min-width: 1024px) {
   .ce-track { --ce-gutter: max(2rem, calc((100% - 80rem) / 2 + 2rem)); }
+}
+/* Full-bleed variant: cards use the whole screen width (small side padding only) */
+.ce-track.ce-track--full { --ce-gutter: 1rem; }
+@media (min-width: 640px) {
+  .ce-track.ce-track--full { --ce-gutter: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .ce-track.ce-track--full { --ce-gutter: 2rem; }
+}
+/* While the track scrolls itself, snapping and smooth scrolling would fight each small step */
+.ce-track.is-auto {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
 }
 .ce-track > * {
   scroll-snap-align: start;
