@@ -140,7 +140,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookDemo }) => {
                 rel="noopener noreferrer"
                 className="py-1 lg:py-0 text-white hover:text-[#16834A] font-medium transition-colors"
               >
-                {BUSINESS_INFO.contact.whatsapp} (WhatsApp Direct)
+                {BUSINESS_INFO.contact.whatsapp} - WhatsApp
               </a>
             </div>
 
